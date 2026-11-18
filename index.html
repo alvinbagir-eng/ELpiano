@@ -10,15 +10,10 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <style>
-    :root {
-      --navy:#0f172a; --navy-light:#1e293b; --gold:#d4af37; --bg:#f1f5f9;
-      --card:#ffffff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
-      --green:#16a34a; --green-bg:#dcfce7; --amber:#d97706; --amber-bg:#fef3c7; --red:#dc2626;
-    }
+    :root { --navy:#0f172a; --navy-light:#1e293b; --gold:#d4af37; --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0; --green:#16a34a; --green-bg:#dcfce7; --amber:#d97706; --amber-bg:#fef3c7; --red:#dc2626; }
     * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
     body { margin:0; background:#cbd5e1; display:flex; justify-content:center; min-height:100vh; }
     .app-shell { width:100%; max-width:460px; background:var(--bg); min-height:100vh; display:flex; flex-direction:column; position:relative; box-shadow:0 0 40px rgba(0,0,0,0.2); }
-
     .topbar { background:var(--navy); color:#fff; padding:10px 12px; position:sticky; top:0; z-index:50; border-bottom:2px solid var(--gold); }
     .brand-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:6px; }
     .brand { display:flex; align-items:center; gap:8px; }
@@ -29,29 +24,25 @@
     .dot { width:7px; height:7px; border-radius:50%; display:inline-block; }
     .dot.online { background:#22c55e; box-shadow:0 0 6px #22c55e; }
     .dot.offline { background:#f59e0b; }
-
     .top-actions { display:flex; align-items:center; gap:6px; }
     .mgr-pill { background:rgba(212,175,55,0.16); color:var(--gold); border:1px solid rgba(212,175,55,0.45); padding:4px 8px; border-radius:18px; font-size:11.5px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
     .settings-gear-btn { background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.18); width:30px; height:30px; border-radius:9px; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
     .settings-gear-btn.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
-
     .top-nav { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; background:var(--navy-light); padding:4px; border-radius:10px; margin-bottom:8px; }
     .top-nav-item { border:none; background:transparent; color:#94a3b8; border-radius:8px; padding:6px 2px; display:flex; flex-direction:column; align-items:center; gap:2px; font-size:10px; font-weight:700; cursor:pointer; position:relative; }
     .top-nav-item .nav-ico { font-size:14px; line-height:1; }
     .top-nav-item.active { background:var(--gold); color:var(--navy); box-shadow:0 2px 6px rgba(0,0,0,0.25); }
     .chat-badge { position:absolute; top:1px; right:6px; background:var(--red); color:#fff; font-size:9px; font-weight:800; padding:1px 5px; border-radius:10px; display:none; }
-
     .date-bar { display:flex; align-items:center; gap:6px; background:var(--navy-light); padding:4px; border-radius:10px; }
     .date-btn { background:rgba(255,255,255,0.08); color:#fff; border:none; border-radius:8px; padding:5px 11px; font-size:14px; font-weight:700; cursor:pointer; }
     .date-input { flex:1; background:transparent; border:none; color:#fff; font-size:13.5px; font-weight:600; text-align:center; outline:none; color-scheme:dark; }
-
     .singer-bar { background:linear-gradient(135deg,#1e293b,#0f172a); color:#fff; border-radius:12px; padding:9px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; gap:8px; border:1px solid rgba(212,175,55,0.45); cursor:pointer; }
     .singer-bar-left { flex:1; min-width:0; }
     .singer-bar-title { font-size:10px; font-weight:800; color:var(--gold); text-transform:uppercase; }
     .singer-bar-names { font-size:13px; font-weight:700; color:#f8fafc; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .singer-bar-btn { background:rgba(212,175,55,0.2); color:var(--gold); border:1px solid rgba(212,175,55,0.5); padding:5px 9px; border-radius:8px; font-size:11px; font-weight:700; white-space:nowrap; }
-    .weekend-banner { background:#fef3c7; color:#92400e; border:1px solid #fde68a; border-radius:9px; padding:5px 10px; font-size:11px; font-weight:700; margin-bottom:8px; text-align:center; }
-
+    .weekend-banner { background:#fef3c7; color:#92400e; border:1px solid #fde68a; border-radius:9px; padding:6px 10px; font-size:11px; font-weight:700; margin-bottom:8px; text-align:center; }
+    .season-banner { background:linear-gradient(135deg,#14532d,#064e3b); color:#fef08a; border:1px solid var(--gold); border-radius:10px; padding:7px 10px; font-size:11.5px; font-weight:700; margin-bottom:8px; text-align:center; }
     .sub-header { padding:10px 14px 4px; }
     .mini-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:8px; }
     .mini-stat { background:var(--card); border-radius:10px; padding:8px 6px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
@@ -61,15 +52,14 @@
     .filter-pills { display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; }
     .pill { padding:6px 12px; border-radius:20px; border:1px solid var(--border); background:var(--card); font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; white-space:nowrap; }
     .pill.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
-
     .content { flex:1; padding:6px 14px 96px; overflow-y:auto; }
-
     .cab-card { background:var(--card); border-radius:14px; padding:12px; margin-bottom:10px; box-shadow:0 1px 4px rgba(0,0,0,0.06); border:1px solid var(--border); }
     .cab-head { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
     .cab-title { font-size:16px; font-weight:800; color:var(--navy); }
     .cab-meta { display:flex; gap:6px; margin-top:3px; flex-wrap:wrap; }
     .meta-tag { font-size:11px; font-weight:600; padding:2px 7px; border-radius:6px; background:#f1f5f9; color:#475569; }
     .meta-tag.gold { background:#fef3c7; color:#92400e; }
+    .meta-tag.special { background:#dcfce7; color:#166534; font-weight:700; }
     .smen-badge { font-size:11px; font-weight:700; color:var(--muted); background:#f8fafc; padding:3px 8px; border-radius:8px; border:1px solid var(--border); }
     .shifts-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
     .shifts-grid.single { grid-template-columns:1fr; }
@@ -80,7 +70,6 @@
     .shift-guest { font-size:14px; font-weight:800; color:var(--navy); margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .shift-empty { font-size:13px; font-weight:600; color:#94a3b8; margin-top:6px; }
     .shift-info { font-size:11px; color:#334155; font-weight:600; margin-top:3px; display:flex; justify-content:space-between; }
-
     .zal-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .zal-tile { background:var(--card); border-radius:12px; padding:11px; cursor:pointer; border:1.5px dashed #cbd5e1; display:flex; flex-direction:column; justify-content:space-between; min-height:86px; }
     .zal-tile.confirmed { border:1.5px solid #22c55e; background:var(--green-bg); }
@@ -92,7 +81,6 @@
     .zal-empty { font-size:12px; font-weight:600; color:#94a3b8; margin:10px 0 4px; }
     .zal-foot { display:flex; justify-content:space-between; font-size:11px; font-weight:600; color:#334155; }
     .zal-note { font-size:10px; color:#1e293b; background:rgba(255,255,255,0.65); padding:2px 6px; border-radius:5px; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-
     .sheet-backdrop { position:fixed; inset:0; background:rgba(15,23,42,0.72); z-index:100; display:none; justify-content:center; align-items:center; padding:14px 12px 78px; }
     .sheet-backdrop.open { display:flex; }
     .sheet { width:100%; max-width:440px; background:#fff; border-radius:18px; padding:16px; max-height:calc(100dvh - 96px); overflow-y:auto; box-shadow:0 20px 45px rgba(0,0,0,0.35); }
@@ -100,7 +88,6 @@
     .sheet-title { font-size:17px; font-weight:800; color:var(--navy); }
     .sheet-sub { font-size:12px; color:var(--muted); }
     .guest-readonly-banner { background:#e0f2fe; color:#075985; padding:8px 12px; border-radius:10px; font-size:12px; font-weight:700; margin-bottom:12px; text-align:center; display:none; }
-
     .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .field { display:flex; flex-direction:column; gap:4px; }
     .field.full { grid-column:1 / -1; }
@@ -113,7 +100,6 @@
     .q-chip { font-size:11px; padding:6px 10px; border-radius:8px; background:#f1f5f9; border:1px solid var(--border); cursor:pointer; font-weight:700; color:#334155; }
     .q-chip.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
     .warn-banner { grid-column:1 / -1; background:#fee2e2; color:var(--red); padding:9px 12px; border-radius:10px; font-size:12px; font-weight:700; display:none; }
-
     .sheet-actions { display:flex; gap:8px; margin-top:14px; }
     .confirm-bar { display:none; gap:8px; margin-top:14px; background:#fef2f2; padding:10px; border-radius:12px; border:1px solid #fecaca; align-items:center; }
     .btn { flex:1; padding:12px; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; text-align:center; text-decoration:none; }
@@ -124,11 +110,9 @@
     .btn-cancel { background:#e2e8f0; color:#334155; padding:10px; font-size:13px; }
     .btn-call { background:#dcfce7; color:#166534; font-size:12px; padding:8px; }
     .btn-wa { background:#d1fae5; color:#065f46; font-size:12px; padding:8px; }
-
     .singer-item { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:#f8fafc; border:1px solid var(--border); border-radius:10px; margin-bottom:8px; }
     .preset-chip { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:700; background:#f1f5f9; border:1px solid var(--border); border-radius:16px; padding:5px 10px; cursor:pointer; }
     .preset-del { color:var(--red); font-weight:900; padding-left:3px; }
-
     .mgr-overlay { position:fixed; inset:0; background:rgba(15,23,42,0.92); backdrop-filter:blur(8px); z-index:300; display:none; justify-content:center; align-items:center; padding:18px 18px 72px; }
     .mgr-overlay.open { display:flex; }
     .mgr-modal { width:100%; max-width:390px; background:#fff; border-radius:20px; padding:22px 18px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.45); border:2px solid var(--gold); }
@@ -138,22 +122,20 @@
     .mgr-pick-btn.selected { background:var(--navy); color:var(--gold); border-color:var(--gold); }
     .guest-pick-btn { width:100%; margin-top:12px; padding:12px; border-radius:12px; border:1.5px dashed #94a3b8; background:#f1f5f9; color:#334155; font-size:13px; font-weight:800; cursor:pointer; }
     .guest-pick-btn.selected { background:#e0f2fe; border-color:#0284c7; color:#075985; }
-
     .chat-wrap { display:flex; flex-direction:column; height:calc(100dvh - 205px); min-height:280px; background:#e2e8f0; border-radius:14px; overflow:hidden; border:1px solid var(--border); }
-    .chat-top-bar { background:#ffffff; padding:8px 12px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .chat-top-bar { background:#fff; padding:8px 12px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px; }
     .chat-clear-btn { background:#fef2f2; color:var(--red); border:1px solid #fecaca; padding:5px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; }
     .chat-messages { flex:1; padding:12px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; }
     .msg-bubble { max-width:82%; padding:8px 11px; border-radius:14px; font-size:13px; line-height:1.35; word-wrap:break-word; box-shadow:0 1px 2px rgba(0,0,0,0.08); }
-    .msg-bubble.other { align-self:flex-start; background:#ffffff; color:var(--navy); border-bottom-left-radius:4px; }
-    .msg-bubble.mine { align-self:flex-end; background:var(--navy); color:#ffffff; border-bottom-right-radius:4px; }
+    .msg-bubble.other { align-self:flex-start; background:#fff; color:var(--navy); border-bottom-left-radius:4px; }
+    .msg-bubble.mine { align-self:flex-end; background:var(--navy); color:#fff; border-bottom-right-radius:4px; }
     .msg-sender { font-size:11px; font-weight:800; color:#b45309; margin-bottom:2px; }
     .msg-bubble.mine .msg-sender { color:var(--gold); }
     .msg-meta { font-size:9.5px; opacity:0.65; margin-top:4px; display:flex; justify-content:flex-end; align-items:center; gap:6px; }
     .msg-del { cursor:pointer; color:#fca5a5; font-weight:800; }
-    .chat-input-bar { display:flex; gap:6px; padding:8px; background:#ffffff; border-top:1px solid var(--border); }
+    .chat-input-bar { display:flex; gap:6px; padding:8px; background:#fff; border-top:1px solid var(--border); }
     .chat-input { flex:1; padding:10px 12px; border:1.5px solid var(--border); border-radius:20px; font-size:14px; outline:none; background:#f8fafc; }
     .chat-send-btn { background:var(--navy); color:var(--gold); border:none; border-radius:20px; padding:0 16px; font-size:14px; font-weight:800; cursor:pointer; }
-
     .period-pills { display:flex; gap:6px; overflow-x:auto; padding:4px 0 8px; }
     .p-pill { padding:7px 11px; border-radius:10px; border:1px solid var(--border); background:var(--card); font-size:12px; font-weight:700; color:var(--muted); cursor:pointer; white-space:nowrap; }
     .p-pill.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
@@ -161,7 +143,6 @@
     .custom-range-box .field { flex:1; min-width:120px; }
     .custom-range-box input { padding:7px 8px; font-size:13px; }
     .range-banner { font-size:11px; font-weight:700; color:var(--muted); margin:0 0 8px 2px; display:flex; justify-content:space-between; align-items:center; }
-
     .report-card { background:var(--card); border-radius:14px; padding:14px; margin-bottom:12px; border:1px solid var(--border); }
     .report-card.low-alert { background:#fffbeb; border-color:#fde68a; }
     .report-head-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:6px; }
@@ -178,21 +159,17 @@
     .bar-fill.gold { background:var(--gold); }
     .zero-tag { font-size:10px; font-weight:800; background:#fee2e2; color:var(--red); padding:2px 6px; border-radius:6px; }
     .low-tag { font-size:10px; font-weight:800; background:#fef3c7; color:#92400e; padding:2px 6px; border-radius:6px; }
-
     .report-total { background:var(--navy); color:#fff; border-radius:14px; padding:14px; display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
     .rt-box { background:rgba(255,255,255,0.07); padding:10px; border-radius:10px; }
     .rt-lbl { font-size:10px; color:#cbd5e1; text-transform:uppercase; font-weight:700; }
     .rt-val { font-size:19px; font-weight:800; margin-top:3px; }
-
     .pin-box { display:none; flex-direction:column; gap:10px; }
     .pin-input { width:100%; padding:11px; border:2px solid #cbd5e1; border-radius:10px; font-size:18px; font-weight:800; text-align:center; letter-spacing:6px; outline:none; }
     .pin-input.danger { border-color:#fca5a5; }
     .pin-err { color:var(--red); font-size:12px; font-weight:700; text-align:center; display:none; }
-
     .sub-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 12px; }
     .sub-tab { flex:1 1 30%; padding:8px 6px; border:1px solid var(--border); border-radius:10px; background:var(--card); font-size:11px; font-weight:700; color:var(--muted); cursor:pointer; text-align:center; white-space:nowrap; }
     .sub-tab.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
-
     .setting-row { background:var(--card); border-radius:12px; padding:12px; margin-bottom:8px; border:1px solid var(--border); }
     .setting-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
     .toggle-group { display:flex; background:#f1f5f9; border-radius:8px; padding:3px; }
@@ -204,7 +181,6 @@
     .add-bar input { flex:1; min-width:110px; padding:8px 10px; border:1px solid var(--border); border-radius:8px; font-size:13px; outline:none; }
     .icon-btn { border:1px solid var(--border); background:#f8fafc; border-radius:8px; padding:6px 9px; font-size:13px; cursor:pointer; font-weight:700; }
     .icon-btn.del { background:#fef2f2; border-color:#fecaca; color:var(--red); }
-
     .toast { position:fixed; top:18px; left:50%; transform:translateX(-50%); background:var(--navy); color:var(--gold); padding:10px 18px; border-radius:24px; font-size:13px; font-weight:700; z-index:400; display:none; box-shadow:0 8px 20px rgba(0,0,0,0.25); border:1px solid var(--gold); white-space:nowrap; }
   </style>
 </head>
@@ -219,9 +195,7 @@
     <div id="mgrSelectStep">
       <div style="font-size:13px; color:var(--muted); margin-top:4px;">Xoş gəlmisiniz! Kim olduğunuzu seçin:</div>
       <div class="mgr-list-grid" id="mgrPickGrid"></div>
-      <button id="guestPickBtn" class="guest-pick-btn" onclick="selectGuestMode()">
-        👁️ Qonaq kimi daxil ol (Yalnız baxış)
-      </button>
+      <button id="guestPickBtn" class="guest-pick-btn" onclick="selectGuestMode()">👁️ Qonaq kimi daxil ol (Yalnız baxış)</button>
       <button id="mgrCloseBtn" class="btn btn-cancel" style="margin-top:10px; width:100%; display:none;" onclick="closeMgrPicker()">Bağla</button>
     </div>
     <div id="mgrPinStep" style="display:none; margin-top:12px;">
@@ -244,22 +218,15 @@
         <div class="brand-logo">EP</div>
         <div>
           <div class="brand-name">EL PIANO</div>
-          <div class="brand-sub">
-            <span id="sectionSubTitle">Kabinetlər</span>
-            <span class="live-pill" id="liveBadge"><span class="dot offline"></span> Qoşulur</span>
-          </div>
+          <div class="brand-sub"><span id="sectionSubTitle">Kabinetlər</span><span class="live-pill" id="liveBadge"><span class="dot offline"></span> Qoşulur</span></div>
         </div>
       </div>
       <div style="display:flex; flex-direction:column; align-items:flex-end; gap:3px;">
         <div class="top-actions">
-          <button class="mgr-pill" onclick="openMgrPicker(true)">
-            <span id="activeMgrIcon">👤</span><span id="activeMgrLabel">Seçin</span><span>▾</span>
-          </button>
+          <button class="mgr-pill" onclick="openMgrPicker(true)"><span id="activeMgrIcon">👤</span><span id="activeMgrLabel">Seçin</span><span>▾</span></button>
           <button id="settingsGearBtn" class="settings-gear-btn" onclick="openSettingsTab()" title="Ayarlar">⚙️</button>
         </div>
-        <div style="font-size:10.5px; font-weight:700; color:#facc15;">
-          <span id="topTotalGuests">0 qonaq</span> • <span id="topTotalBeh" style="color:#4ade80;">0 ₼</span>
-        </div>
+        <div style="font-size:10.5px; font-weight:700; color:#facc15;"><span id="topTotalGuests">0 qonaq</span> • <span id="topTotalBeh" style="color:#4ade80;">0 ₼</span></div>
       </div>
     </div>
 
@@ -281,6 +248,7 @@
 
   <div id="filterHeader" class="sub-header">
     <div id="singerBarContainer"></div>
+    <div id="seasonBannerContainer"></div>
     <div id="weekendBannerContainer"></div>
     <div class="mini-stats" id="miniStats"></div>
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 Yer, qonaq və ya nömrə axtar..." oninput="renderApp()" />
@@ -297,10 +265,7 @@
 <div class="sheet-backdrop" id="resSheet">
   <div class="sheet">
     <div class="sheet-header">
-      <div>
-        <div class="sheet-title" id="sheetTitle">Rezerv</div>
-        <div class="sheet-sub" id="sheetSub">Məlumatlar</div>
-      </div>
+      <div><div class="sheet-title" id="sheetTitle">Rezerv</div><div class="sheet-sub" id="sheetSub">Məlumatlar</div></div>
       <button onclick="closeSheet()" style="border:none; background:#f1f5f9; border-radius:50%; width:32px; height:32px; font-weight:700; cursor:pointer;">✕</button>
     </div>
     <div id="guestReadOnlyBanner" class="guest-readonly-banner">👁️ Qonaq rejimi — Yalnız baxış (dəyişiklik etmək olmaz)</div>
@@ -318,10 +283,7 @@
       <div class="field"><label>Alınan BEH (₼)</label><input type="number" id="fBeh" min="0" placeholder="0" /></div>
       <div class="field"><label>Qəbul edən (Menecer)</label><select id="fStaff"></select></div>
       <div class="field full"><label>Status</label>
-        <select id="fStatus">
-          <option value="confirmed">🟢 Təsdiqlənib / Beh ödənilib</option>
-          <option value="pending">🟡 Gözləmədə / Behsiz</option>
-        </select>
+        <select id="fStatus"><option value="confirmed">🟢 Təsdiqlənib / Beh ödənilib</option><option value="pending">🟡 Gözləmədə / Behsiz</option></select>
       </div>
       <div class="field full">
         <label>Əlavə Məlumat / Qeyd</label>
@@ -373,107 +335,94 @@
   };
 
   let db = null;
-  const ROOT_PATH = "elpiano_app";
-  const GUEST_ID = "__GUEST__";
-  const CLEAR_PIN = "4411";
+  const ROOT_PATH = "elpiano_app", GUEST_ID = "__GUEST__", CLEAR_PIN = "4411";
+  try { if (typeof firebase !== "undefined") { if (!firebase.apps.length) firebase.initializeApp(firebaseConfig); db = firebase.database(); } } catch (e) {}
 
-  try {
-    if (typeof firebase !== "undefined") {
-      if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-      db = firebase.database();
-    }
-  } catch (e) { console.error(e); }
-
-  const DEFAULT_MANAGERS = [
-    { name: "Şəbnəm", pin: "" },
-    { name: "Firudin", pin: "" },
-    { name: "Hüseyn", pin: "" },
-    { name: "Musa", pin: "" },
-    { name: "Rüfət", pin: "" }
-  ];
+  const DEFAULT_MANAGERS = [{ name:"Şəbnəm", pin:"" }, { name:"Firudin", pin:"" }, { name:"Hüseyn", pin:"" }, { name:"Musa", pin:"" }, { name:"Rüfət", pin:"" }];
   const DEFAULT_NOTE_CHIPS = ["Menyu var", "Menyu yerində olacaq", "Stol bəzəyi", "Fotoqraf olacaq 150"];
 
   const DEFAULT_CABINETS = [
     { id:"prime_hall", name:"Prime Hall", max:80, depositVal:3000, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"chanel", name:"Chanel", max:45, depositVal:1300, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
-    { id:"dolce_gabana", name:"Dolce & Gabana", max:40, depositVal:1200, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
+    { id:"dolce_gabana", name:"D&G (Dolce & Gabana)", max:40, depositVal:1200, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"dior", name:"Dior", max:30, depositVal:1100, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"valentino", name:"Valentino", max:20, depositVal:800, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
+    { id:"tiffany", name:"Tiffany", max:10, depositVal:400, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"versace", name:"Versace", max:10, depositVal:400, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
-    { id:"tiffany", name:"Tiffany", max:10, depositVal:400, shifts:2, s1:"11:00 - 17:00", s2:"17:00 - 23:00" },
     { id:"armani", name:"Armani", max:18, depositVal:500, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
-    { id:"etro", name:"Etro", max:10, depositVal:150, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"prada", name:"Prada", max:15, depositVal:500, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"hermes", name:"Hermes", max:12, depositVal:250, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
-    { id:"gucci", name:"Gucci", max:12, depositVal:250, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
+    { id:"etro", name:"Etro", max:10, depositVal:150, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"bvlgari", name:"Bvlgari", max:12, depositVal:250, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
     { id:"rich", name:"Rich", max:12, depositVal:250, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
-    { id:"boss", name:"Boss", max:6, depositVal:150, shifts:2, s1:"13:00 - 17:00", s2:"18:00 - 23:00" }
+    { id:"gucci", name:"Gucci", max:12, depositVal:250, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
+    { id:"boss", name:"Boss", max:6, depositVal:150, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" }
+  ];
+
+  // ŞƏKİLDƏKİ DEKABR 1-15 və 16-31 TARİFLƏRİ (Ayarlardan da istənilən gün dəyişmək olur)
+  const DEFAULT_TARIFFS = [
+    {
+      id: "dec_1_15",
+      title: "Dekabr 1-15 • Xidmət haqqı 10% • Menyu qiymətə daxildir",
+      from: "2026-12-01",
+      to: "2026-12-15",
+      prices: { prime_hall:4000, chanel:1800, dolce_gabana:1500, dior:1300, valentino:1000, tiffany:400, versace:400, armani:500, prada:500, hermes:300, etro:200, bvlgari:300, rich:300, gucci:300, boss:200 }
+    },
+    {
+      id: "dec_16_31",
+      title: "Dekabr 16-31 • Xidmət haqqı 10% • Menyu qiymətə daxildir",
+      from: "2026-12-16",
+      to: "2026-12-31",
+      prices: { prime_hall:5000, chanel:2000, dolce_gabana:1800, dior:1500, valentino:1200, tiffany:500, versace:500, armani:800, prada:800, hermes:300, etro:250, bvlgari:300, rich:300, gucci:300, boss:200 }
+    }
   ];
 
   const DEFAULT_ZAL_DAY = Array.from({ length: 14 }, (_, i) => ({ id:`Zal-${i+1}`, name:`Zal-${i+1}` }));
-  const DEFAULT_ZAL_NIGHT = [
-    "Zal-1","Zal-2","Zal-3","Zal-4","Zal-5","Zal-17","Zal-7","Zal-9","Zal-10",
-    "Zal-11","Zal-12","Zal-13","Zal-14","Zal-15","Zal-16","Zal-6","Zal-18","Zal-19",
-    "Zal-20","Zal-21","Zal-22","Zal-23","Zal-24","Zal-25","Zal-26"
-  ].map(z => ({ id:z, name:z }));
+  const DEFAULT_ZAL_NIGHT = ["Zal-1","Zal-2","Zal-3","Zal-4","Zal-5","Zal-17","Zal-7","Zal-9","Zal-10","Zal-11","Zal-12","Zal-13","Zal-14","Zal-15","Zal-16","Zal-6","Zal-18","Zal-19","Zal-20","Zal-21","Zal-22","Zal-23","Zal-24","Zal-25","Zal-26"].map(z => ({ id:z, name:z }));
 
   let cloudManagers = JSON.parse(JSON.stringify(DEFAULT_MANAGERS));
   let cloudNoteChips = [...DEFAULT_NOTE_CHIPS];
   let cloudCabinets = JSON.parse(JSON.stringify(DEFAULT_CABINETS));
+  let cloudTariffs = JSON.parse(JSON.stringify(DEFAULT_TARIFFS));
+  let cloudWeekendCounts = { day: 20, night: 30 };
   let cloudZalDay = JSON.parse(JSON.stringify(DEFAULT_ZAL_DAY));
   let cloudZalNight = JSON.parse(JSON.stringify(DEFAULT_ZAL_NIGHT));
-  let cloudReservations = {};
-  let cloudDateSingers = [];
-  let cloudSingerPresets = [];
-  let cloudChat = [];
+  let cloudReservations = {}, cloudDateSingers = [], cloudSingerPresets = [], cloudChat = [];
 
-  let currentManager = "";
-  let pendingLoginManager = null;
-  let currentTab = "kabinet";
-  let settingsSubTab = "managers";
-  let currentFilter = "all";
-  let editingTarget = null;
-  let editingCabIdx = null, editingMgrIdx = null, editingZalIdx = null, editingChipIdx = null;
-  let showNewCabForm = false;
-  let activeResRefPath = null, activeSingerRefPath = null;
+  let currentManager = "", pendingLoginManager = null, currentTab = "kabinet", settingsSubTab = "tariffs", currentFilter = "all";
+  let editingTarget = null, editingCabIdx = null, editingMgrIdx = null, editingZalIdx = null, editingChipIdx = null, editingTariffIdx = null;
+  let showNewCabForm = false, showNewTariffForm = false, activeResRefPath = null, activeSingerRefPath = null;
   let lastChatSeenTs = Number(safeGetLocal("elpiano_chat_seen") || 0);
+  let reportPeriod = "day", reportCustomFrom = "", reportCustomTo = "", reportRangeData = null, reportLoading = false, cabSortAsc = false, zalSortAsc = false, reportZalTab = "night";
 
-  let reportPeriod = "day", reportCustomFrom = "", reportCustomTo = "", reportRangeData = null;
-  let reportLoading = false, cabSortAsc = false, zalSortAsc = false, reportZalTab = "night";
+  function formatDateISO(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
+  function formatDisplayDate(iso) { if (!iso || !iso.includes("-")) return iso; const [y,m,d] = iso.split("-"); return `${d}.${m}.${y}`; }
+  function isWeekend(dateStr) { if (!dateStr || !dateStr.includes("-")) return false; const [y,m,d] = dateStr.split("-").map(Number); const day = new Date(y,m-1,d).getDay(); return day===0 || day===6; }
+  function getDayNameAz(dateStr) { if (!dateStr || !dateStr.includes("-")) return ""; const [y,m,d] = dateStr.split("-").map(Number); return ["Bazar","B.e","Ç.a","Çərş","C.a","Cümə","6-cı gün"][new Date(y,m-1,d).getDay()] || ""; }
 
-  function formatDateISO(d) {
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  function getActiveTariff(dateStr) {
+    const dt = dateStr || datePicker.value;
+    return (cloudTariffs || []).find(t => t && t.from && t.to && dt >= t.from && dt <= t.to) || null;
   }
-  function formatDisplayDate(iso) {
-    if (!iso || !iso.includes("-")) return iso;
-    const [y, m, d] = iso.split("-");
-    return `${d}.${m}.${y}`;
+  function getCabinetDepositForDate(cab, dateStr) {
+    if (!cab) return 0;
+    const tr = getActiveTariff(dateStr);
+    if (tr && tr.prices && tr.prices[cab.id] !== undefined && tr.prices[cab.id] !== "") {
+      return Number(tr.prices[cab.id]) || 0;
+    }
+    return Number(cab.depositVal) || 0;
   }
-  function isWeekend(dateStr) {
-    if (!dateStr || !dateStr.includes("-")) return false;
-    const [y, m, d] = dateStr.split("-").map(Number);
-    const day = new Date(y, m - 1, d).getDay();
-    return day === 0 || day === 6;
-  }
-  function getDayNameAz(dateStr) {
-    if (!dateStr || !dateStr.includes("-")) return "";
-    const [y, m, d] = dateStr.split("-").map(Number);
-    return ["Bazar","B.e","Ç.a","Çərş","C.a","Cümə","6-cı gün"][new Date(y, m - 1, d).getDay()] || "";
-  }
+
   function getEffectiveZalList(type, dateStr) {
     const base = [...getZalList(type)];
     if (!isWeekend(dateStr || datePicker.value)) return base;
-    const targetCount = type === "day" ? 20 : 30;
+    const targetCount = type === "day" ? (Number(cloudWeekendCounts.day)||20) : (Number(cloudWeekendCounts.night)||30);
     if (base.length >= targetCount) return base;
-    const existingIds = new Set(base.map(z => z.id));
-    const existingNames = new Set(base.map(z => z.name.toLowerCase()));
+    const existingIds = new Set(base.map(z => z.id)), existingNames = new Set(base.map(z => z.name.toLowerCase()));
     let num = type === "day" ? 15 : 27;
     while (base.length < targetCount) {
       const c = `Zal-${num}`;
-      if (!existingIds.has(c) && !existingNames.has(c.toLowerCase())) {
-        base.push({ id:c, name:c }); existingIds.add(c);
-      }
+      if (!existingIds.has(c) && !existingNames.has(c.toLowerCase())) { base.push({ id:c, name:c }); existingIds.add(c); }
       num++;
     }
     return base;
@@ -486,60 +435,31 @@
   reportCustomFrom = formatDateISO(oneMonthAgo); reportCustomTo = todayStr;
 
   function isGuest() { return currentManager === GUEST_ID; }
-  function toArray(val) {
-    if (!val) return [];
-    if (Array.isArray(val)) return val.filter(Boolean);
-    if (typeof val === "object") return Object.values(val).filter(Boolean);
-    return [];
-  }
-  function normalizeManagers(raw) {
-    return toArray(raw).map(item => typeof item === "string"
-      ? { name: item, pin: "" }
-      : { name: String(item.name || ""), pin: String(item.pin || "") }
-    ).filter(m => m.name);
-  }
+  function toArray(val) { if (!val) return []; if (Array.isArray(val)) return val.filter(Boolean); if (typeof val === "object") return Object.values(val).filter(Boolean); return []; }
+  function normalizeManagers(raw) { return toArray(raw).map(i => typeof i==="string" ? {name:i,pin:""} : {name:String(i.name||""),pin:String(i.pin||"")}).filter(m => m.name); }
   function safeGetLocal(k) { try { return localStorage.getItem(k); } catch { return null; } }
   function safeSetLocal(k, v) { try { localStorage.setItem(k, v); } catch {} }
   function formatMoney(n) { return (Number(n) || 0).toLocaleString("de-DE") + " ₼"; }
   function escHtml(s) { return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
-  function showToast(msg) {
-    const t = document.getElementById("toast"); t.textContent = msg; t.style.display = "block";
-    clearTimeout(window._toastTimer); window._toastTimer = setTimeout(() => { t.style.display = "none"; }, 2200);
-  }
+  function showToast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(window._toastTimer); window._toastTimer = setTimeout(() => { t.style.display = "none"; }, 2200); }
 
-  function initManagerIdentity() {
-    const savedMgr = safeGetLocal("elpiano_current_manager");
-    if (savedMgr) applyIdentityUI(savedMgr);
-    else openMgrPicker(false);
-  }
+  // KİMLİK + PIN
+  function initManagerIdentity() { const s = safeGetLocal("elpiano_current_manager"); if (s) applyIdentityUI(s); else openMgrPicker(false); }
   function applyIdentityUI(val) {
     currentManager = val;
-    const labelEl = document.getElementById("activeMgrLabel");
-    const iconEl = document.getElementById("activeMgrIcon");
-    const gearBtn = document.getElementById("settingsGearBtn");
-    if (val === GUEST_ID) {
-      iconEl.textContent = "👁️"; labelEl.textContent = "Qonaq"; gearBtn.style.display = "none";
-      if (currentTab === "settings") switchTab("kabinet", document.getElementById("nav_kabinet"));
-    } else {
-      iconEl.textContent = "👤"; labelEl.textContent = val; gearBtn.style.display = "flex";
-    }
+    const lbl = document.getElementById("activeMgrLabel"), ico = document.getElementById("activeMgrIcon"), gear = document.getElementById("settingsGearBtn");
+    if (val === GUEST_ID) { ico.textContent="👁️"; lbl.textContent="Qonaq"; gear.style.display="none"; if (currentTab==="settings") switchTab("kabinet", document.getElementById("nav_kabinet")); }
+    else { ico.textContent="👤"; lbl.textContent=val; gear.style.display="flex"; }
   }
   function openMgrPicker(allowClose) {
     backToMgrList();
-    const grid = document.getElementById("mgrPickGrid");
-    grid.innerHTML = getManagers().map((m, idx) => `
-      <button class="mgr-pick-btn ${m.name === currentManager ? 'selected' : ''}" onclick="tryPickManager(${idx})">
-        <span style="font-size:20px;">${m.pin ? '🔒' : '👤'}</span>
-        <span>${escHtml(m.name)}</span>
-      </button>
-    `).join("");
+    document.getElementById("mgrPickGrid").innerHTML = getManagers().map((m, i) => `<button class="mgr-pick-btn ${m.name===currentManager?'selected':''}" onclick="tryPickManager(${i})"><span style="font-size:20px;">${m.pin?'🔒':'👤'}</span><span>${escHtml(m.name)}</span></button>`).join("");
     document.getElementById("guestPickBtn").className = "guest-pick-btn" + (currentManager === GUEST_ID ? " selected" : "");
     document.getElementById("mgrCloseBtn").style.display = (allowClose && currentManager) ? "block" : "none";
     document.getElementById("mgrOverlay").classList.add("open");
   }
   function tryPickManager(idx) {
-    const m = getManagers()[idx];
-    if (!m) return;
+    const m = getManagers()[idx]; if (!m) return;
     if (m.pin && m.pin.trim() !== "") {
       pendingLoginManager = m;
       document.getElementById("mgrSelectStep").style.display = "none";
@@ -547,56 +467,33 @@
       document.getElementById("mgrPinTargetTitle").textContent = `🔒 ${m.name} — Giriş Kodu`;
       document.getElementById("mgrLoginPinErr").style.display = "none";
       const inp = document.getElementById("mgrLoginPinInput"); inp.value = ""; inp.focus();
-    } else {
-      completeManagerLogin(m.name);
-    }
+    } else completeManagerLogin(m.name);
   }
-  function backToMgrList() {
-    pendingLoginManager = null;
-    document.getElementById("mgrSelectStep").style.display = "block";
-    document.getElementById("mgrPinStep").style.display = "none";
-  }
+  function backToMgrList() { pendingLoginManager = null; document.getElementById("mgrSelectStep").style.display = "block"; document.getElementById("mgrPinStep").style.display = "none"; }
   function verifyMgrPin() {
     if (!pendingLoginManager) return;
-    const entered = document.getElementById("mgrLoginPinInput").value.trim();
-    if (entered === pendingLoginManager.pin.trim()) {
-      completeManagerLogin(pendingLoginManager.name);
-    } else {
-      document.getElementById("mgrLoginPinErr").style.display = "block";
-    }
+    if (document.getElementById("mgrLoginPinInput").value.trim() === pendingLoginManager.pin.trim()) completeManagerLogin(pendingLoginManager.name);
+    else document.getElementById("mgrLoginPinErr").style.display = "block";
   }
-  function completeManagerLogin(name) {
-    applyIdentityUI(name);
-    safeSetLocal("elpiano_current_manager", name);
-    document.getElementById("mgrOverlay").classList.remove("open");
-    showToast(`Xoş gəldiniz, ${name}!`);
-    renderApp();
-  }
-  function selectGuestMode() {
-    applyIdentityUI(GUEST_ID);
-    safeSetLocal("elpiano_current_manager", GUEST_ID);
-    document.getElementById("mgrOverlay").classList.remove("open");
-    showToast("Qonaq rejimi (Yalnız baxış)");
-    renderApp();
-  }
+  function completeManagerLogin(name) { applyIdentityUI(name); safeSetLocal("elpiano_current_manager", name); document.getElementById("mgrOverlay").classList.remove("open"); showToast(`Xoş gəldiniz, ${name}!`); renderApp(); }
+  function selectGuestMode() { applyIdentityUI(GUEST_ID); safeSetLocal("elpiano_current_manager", GUEST_ID); document.getElementById("mgrOverlay").classList.remove("open"); showToast("Qonaq rejimi (Yalnız baxış)"); renderApp(); }
   function closeMgrPicker() { if (currentManager) document.getElementById("mgrOverlay").classList.remove("open"); }
 
+  // FİREBASE
   function startFirebaseSync() {
     if (!db) { document.getElementById("liveBadge").innerHTML = '<span class="dot offline"></span> Lokal'; return; }
-    db.ref(".info/connected").on("value", snap => {
-      document.getElementById("liveBadge").innerHTML = snap.val() === true
-        ? '<span class="dot online"></span> Canlı' : '<span class="dot offline"></span> Qoşulur';
-    });
+    db.ref(".info/connected").on("value", s => { document.getElementById("liveBadge").innerHTML = s.val()===true ? '<span class="dot online"></span> Canlı' : '<span class="dot offline"></span> Qoşulur'; });
     db.ref(`${ROOT_PATH}/config`).once("value", snap => {
       if (!snap.exists()) {
         db.ref(`${ROOT_PATH}/config`).set({
-          managers: DEFAULT_MANAGERS, cabinets: DEFAULT_CABINETS,
-          zal_day: DEFAULT_ZAL_DAY, zal_night: DEFAULT_ZAL_NIGHT,
-          note_chips: DEFAULT_NOTE_CHIPS, note_chips_init: true, singer_presets: []
+          managers:DEFAULT_MANAGERS, cabinets:DEFAULT_CABINETS, zal_day:DEFAULT_ZAL_DAY, zal_night:DEFAULT_ZAL_NIGHT,
+          note_chips:DEFAULT_NOTE_CHIPS, note_chips_init:true, singer_presets:[],
+          tariffs:DEFAULT_TARIFFS, tariffs_init:true, weekend_counts:{ day:20, night:30 }
         });
-      } else if (!snap.val().note_chips_init) {
-        db.ref(`${ROOT_PATH}/config/note_chips`).set(DEFAULT_NOTE_CHIPS);
-        db.ref(`${ROOT_PATH}/config/note_chips_init`).set(true);
+      } else {
+        const v = snap.val();
+        if (!v.note_chips_init) { db.ref(`${ROOT_PATH}/config/note_chips`).set(DEFAULT_NOTE_CHIPS); db.ref(`${ROOT_PATH}/config/note_chips_init`).set(true); }
+        if (!v.tariffs_init) { db.ref(`${ROOT_PATH}/config/tariffs`).set(DEFAULT_TARIFFS); db.ref(`${ROOT_PATH}/config/tariffs_init`).set(true); }
       }
     });
     db.ref(`${ROOT_PATH}/config`).on("value", snap => {
@@ -607,16 +504,16 @@
         if (cfg.zal_day) cloudZalDay = toArray(cfg.zal_day);
         if (cfg.zal_night) cloudZalNight = toArray(cfg.zal_night);
         if (cfg.note_chips_init) cloudNoteChips = toArray(cfg.note_chips);
+        if (cfg.tariffs_init) cloudTariffs = toArray(cfg.tariffs);
+        if (cfg.weekend_counts) cloudWeekendCounts = cfg.weekend_counts;
         cloudSingerPresets = cfg.singer_presets ? toArray(cfg.singer_presets) : [];
-        if (document.getElementById("mgrOverlay").classList.contains("open") && document.getElementById("mgrSelectStep").style.display !== "none") {
-          openMgrPicker(Boolean(currentManager));
-        }
+        if (document.getElementById("mgrOverlay").classList.contains("open") && document.getElementById("mgrSelectStep").style.display !== "none") openMgrPicker(Boolean(currentManager));
         if (document.getElementById("singerSheet").classList.contains("open")) renderSingerSheetContent();
         if (currentTab !== "chat") renderApp();
       }
     });
     db.ref(`${ROOT_PATH}/chat`).limitToLast(100).on("value", snap => {
-      const list = []; snap.forEach(c => { list.push({ id: c.key, ...c.val() }); });
+      const list = []; snap.forEach(c => { list.push({ id:c.key, ...c.val() }); });
       cloudChat = list;
       if (currentTab === "chat") { markChatSeen(); renderChatMessages(); } else updateChatBadge();
     });
@@ -644,103 +541,68 @@
   }
 
   function getManagers() { return cloudManagers; }
-  function saveManagers(arr) { cloudManagers = arr; if (db) db.ref(`${ROOT_PATH}/config/managers`).set(arr); }
+  function saveManagers(a) { cloudManagers = a; if (db) db.ref(`${ROOT_PATH}/config/managers`).set(a); }
   function getNoteChips() { return cloudNoteChips; }
-  function saveNoteChips(arr) { cloudNoteChips = arr; if (db) { db.ref(`${ROOT_PATH}/config/note_chips_init`).set(true); db.ref(`${ROOT_PATH}/config/note_chips`).set(arr); } }
+  function saveNoteChips(a) { cloudNoteChips = a; if (db) { db.ref(`${ROOT_PATH}/config/note_chips_init`).set(true); db.ref(`${ROOT_PATH}/config/note_chips`).set(a); } }
   function getCabinetsConfig() { return cloudCabinets; }
-  function saveCabinetsConfig(cfg) { cloudCabinets = cfg; if (db) db.ref(`${ROOT_PATH}/config/cabinets`).set(cfg); }
+  function saveCabinetsConfig(c) { cloudCabinets = c; if (db) db.ref(`${ROOT_PATH}/config/cabinets`).set(c); }
+  function saveTariffsConfig(t) { cloudTariffs = t; if (db) { db.ref(`${ROOT_PATH}/config/tariffs_init`).set(true); db.ref(`${ROOT_PATH}/config/tariffs`).set(t); } }
+  function saveWeekendCounts(wc) { cloudWeekendCounts = wc; if (db) db.ref(`${ROOT_PATH}/config/weekend_counts`).set(wc); }
   function getZalList(t) { return t === "day" ? cloudZalDay : cloudZalNight; }
   function saveZalList(t, list) { if (t === "day") cloudZalDay = list; else cloudZalNight = list; if (db) db.ref(`${ROOT_PATH}/config/${t==="day"?"zal_day":"zal_night"}`).set(list); }
   function getDayReservations() { return cloudReservations || {}; }
 
+  // MÜĞƏNNİLƏR
   function renderSingerBanner() {
     const c = document.getElementById("singerBarContainer"); if (!c) return;
-    const singers = cloudDateSingers || [];
-    const dateLbl = `${formatDisplayDate(datePicker.value)} (${getDayNameAz(datePicker.value)})`;
+    const singers = cloudDateSingers || [], dateLbl = `${formatDisplayDate(datePicker.value)} (${getDayNameAz(datePicker.value)})`;
     const namesText = singers.length ? singers.join(" • ") : (isGuest() ? "Bu gün üçün müğənni qeyd olunmayıb" : "Müğənni əlavə etmək üçün toxunun...");
     c.innerHTML = `<div class="singer-bar" onclick="openSingerSheet()"><div class="singer-bar-left"><div class="singer-bar-title">🎤 Müğənnilər — ${dateLbl}</div><div class="singer-bar-names" style="${!singers.length?'color:#94a3b8;font-weight:500;':''}">${escHtml(namesText)}</div></div>${!isGuest()?`<span class="singer-bar-btn">${singers.length?'✏️ Düzəliş':'+ Əlavə et'}</span>`:''}</div>`;
   }
   function openSingerSheet() {
-    if (isGuest() && (!cloudDateSingers || !cloudDateSingers.length)) { showToast("👁️ Bu gün üçün müğənni təyin edilməyib"); return; }
+    if (isGuest() && (!cloudDateSingers || !cloudDateSingers.length)) { showToast("👁️ Müğənni təyin edilməyib"); return; }
     document.getElementById("singerSheetDateLabel").textContent = `${formatDisplayDate(datePicker.value)} (${getDayNameAz(datePicker.value)})`;
     document.getElementById("singerEditControls").style.display = isGuest() ? "none" : "block";
-    renderSingerSheetContent();
-    document.getElementById("singerSheet").classList.add("open");
+    renderSingerSheetContent(); document.getElementById("singerSheet").classList.add("open");
   }
   function closeSingerSheet() { document.getElementById("singerSheet").classList.remove("open"); }
   function renderSingerSheetContent() {
     const list = cloudDateSingers || [];
-    document.getElementById("singerListBody").innerHTML = !list.length
-      ? `<div style="text-align:center; padding:16px; color:#94a3b8; font-size:13px;">Bu tarix üçün hələ müğənni əlavə olunmayıb</div>`
+    document.getElementById("singerListBody").innerHTML = !list.length ? `<div style="text-align:center; padding:16px; color:#94a3b8; font-size:13px;">Bu tarix üçün hələ müğənni əlavə olunmayıb</div>`
       : list.map((name, i) => `<div class="singer-item"><b style="font-size:14px;">🎤 ${escHtml(name)}</b>${!isGuest()?`<button class="icon-btn del" onclick="removeSingerFromDate(${i})">🗑️</button>`:''}</div>`).join("");
     const pw = document.getElementById("singerPresetsWrap");
-    if (!isGuest() && cloudSingerPresets.length) {
-      pw.innerHTML = `<div style="font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px;">TEZ SEÇİM:</div><div style="display:flex; flex-wrap:wrap; gap:6px;">${cloudSingerPresets.map((p, idx) => `<span class="preset-chip"><span onclick="pushSingerToCurrentDate('${escHtml(p).replace(/'/g,"\\'")}')">+ ${escHtml(p)}</span><span class="preset-del" onclick="removeSingerPreset(${idx})">×</span></span>`).join("")}</div>`;
-    } else pw.innerHTML = "";
+    if (!isGuest() && cloudSingerPresets.length) pw.innerHTML = `<div style="font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px;">TEZ SEÇİM:</div><div style="display:flex; flex-wrap:wrap; gap:6px;">${cloudSingerPresets.map((p, idx) => `<span class="preset-chip"><span onclick="pushSingerToCurrentDate('${escHtml(p).replace(/'/g,"\\'")}')">+ ${escHtml(p)}</span><span class="preset-del" onclick="removeSingerPreset(${idx})">×</span></span>`).join("")}</div>`;
+    else pw.innerHTML = "";
   }
-  function addSingerToDate() {
-    if (isGuest()) return;
-    const inp = document.getElementById("newDateSingerInput"), val = inp.value.trim();
-    if (!val) return; inp.value = ""; pushSingerToCurrentDate(val);
-  }
+  function addSingerToDate() { if (isGuest()) return; const i=document.getElementById("newDateSingerInput"), v=i.value.trim(); if(!v) return; i.value=""; pushSingerToCurrentDate(v); }
   function pushSingerToCurrentDate(name) {
     const list = [...(cloudDateSingers || [])];
-    if (!list.some(x => x.toLowerCase() === name.toLowerCase())) {
-      list.push(name); cloudDateSingers = list;
-      if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(list);
-    }
-    if (!cloudSingerPresets.some(x => x.toLowerCase() === name.toLowerCase())) {
-      cloudSingerPresets = [...cloudSingerPresets, name];
-      if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(cloudSingerPresets);
-    }
+    if (!list.some(x => x.toLowerCase() === name.toLowerCase())) { list.push(name); cloudDateSingers = list; if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(list); }
+    if (!cloudSingerPresets.some(x => x.toLowerCase() === name.toLowerCase())) { cloudSingerPresets = [...cloudSingerPresets, name]; if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(cloudSingerPresets); }
     renderSingerSheetContent(); renderSingerBanner(); showToast(`${name} əlavə olundu!`);
   }
-  function removeSingerFromDate(idx) {
-    if (isGuest()) return;
-    const list = [...(cloudDateSingers || [])]; list.splice(idx, 1); cloudDateSingers = list;
-    if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(list);
-    renderSingerSheetContent(); renderSingerBanner();
-  }
-  function removeSingerPreset(idx) {
-    if (isGuest()) return;
-    const presets = [...cloudSingerPresets]; presets.splice(idx, 1); cloudSingerPresets = presets;
-    if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(presets);
-    renderSingerSheetContent();
-  }
+  function removeSingerFromDate(i) { if (isGuest()) return; const l=[...(cloudDateSingers||[])]; l.splice(i,1); cloudDateSingers=l; if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(l); renderSingerSheetContent(); renderSingerBanner(); }
+  function removeSingerPreset(i) { if (isGuest()) return; const p=[...cloudSingerPresets]; p.splice(i,1); cloudSingerPresets=p; if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(p); renderSingerSheetContent(); }
 
-  function changeDay(delta) {
-    const [y, m, d] = datePicker.value.split("-").map(Number);
-    const dt = new Date(y, m - 1, d); dt.setDate(dt.getDate() + delta);
-    datePicker.value = formatDateISO(dt); cloudReservations = {}; cloudDateSingers = [];
-    listenToSelectedDate(); renderApp();
-  }
-  function setToday() {
-    datePicker.value = todayStr; cloudReservations = {}; cloudDateSingers = [];
-    listenToSelectedDate(); renderApp();
-  }
-  function jumpToDateFromReport(isoDate) {
-    datePicker.value = isoDate; cloudReservations = {}; cloudDateSingers = [];
-    listenToSelectedDate(); switchTab("kabinet", document.getElementById("nav_kabinet"));
-  }
-  function setFilter(f, btn) {
-    currentFilter = f; document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
-    btn.classList.add("active"); renderApp();
-  }
+  // NAVİQASİYA
+  function changeDay(d) { const [y,m,day]=datePicker.value.split("-").map(Number), dt=new Date(y,m-1,day); dt.setDate(dt.getDate()+d); datePicker.value=formatDateISO(dt); cloudReservations={}; cloudDateSingers=[]; listenToSelectedDate(); renderApp(); }
+  function setToday() { datePicker.value=todayStr; cloudReservations={}; cloudDateSingers=[]; listenToSelectedDate(); renderApp(); }
+  function jumpToDateFromReport(iso) { datePicker.value=iso; cloudReservations={}; cloudDateSingers=[]; listenToSelectedDate(); switchTab("kabinet", document.getElementById("nav_kabinet")); }
+  function setFilter(f, btn) { currentFilter=f; document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active")); btn.classList.add("active"); renderApp(); }
   function switchTab(tab, btn) {
-    currentTab = tab; editingCabIdx = editingMgrIdx = editingZalIdx = editingChipIdx = null; showNewCabForm = false;
+    currentTab = tab; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
     document.querySelectorAll(".top-nav-item").forEach(n => n.classList.remove("active"));
     if (btn) btn.classList.add("active");
     document.getElementById("settingsGearBtn").classList.remove("active");
-    const showFilter = (tab === "kabinet" || tab === "zal_day" || tab === "zal_night");
-    document.getElementById("filterHeader").style.display = showFilter ? "block" : "none";
-    document.getElementById("dateBar").style.display = (tab === "chat" || (tab === "report" && reportPeriod !== "day")) ? "none" : "flex";
-    if (tab === "chat") markChatSeen();
-    if (tab === "report" && reportPeriod !== "day") { fetchReportRange(); return; }
+    document.getElementById("filterHeader").style.display = (tab==="kabinet"||tab==="zal_day"||tab==="zal_night") ? "block" : "none";
+    document.getElementById("dateBar").style.display = (tab==="chat"||(tab==="report"&&reportPeriod!=="day")) ? "none" : "flex";
+    if (tab==="chat") markChatSeen();
+    if (tab==="report" && reportPeriod!=="day") { fetchReportRange(); return; }
     renderApp();
   }
   function openSettingsTab() {
     if (isGuest()) return;
-    currentTab = "settings"; editingCabIdx = editingMgrIdx = editingZalIdx = editingChipIdx = null; showNewCabForm = false;
+    currentTab = "settings"; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
     document.querySelectorAll(".top-nav-item").forEach(n => n.classList.remove("active"));
     document.getElementById("settingsGearBtn").classList.add("active");
     document.getElementById("filterHeader").style.display = "none";
@@ -748,18 +610,15 @@
     renderApp();
   }
 
+  // STATİSTİKA & RENDER
   function computeDayMiniStats(cabs, zalDay, zalNight, resData) {
     const s = { kabDayG:0, kabNightG:0, kabBeh:0, zalDayG:0, zalDayBeh:0, zalDayFilled:0, zalNightG:0, zalNightBeh:0, zalNightFilled:0 };
     cabs.forEach(cab => {
-      const r1 = resData[`kabinet_${cab.id}_1`];
-      if (r1?.name) { s.kabDayG += Number(r1.guests)||0; s.kabBeh += Number(r1.beh)||0; }
-      if (cab.shifts === 2) {
-        const r2 = resData[`kabinet_${cab.id}_2`];
-        if (r2?.name) { s.kabNightG += Number(r2.guests)||0; s.kabBeh += Number(r2.beh)||0; }
-      }
+      const r1 = resData[`kabinet_${cab.id}_1`]; if (r1?.name) { s.kabDayG += Number(r1.guests)||0; s.kabBeh += Number(r1.beh)||0; }
+      if (cab.shifts===2) { const r2 = resData[`kabinet_${cab.id}_2`]; if (r2?.name) { s.kabNightG += Number(r2.guests)||0; s.kabBeh += Number(r2.beh)||0; } }
     });
-    zalDay.forEach(z => { const r = resData[`zal_day_${z.id}`]; if (r?.name) { s.zalDayFilled++; s.zalDayG += Number(r.guests)||0; s.zalDayBeh += Number(r.beh)||0; } });
-    zalNight.forEach(z => { const r = resData[`zal_night_${z.id}`]; if (r?.name) { s.zalNightFilled++; s.zalNightG += Number(r.guests)||0; s.zalNightBeh += Number(r.beh)||0; } });
+    zalDay.forEach(z => { const r=resData[`zal_day_${z.id}`]; if (r?.name) { s.zalDayFilled++; s.zalDayG += Number(r.guests)||0; s.zalDayBeh += Number(r.beh)||0; } });
+    zalNight.forEach(z => { const r=resData[`zal_night_${z.id}`]; if (r?.name) { s.zalNightFilled++; s.zalNightG += Number(r.guests)||0; s.zalNightBeh += Number(r.beh)||0; } });
     s.totalGuests = s.kabDayG + s.kabNightG + s.zalDayG + s.zalNightG;
     s.totalBeh = s.kabBeh + s.zalDayBeh + s.zalNightBeh;
     return s;
@@ -771,32 +630,26 @@
   }
 
   function renderApp() {
-    const cabs = getCabinetsConfig();
-    const zalDay = getEffectiveZalList("day", datePicker.value);
-    const zalNight = getEffectiveZalList("night", datePicker.value);
-    const resData = getDayReservations();
+    const cabs = getCabinetsConfig(), zalDay = getEffectiveZalList("day", datePicker.value), zalNight = getEffectiveZalList("night", datePicker.value), resData = getDayReservations();
     const st = computeDayMiniStats(cabs, zalDay, zalNight, resData);
-
-    const titles = { kabinet:`Kabinetlər (${cabs.length} otaq)`, zal_day:`Zal — Səhər (${zalDay.length} zal)`, zal_night:`Zal — Şou Proqram (${zalNight.length} zal)`, chat:"Menecer Chatı", report:"Detallı Hesabat", settings:"Ayarlar & Redaktə" };
+    const titles = { kabinet:`Kabinetlər (${cabs.length} otaq)`, zal_day:`Zal — Səhər (${zalDay.length} zal)`, zal_night:`Zal — Şou Proqram (${zalNight.length} zal)`, chat:"Menecer Chatı", report:"Detallı Hesabat", settings:"Ayarlar & Tariflər" };
     document.getElementById("sectionSubTitle").textContent = titles[currentTab];
     document.getElementById("topTotalGuests").textContent = `${st.totalGuests} qonaq`;
     document.getElementById("topTotalBeh").textContent = `${formatMoney(st.totalBeh)}`;
     renderSingerBanner();
 
-    const wb = document.getElementById("weekendBannerContainer");
-    wb.innerHTML = (isWeekend(datePicker.value) && (currentTab === "zal_day" || currentTab === "zal_night"))
-      ? `<div class="weekend-banner">📅 Həftəsonu (${getDayNameAz(datePicker.value)}): Zal Səhər 20, Şou Proqram 30 zal aktivdir!</div>` : "";
+    const activeTr = getActiveTariff(datePicker.value);
+    document.getElementById("seasonBannerContainer").innerHTML = (activeTr && currentTab === "kabinet")
+      ? `<div class="season-banner">✨ ${escHtml(activeTr.title)}</div>` : "";
+    document.getElementById("weekendBannerContainer").innerHTML = (isWeekend(datePicker.value) && (currentTab==="zal_day"||currentTab==="zal_night"))
+      ? `<div class="weekend-banner">📅 Həftəsonu (${getDayNameAz(datePicker.value)}): Zal Səhər ${zalDay.length}, Şou Proqram ${zalNight.length} zal aktivdir!</div>` : "";
 
     const ms = document.getElementById("miniStats");
-    if (currentTab === "kabinet") {
-      ms.innerHTML = `<div class="mini-stat"><div class="mini-stat-val">${st.kabDayG}</div><div class="mini-stat-lbl">17:00-a qədər</div></div><div class="mini-stat"><div class="mini-stat-val">${st.kabNightG}</div><div class="mini-stat-lbl">18:00-dan</div></div><div class="mini-stat"><div class="mini-stat-val" style="color:#16a34a;">${formatMoney(st.kabBeh)}</div><div class="mini-stat-lbl">Kabinet BEH</div></div>`;
-    } else if (currentTab === "zal_day") {
-      ms.innerHTML = `<div class="mini-stat"><div class="mini-stat-val">${st.zalDayFilled}/${zalDay.length}</div><div class="mini-stat-lbl">Dolu Zal</div></div><div class="mini-stat"><div class="mini-stat-val">${st.zalDayG}</div><div class="mini-stat-lbl">Qonaq Sayı</div></div><div class="mini-stat"><div class="mini-stat-val" style="color:#16a34a;">${formatMoney(st.zalDayBeh)}</div><div class="mini-stat-lbl">Səhər BEH</div></div>`;
-    } else if (currentTab === "zal_night") {
-      ms.innerHTML = `<div class="mini-stat"><div class="mini-stat-val">${st.zalNightFilled}/${zalNight.length}</div><div class="mini-stat-lbl">Dolu Zal</div></div><div class="mini-stat"><div class="mini-stat-val">${st.zalNightG}</div><div class="mini-stat-lbl">Qonaq Sayı</div></div><div class="mini-stat"><div class="mini-stat-val" style="color:#16a34a;">${formatMoney(st.zalNightBeh)}</div><div class="mini-stat-lbl">Axşam BEH</div></div>`;
-    }
+    if (currentTab === "kabinet") ms.innerHTML = `<div class="mini-stat"><div class="mini-stat-val">${st.kabDayG}</div><div class="mini-stat-lbl">17:00-a qədər</div></div><div class="mini-stat"><div class="mini-stat-val">${st.kabNightG}</div><div class="mini-stat-lbl">18:00-dan</div></div><div class="mini-stat"><div class="mini-stat-val" style="color:#16a34a;">${formatMoney(st.kabBeh)}</div><div class="mini-stat-lbl">Kabinet BEH</div></div>`;
+    else if (currentTab === "zal_day") ms.innerHTML = `<div class="mini-stat"><div class="mini-stat-val">${st.zalDayFilled}/${zalDay.length}</div><div class="mini-stat-lbl">Dolu Zal</div></div><div class="mini-stat"><div class="mini-stat-val">${st.zalDayG}</div><div class="mini-stat-lbl">Qonaq Sayı</div></div><div class="mini-stat"><div class="mini-stat-val" style="color:#16a34a;">${formatMoney(st.zalDayBeh)}</div><div class="mini-stat-lbl">Səhər BEH</div></div>`;
+    else if (currentTab === "zal_night") ms.innerHTML = `<div class="mini-stat"><div class="mini-stat-val">${st.zalNightFilled}/${zalNight.length}</div><div class="mini-stat-lbl">Dolu Zal</div></div><div class="mini-stat"><div class="mini-stat-val">${st.zalNightG}</div><div class="mini-stat-lbl">Qonaq Sayı</div></div><div class="mini-stat"><div class="mini-stat-val" style="color:#16a34a;">${formatMoney(st.zalNightBeh)}</div><div class="mini-stat-lbl">Axşam BEH</div></div>`;
 
-    if (currentTab === "kabinet") renderCabinets(cabs, resData);
+    if (currentTab === "kabinet") renderCabinets(cabs, resData, Boolean(activeTr));
     else if (currentTab === "zal_day") renderZalGrid("zal_day", zalDay, resData, "10:00 - 17:00");
     else if (currentTab === "zal_night") renderZalGrid("zal_night", zalNight, resData, "18:00 - 23:00");
     else if (currentTab === "chat") renderChatScreen();
@@ -804,18 +657,17 @@
     else if (currentTab === "settings") renderSettings();
   }
 
-  function renderCabinets(cabs, resData) {
+  function renderCabinets(cabs, resData, hasSpecialTariff) {
     const q = document.getElementById("searchInput").value.trim().toLowerCase();
     let html = "";
     cabs.forEach(cab => {
-      const r1 = resData[`kabinet_${cab.id}_1`];
-      const r2 = cab.shifts === 2 ? resData[`kabinet_${cab.id}_2`] : null;
-      const hasAny = Boolean(r1?.name || r2?.name);
-      const hasFree = Boolean(!r1?.name || (cab.shifts === 2 && !r2?.name));
-      if (currentFilter === "free" && !hasFree) return;
-      if (currentFilter === "booked" && !hasAny) return;
+      const r1 = resData[`kabinet_${cab.id}_1`], r2 = cab.shifts===2 ? resData[`kabinet_${cab.id}_2`] : null;
+      const hasAny = Boolean(r1?.name || r2?.name), hasFree = Boolean(!r1?.name || (cab.shifts===2 && !r2?.name));
+      if (currentFilter==="free" && !hasFree) return;
+      if (currentFilter==="booked" && !hasAny) return;
       if (q && !`${cab.name} ${r1?.name||""} ${r1?.phone||""} ${r2?.name||""} ${r2?.phone||""}`.toLowerCase().includes(q)) return;
-      html += `<div class="cab-card"><div class="cab-head"><div><div class="cab-title">${escHtml(cab.name)}</div><div class="cab-meta"><span class="meta-tag">👥 Max ${cab.max} nəfər</span><span class="meta-tag gold">💳 Depozit: ${formatMoney(cab.depositVal)}</span></div></div><span class="smen-badge">${cab.shifts===2?"2 smen":"1 smen"}</span></div><div class="shifts-grid ${cab.shifts===1?"single":""}">${renderCabShiftBox(cab,1,r1,cab.shifts===1?"Tam gün":"☀️ 17:00-a qədər",cab.s1)}${cab.shifts===2?renderCabShiftBox(cab,2,r2,"🌙 18:00-dan",cab.s2):""}</div></div>`;
+      const depVal = getCabinetDepositForDate(cab, datePicker.value);
+      html += `<div class="cab-card"><div class="cab-head"><div><div class="cab-title">${escHtml(cab.name)}</div><div class="cab-meta"><span class="meta-tag">👥 Max ${cab.max} nəfər</span><span class="meta-tag ${hasSpecialTariff?'special':'gold'}">💳 Depozit: ${formatMoney(depVal)}</span></div></div><span class="smen-badge">${cab.shifts===2?"2 smen":"1 smen"}</span></div><div class="shifts-grid ${cab.shifts===1?"single":""}">${renderCabShiftBox(cab,1,r1,cab.shifts===1?"Tam gün":"☀️ 17:00-a qədər",cab.s1)}${cab.shifts===2?renderCabShiftBox(cab,2,r2,"🌙 18:00-dan",cab.s2):""}</div></div>`;
     });
     document.getElementById("mainContent").innerHTML = html || `<div style="text-align:center; padding:40px; color:#94a3b8;">Heç nə tapılmadı</div>`;
   }
@@ -829,8 +681,8 @@
     let html = `<div class="zal-grid">`, count = 0;
     list.forEach(zal => {
       const res = resData[`${section}_${zal.id}`], isBooked = Boolean(res?.name);
-      if (currentFilter === "free" && isBooked) return;
-      if (currentFilter === "booked" && !isBooked) return;
+      if (currentFilter==="free" && isBooked) return;
+      if (currentFilter==="booked" && !isBooked) return;
       if (q && !`${zal.name} ${res?.name||""} ${res?.phone||""} ${res?.staff||""}`.toLowerCase().includes(q)) return;
       count++;
       const cls = isBooked ? (res.status === "confirmed" ? "confirmed" : "pending") : "";
@@ -841,87 +693,61 @@
     document.getElementById("mainContent").innerHTML = count ? html + `</div>` : `<div style="text-align:center; padding:40px; color:#94a3b8;">Heç nə tapılmadı</div>`;
   }
 
+  // CHAT
   function updateChatBadge() {
-    const unread = cloudChat.filter(m => m.ts > lastChatSeenTs && m.sender !== currentManager).length;
-    const b = document.getElementById("chatBadge");
-    if (unread > 0) { b.textContent = unread > 9 ? "9+" : unread; b.style.display = "inline-block"; } else b.style.display = "none";
+    const u = cloudChat.filter(m => m.ts > lastChatSeenTs && m.sender !== currentManager).length, b = document.getElementById("chatBadge");
+    if (u > 0) { b.textContent = u > 9 ? "9+" : u; b.style.display = "inline-block"; } else b.style.display = "none";
   }
-  function markChatSeen() {
-    lastChatSeenTs = Date.now(); safeSetLocal("elpiano_chat_seen", String(lastChatSeenTs));
-    document.getElementById("chatBadge").style.display = "none";
-  }
+  function markChatSeen() { lastChatSeenTs = Date.now(); safeSetLocal("elpiano_chat_seen", String(lastChatSeenTs)); document.getElementById("chatBadge").style.display = "none"; }
   function renderChatScreen() {
     const g = isGuest();
-    document.getElementById("mainContent").innerHTML = `
-      <div class="chat-wrap">
-        <div class="chat-top-bar">
-          <span style="font-size:12px; font-weight:800; color:var(--navy);">💬 Menecer Chatı</span>
-          ${!g ? `<div><button id="chatClearBtn" class="chat-clear-btn" onclick="askClearChat()">🧹 Sıfırla</button><div id="chatClearConfirm" style="display:none; gap:6px; align-items:center;"><span style="font-size:11px; font-weight:700; color:#991b1b;">Silinsin?</span><button class="btn btn-cancel btn-sm" style="padding:4px 8px;" onclick="cancelClearChat()">Xeyr</button><button class="btn btn-del-confirm btn-sm" style="padding:4px 8px;" onclick="confirmClearChat()">Bəli</button></div></div>` : ''}
-        </div>
-        <div class="chat-messages" id="chatMessagesBox"></div>
-        ${g ? `<div style="padding:10px; background:#f8fafc; text-align:center; font-size:12px; font-weight:700; color:#64748b; border-top:1px solid var(--border);">👁️ Qonaq rejimində mesaj yazmaq bağlıdır</div>` : `<div class="chat-input-bar"><input type="text" id="chatInput" class="chat-input" placeholder="${escHtml(currentManager)} adıyla mesaj yaz..." onkeydown="if(event.key==='Enter') sendChatMsg()" /><button class="chat-send-btn" onclick="sendChatMsg()">Göndər ➤</button></div>`}
-      </div>`;
+    document.getElementById("mainContent").innerHTML = `<div class="chat-wrap"><div class="chat-top-bar"><span style="font-size:12px; font-weight:800; color:var(--navy);">💬 Menecer Chatı</span>${!g?`<div><button id="chatClearBtn" class="chat-clear-btn" onclick="askClearChat()">🧹 Sıfırla</button><div id="chatClearConfirm" style="display:none; gap:6px; align-items:center;"><span style="font-size:11px; font-weight:700; color:#991b1b;">Silinsin?</span><button class="btn btn-cancel btn-sm" style="padding:4px 8px;" onclick="cancelClearChat()">Xeyr</button><button class="btn btn-del-confirm btn-sm" style="padding:4px 8px;" onclick="confirmClearChat()">Bəli</button></div></div>`:''}</div><div class="chat-messages" id="chatMessagesBox"></div>${g?`<div style="padding:10px; background:#f8fafc; text-align:center; font-size:12px; font-weight:700; color:#64748b; border-top:1px solid var(--border);">👁️ Qonaq rejimində mesaj yazmaq bağlıdır</div>`:`<div class="chat-input-bar"><input type="text" id="chatInput" class="chat-input" placeholder="${escHtml(currentManager)} adıyla mesaj yaz..." onkeydown="if(event.key==='Enter') sendChatMsg()" /><button class="chat-send-btn" onclick="sendChatMsg()">Göndər ➤</button></div>`}</div>`;
     renderChatMessages();
   }
   function askClearChat() { document.getElementById("chatClearBtn").style.display="none"; document.getElementById("chatClearConfirm").style.display="flex"; }
   function cancelClearChat() { document.getElementById("chatClearBtn").style.display="inline-block"; document.getElementById("chatClearConfirm").style.display="none"; }
-  function confirmClearChat() { if (isGuest()) return; cloudChat=[]; if (db) db.ref(`${ROOT_PATH}/chat`).remove(); cancelClearChat(); renderChatMessages(); showToast("Chat sıfırlandı!"); }
+  function confirmClearChat() { if (!isGuest()) { cloudChat=[]; if (db) db.ref(`${ROOT_PATH}/chat`).remove(); cancelClearChat(); renderChatMessages(); showToast("Chat sıfırlandı!"); } }
   function renderChatMessages() {
     const box = document.getElementById("chatMessagesBox"); if (!box) return;
-    if (!cloudChat.length) { box.innerHTML = `<div style="text-align:center; color:#64748b; font-size:13px; margin:auto;">Hələ mesaj yoxdur. İlk mesajı yazın!</div>`; return; }
+    if (!cloudChat.length) { box.innerHTML = `<div style="text-align:center; color:#64748b; font-size:13px; margin:auto;">Hələ mesaj yoxdur!</div>`; return; }
     box.innerHTML = cloudChat.map(m => {
       const isMine = (m.sender === currentManager), d = new Date(m.ts || Date.now());
-      const hm = `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
-      const dm = `${String(d.getDate()).padStart(2,"0")}.${String(d.getMonth()+1).padStart(2,"0")}`;
+      const hm = `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`, dm = `${String(d.getDate()).padStart(2,"0")}.${String(d.getMonth()+1).padStart(2,"0")}`;
       return `<div class="msg-bubble ${isMine?'mine':'other'}">${!isMine?`<div class="msg-sender">${escHtml(m.sender)}</div>`:''}<div>${escHtml(m.text)}</div><div class="msg-meta"><span>${dm} • ${hm}</span>${isMine?`<span class="msg-del" onclick="deleteChatMsg('${m.id}')">✕</span>`:''}</div></div>`;
     }).join("");
     box.scrollTop = box.scrollHeight;
   }
-  function sendChatMsg() {
-    if (isGuest() || !currentManager) return;
-    const inp = document.getElementById("chatInput"), text = inp.value.trim(); if (!text) return;
-    inp.value = ""; if (db) db.ref(`${ROOT_PATH}/chat`).push({ sender:currentManager, text, ts:Date.now() });
-    markChatSeen();
-  }
+  function sendChatMsg() { if (isGuest() || !currentManager) return; const i=document.getElementById("chatInput"), t=i.value.trim(); if (!t) return; i.value=""; if (db) db.ref(`${ROOT_PATH}/chat`).push({sender:currentManager,text:t,ts:Date.now()}); markChatSeen(); }
   function deleteChatMsg(id) { if (!isGuest() && db) db.ref(`${ROOT_PATH}/chat/${id}`).remove(); }
 
+  // HESABAT + EXCEL + BACKUP
   function getPeriodDates() {
     const end = new Date(), start = new Date();
-    if (reportPeriod === "day") return { from: datePicker.value, to: datePicker.value };
-    if (reportPeriod === "1m") { start.setMonth(start.getMonth() - 1); return { from: formatDateISO(start), to: formatDateISO(end) }; }
-    if (reportPeriod === "3m") { start.setMonth(start.getMonth() - 3); return { from: formatDateISO(start), to: formatDateISO(end) }; }
-    if (reportPeriod === "6m") { start.setMonth(start.getMonth() - 6); return { from: formatDateISO(start), to: formatDateISO(end) }; }
-    let f = reportCustomFrom || todayStr, t = reportCustomTo || todayStr;
-    if (f > t) { const tmp = f; f = t; t = tmp; }
-    return { from: f, to: t };
+    if (reportPeriod==="day") return { from:datePicker.value, to:datePicker.value };
+    if (reportPeriod==="1m") { start.setMonth(start.getMonth()-1); return { from:formatDateISO(start), to:formatDateISO(end) }; }
+    if (reportPeriod==="3m") { start.setMonth(start.getMonth()-3); return { from:formatDateISO(start), to:formatDateISO(end) }; }
+    if (reportPeriod==="6m") { start.setMonth(start.getMonth()-6); return { from:formatDateISO(start), to:formatDateISO(end) }; }
+    let f=reportCustomFrom||todayStr, t=reportCustomTo||todayStr; if (f>t) { const x=f; f=t; t=x; } return { from:f, to:t };
   }
-  function setReportPeriod(p) {
-    reportPeriod = p; document.getElementById("dateBar").style.display = p === "day" ? "flex" : "none";
-    if (p === "day") { reportRangeData = null; renderReportScreen(); } else fetchReportRange();
-  }
-  function applyCustomRange() {
-    reportCustomFrom = document.getElementById("repFromDate").value || todayStr;
-    reportCustomTo = document.getElementById("repToDate").value || todayStr;
-    fetchReportRange();
-  }
+  function setReportPeriod(p) { reportPeriod=p; document.getElementById("dateBar").style.display = p==="day"?"flex":"none"; if (p==="day") { reportRangeData=null; renderReportScreen(); } else fetchReportRange(); }
+  function applyCustomRange() { reportCustomFrom=document.getElementById("repFromDate").value||todayStr; reportCustomTo=document.getElementById("repToDate").value||todayStr; fetchReportRange(); }
   function fetchReportRange() {
     const { from, to } = getPeriodDates();
-    if (!db) { reportRangeData = { [datePicker.value]: getDayReservations() }; renderReportScreen(); return; }
+    if (!db) { reportRangeData = { [datePicker.value]:getDayReservations() }; renderReportScreen(); return; }
     reportLoading = true; renderReportScreen();
-    db.ref(`${ROOT_PATH}/reservations`).orderByKey().startAt(from).endAt(to).once("value", snap => {
-      reportRangeData = snap.val() || {}; reportLoading = false;
-      if (currentTab === "report") renderReportScreen();
-    }, () => { reportLoading = false; reportRangeData = {}; if (currentTab === "report") renderReportScreen(); });
+    db.ref(`${ROOT_PATH}/reservations`).orderByKey().startAt(from).endAt(to).once("value", s => {
+      reportRangeData = s.val() || {}; reportLoading = false; if (currentTab==="report") renderReportScreen();
+    }, () => { reportLoading = false; reportRangeData = {}; if (currentTab==="report") renderReportScreen(); });
   }
 
   function aggregateReportData(dataByDate) {
     const cabs = getCabinetsConfig();
-    const zalDay = reportPeriod === "day" ? getEffectiveZalList("day", datePicker.value) : getEffectiveZalList("day", "2026-11-21");
-    const zalNight = reportPeriod === "day" ? getEffectiveZalList("night", datePicker.value) : getEffectiveZalList("night", "2026-11-21");
-    const cabMap = {}, zalDayMap = {}, zalNightMap = {}, staffMap = {}, dayMap = {};
-    cabs.forEach(c => cabMap[c.id] = { id:c.id, name:c.name, max:c.max, count:0, dayCount:0, nightCount:0, guests:0, beh:0, depositSum:0 });
-    zalDay.forEach(z => zalDayMap[z.id] = { id:z.id, name:z.name, count:0, guests:0, beh:0 });
-    zalNight.forEach(z => zalNightMap[z.id] = { id:z.id, name:z.name, count:0, guests:0, beh:0 });
+    const zalDay = reportPeriod==="day" ? getEffectiveZalList("day", datePicker.value) : getEffectiveZalList("day", "2026-11-21");
+    const zalNight = reportPeriod==="day" ? getEffectiveZalList("night", datePicker.value) : getEffectiveZalList("night", "2026-11-21");
+    const cabMap={}, zalDayMap={}, zalNightMap={}, staffMap={}, dayMap={};
+    cabs.forEach(c => cabMap[c.id]={id:c.id,name:c.name,max:c.max,count:0,dayCount:0,nightCount:0,guests:0,beh:0,depositSum:0});
+    zalDay.forEach(z => zalDayMap[z.id]={id:z.id,name:z.name,count:0,guests:0,beh:0});
+    zalNight.forEach(z => zalNightMap[z.id]={id:z.id,name:z.name,count:0,guests:0,beh:0});
     const summary = { totalRes:0, totalGuests:0, totalBeh:0, totalDeposit:0, confirmed:0, pending:0, kabDayRes:0, kabDayGuests:0, kabDayBeh:0, kabNightRes:0, kabNightGuests:0, kabNightBeh:0, zalDayRes:0, zalDayGuests:0, zalDayBeh:0, zalNightRes:0, zalNightGuests:0, zalNightBeh:0 };
 
     Object.entries(dataByDate || {}).forEach(([dateKey, dayObj]) => {
@@ -930,7 +756,7 @@
         if (!r || !r.name) return;
         const g = Number(r.guests)||0, b = Number(r.beh)||0;
         summary.totalRes++; summary.totalGuests += g; summary.totalBeh += b;
-        r.status === "confirmed" ? summary.confirmed++ : summary.pending++;
+        r.status==="confirmed" ? summary.confirmed++ : summary.pending++;
         if (!dayMap[dateKey]) dayMap[dateKey] = { date:dateKey, count:0, guests:0, beh:0 };
         dayMap[dateKey].count++; dayMap[dateKey].guests += g; dayMap[dateKey].beh += b;
         const mgr = r.staff || "Qeyd olunmayıb";
@@ -938,332 +764,217 @@
         staffMap[mgr].count++; staffMap[mgr].guests += g; staffMap[mgr].beh += b;
 
         if (resKey.startsWith("kabinet_")) {
-          const rest = resKey.slice(8), idx = rest.lastIndexOf("_");
-          const cabId = idx > 0 ? rest.slice(0, idx) : rest, shift = idx > 0 ? rest.slice(idx + 1) : "1";
+          const rest = resKey.slice(8), idx = rest.lastIndexOf("_"), cabId = idx>0?rest.slice(0,idx):rest, shift = idx>0?rest.slice(idx+1):"1";
           if (!cabMap[cabId]) cabMap[cabId] = { id:cabId, name:cabId+" (köhnə)", max:"-", count:0, dayCount:0, nightCount:0, guests:0, beh:0, depositSum:0 };
-          const cabCfg = cabs.find(x => x.id === cabId), dep = cabCfg ? (Number(cabCfg.depositVal)||0) : 0;
+          const cabCfg = cabs.find(x => x.id === cabId), dep = cabCfg ? getCabinetDepositForDate(cabCfg, dateKey) : 0;
           cabMap[cabId].count++; cabMap[cabId].guests += g; cabMap[cabId].beh += b; cabMap[cabId].depositSum += dep; summary.totalDeposit += dep;
-          if (shift === "1") { cabMap[cabId].dayCount++; summary.kabDayRes++; summary.kabDayGuests += g; summary.kabDayBeh += b; }
+          if (shift==="1") { cabMap[cabId].dayCount++; summary.kabDayRes++; summary.kabDayGuests += g; summary.kabDayBeh += b; }
           else { cabMap[cabId].nightCount++; summary.kabNightRes++; summary.kabNightGuests += g; summary.kabNightBeh += b; }
         } else if (resKey.startsWith("zal_day_")) {
-          const zId = resKey.slice(8);
-          if (!zalDayMap[zId]) zalDayMap[zId] = { id:zId, name:zId, count:0, guests:0, beh:0 };
+          const zId = resKey.slice(8); if (!zalDayMap[zId]) zalDayMap[zId] = { id:zId, name:zId, count:0, guests:0, beh:0 };
           zalDayMap[zId].count++; zalDayMap[zId].guests += g; zalDayMap[zId].beh += b;
           summary.zalDayRes++; summary.zalDayGuests += g; summary.zalDayBeh += b;
         } else if (resKey.startsWith("zal_night_")) {
-          const zId = resKey.slice(10);
-          if (!zalNightMap[zId]) zalNightMap[zId] = { id:zId, name:zId, count:0, guests:0, beh:0 };
+          const zId = resKey.slice(10); if (!zalNightMap[zId]) zalNightMap[zId] = { id:zId, name:zId, count:0, guests:0, beh:0 };
           zalNightMap[zId].count++; zalNightMap[zId].guests += g; zalNightMap[zId].beh += b;
           summary.zalNightRes++; summary.zalNightGuests += g; summary.zalNightBeh += b;
         }
       });
     });
-    return {
-      summary, cabList:Object.values(cabMap), zalDayList:Object.values(zalDayMap), zalNightList:Object.values(zalNightMap),
-      staffList:Object.values(staffMap).sort((a,b) => b.count - a.count || b.guests - a.guests),
-      dayList:Object.values(dayMap).sort((a,b) => b.date.localeCompare(a.date))
-    };
+    return { summary, cabList:Object.values(cabMap), zalDayList:Object.values(zalDayMap), zalNightList:Object.values(zalNightMap), staffList:Object.values(staffMap).sort((a,b)=>b.count-a.count||b.guests-a.guests), dayList:Object.values(dayMap).sort((a,b)=>b.date.localeCompare(a.date)) };
   }
 
   function exportReportCSV() {
-    const { from, to } = getPeriodDates();
-    const sourceData = reportPeriod === "day" ? { [datePicker.value]: getDayReservations() } : (reportRangeData || {});
-    const cabs = getCabinetsConfig();
+    const { from, to } = getPeriodDates(), sourceData = reportPeriod==="day" ? {[datePicker.value]:getDayReservations()} : (reportRangeData||{}), cabs = getCabinetsConfig();
     let csv = "\uFEFFTarix,Bolme,Yer,Qonaq,Say,Vaxt,Telefon,BEH,Menecer,Status,Qeyd\n";
     Object.keys(sourceData).sort().forEach(d => {
-      const dayObj = sourceData[d] || {};
-      Object.entries(dayObj).forEach(([k, r]) => {
+      Object.entries(sourceData[d]||{}).forEach(([k, r]) => {
         if (!r || !r.name) return;
-        let sec = "Zal", place = k;
-        if (k.startsWith("kabinet_")) {
-          sec = "Kabinet"; const rest = k.slice(8), idx = rest.lastIndexOf("_");
-          const cid = idx > 0 ? rest.slice(0, idx) : rest, sh = idx > 0 ? rest.slice(idx + 1) : "1";
-          const cObj = cabs.find(x => x.id === cid);
-          place = (cObj ? cObj.name : cid) + (sh === "1" ? " (Seher)" : " (Axsam)");
-        } else if (k.startsWith("zal_day_")) { sec = "Zal Seher"; place = k.slice(8); }
-        else if (k.startsWith("zal_night_")) { sec = "Sou Proqram"; place = k.slice(10); }
-        const row = [d, sec, place, r.name, r.guests||0, r.time||"", r.phone||"", r.beh||0, r.staff||"", r.status==="confirmed"?"Tesdiq":"Gozleme", r.note||""];
-        csv += row.map(v => `"${String(v).replace(/"/g,'""')}"`).join(",") + "\n";
+        let sec="Zal", place=k;
+        if (k.startsWith("kabinet_")) { sec="Kabinet"; const rest=k.slice(8), idx=rest.lastIndexOf("_"), cid=idx>0?rest.slice(0,idx):rest, sh=idx>0?rest.slice(idx+1):"1", co=cabs.find(x=>x.id===cid); place=(co?co.name:cid)+(sh==="1"?" (Seher)":" (Axsam)"); }
+        else if (k.startsWith("zal_day_")) { sec="Zal Seher"; place=k.slice(8); }
+        else if (k.startsWith("zal_night_")) { sec="Sou Proqram"; place=k.slice(10); }
+        csv += [d,sec,place,r.name,r.guests||0,r.time||"",r.phone||"",r.beh||0,r.staff||"",r.status==="confirmed"?"Tesdiq":"Gozleme",r.note||""].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")+"\n";
       });
     });
-    const blob = new Blob([csv], { type:"text/csv;charset=utf-8;" });
-    const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-    a.download = `elpiano_${from}_${to}.csv`; a.click();
-    showToast("Excel (CSV) faylı yükləndi!");
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"})); a.download=`elpiano_${from}_${to}.csv`; a.click(); showToast("Excel (CSV) yükləndi!");
   }
 
   function downloadFullBackupJSON() {
-    if (!db) return;
-    showToast("Yedək hazırlanır...");
-    db.ref(ROOT_PATH).once("value", snap => {
-      const data = snap.val() || {};
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type:"application/json" });
-      const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-      a.download = `elpiano_tam_yedek_${todayStr}.json`; a.click();
-      showToast("Tam yedək faylı yükləndi!");
+    if (!db) return; showToast("Yedək hazırlanır...");
+    db.ref(ROOT_PATH).once("value", s => {
+      const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(s.val()||{},null,2)],{type:"application/json"}));
+      a.download=`elpiano_tam_yedek_${todayStr}.json`; a.click(); showToast("Tam yedək yükləndi!");
     });
   }
-
-  function restoreFullBackupJSON(input) {
-    const file = input.files[0]; if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
+  function restoreFullBackupJSON(inp) {
+    const f = inp.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onload = e => {
       try {
-        const parsed = JSON.parse(e.target.result);
-        if (!parsed || typeof parsed !== "object" || (!parsed.config && !parsed.reservations)) {
-          showToast("⚠️ Yanlış yedək faylı!"); return;
-        }
-        window._pendingRestoreObj = parsed;
-        document.getElementById("restorePinBox").style.display = "flex";
-        document.getElementById("restorePinInput").value = "";
-        document.getElementById("restorePinErr").style.display = "none";
+        const p = JSON.parse(e.target.result);
+        if (!p || typeof p !== "object" || (!p.config && !p.reservations)) { showToast("⚠️ Yanlış fayl!"); return; }
+        window._pendingRestoreObj = p; document.getElementById("restorePinBox").style.display="flex"; document.getElementById("restorePinInput").value=""; document.getElementById("restorePinErr").style.display="none";
       } catch { showToast("⚠️ Fayl oxunmadı!"); }
     };
-    reader.readAsText(file);
-    input.value = "";
+    rd.readAsText(f); inp.value = "";
   }
-
   function confirmRestoreBackup() {
-    if (document.getElementById("restorePinInput").value.trim() !== CLEAR_PIN) {
-      document.getElementById("restorePinErr").style.display = "block"; return;
-    }
-    if (db && window._pendingRestoreObj) {
-      db.ref(ROOT_PATH).set(window._pendingRestoreObj).then(() => {
-        window._pendingRestoreObj = null;
-        document.getElementById("restorePinBox").style.display = "none";
-        showToast("✅ Baza yedəkdən bərpa edildi!");
-        renderApp();
-      });
-    }
+    if (document.getElementById("restorePinInput").value.trim() !== CLEAR_PIN) { document.getElementById("restorePinErr").style.display="block"; return; }
+    if (db && window._pendingRestoreObj) db.ref(ROOT_PATH).set(window._pendingRestoreObj).then(() => { window._pendingRestoreObj=null; document.getElementById("restorePinBox").style.display="none"; showToast("✅ Bərpa edildi!"); renderApp(); });
   }
 
   function renderReportScreen() {
     const { from, to } = getPeriodDates();
-    const periodControls = `
-      <div class="period-pills">
-        <button class="p-pill ${reportPeriod==='day'?'active':''}" onclick="setReportPeriod('day')">Bu gün</button>
-        <button class="p-pill ${reportPeriod==='1m'?'active':''}" onclick="setReportPeriod('1m')">Son 1 ay</button>
-        <button class="p-pill ${reportPeriod==='3m'?'active':''}" onclick="setReportPeriod('3m')">Son 3 ay</button>
-        <button class="p-pill ${reportPeriod==='6m'?'active':''}" onclick="setReportPeriod('6m')">Son 6 ay</button>
-        <button class="p-pill ${reportPeriod==='custom'?'active':''}" onclick="setReportPeriod('custom')">📅 Tarix seç</button>
-      </div>
-      ${reportPeriod==='custom'?`<div class="custom-range-box"><div class="field"><label>Başlanğıc</label><input type="date" id="repFromDate" value="${reportCustomFrom}" /></div><div class="field"><label>Bitiş</label><input type="date" id="repToDate" value="${reportCustomTo}" /></div><button class="btn btn-save btn-sm" style="height:36px;" onclick="applyCustomRange()">Göstər</button></div>`:''}
-      <div class="range-banner">
-        <span>📆 Dövr: <b>${formatDisplayDate(from)}${from!==to?' — '+formatDisplayDate(to):''}</b></span>
-        <div style="display:flex; gap:6px;">
-          <button class="sort-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;" onclick="exportReportCSV()">📥 Excel</button>
-          ${reportPeriod!=='day'?`<button class="sort-btn" onclick="fetchReportRange()">🔄 Yenilə</button>`:''}
-        </div>
-      </div>`;
-
+    const periodControls = `<div class="period-pills"><button class="p-pill ${reportPeriod==='day'?'active':''}" onclick="setReportPeriod('day')">Bu gün</button><button class="p-pill ${reportPeriod==='1m'?'active':''}" onclick="setReportPeriod('1m')">Son 1 ay</button><button class="p-pill ${reportPeriod==='3m'?'active':''}" onclick="setReportPeriod('3m')">Son 3 ay</button><button class="p-pill ${reportPeriod==='6m'?'active':''}" onclick="setReportPeriod('6m')">Son 6 ay</button><button class="p-pill ${reportPeriod==='custom'?'active':''}" onclick="setReportPeriod('custom')">📅 Tarix seç</button></div>${reportPeriod==='custom'?`<div class="custom-range-box"><div class="field"><label>Başlanğıc</label><input type="date" id="repFromDate" value="${reportCustomFrom}" /></div><div class="field"><label>Bitiş</label><input type="date" id="repToDate" value="${reportCustomTo}" /></div><button class="btn btn-save btn-sm" style="height:36px;" onclick="applyCustomRange()">Göstər</button></div>`:''}<div class="range-banner"><span>📆 Dövr: <b>${formatDisplayDate(from)}${from!==to?' — '+formatDisplayDate(to):''}</b></span><div style="display:flex; gap:6px;"><button class="sort-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;" onclick="exportReportCSV()">📥 Excel</button>${reportPeriod!=='day'?`<button class="sort-btn" onclick="fetchReportRange()">🔄 Yenilə</button>`:''}</div></div>`;
     if (reportLoading) { document.getElementById("mainContent").innerHTML = periodControls + `<div class="report-card" style="text-align:center; padding:34px; color:var(--muted); font-weight:700;">⏳ Hesablanır...</div>`; return; }
 
-    const sourceData = reportPeriod === "day" ? { [datePicker.value]: getDayReservations() } : (reportRangeData || {});
+    const sourceData = reportPeriod==="day" ? {[datePicker.value]:getDayReservations()} : (reportRangeData||{});
     const agg = aggregateReportData(sourceData), s = agg.summary;
-    const leastCabs = [...agg.cabList].sort((a,b) => a.count-b.count || a.guests-b.guests).slice(0,5);
-    const leastZalNight = [...agg.zalNightList].sort((a,b) => a.count-b.count || a.guests-b.guests).slice(0,5);
-    const leastZalDay = [...agg.zalDayList].sort((a,b) => a.count-b.count || a.guests-b.guests).slice(0,5);
-    const sortedCabs = [...agg.cabList].sort((a,b) => cabSortAsc ? (a.count-b.count || a.guests-b.guests) : (b.count-a.count || b.guests-a.guests));
-    const maxCabCount = Math.max(1, ...sortedCabs.map(c => c.count));
-    const activeZals = reportZalTab === "night" ? agg.zalNightList : agg.zalDayList;
-    const sortedZals = [...activeZals].sort((a,b) => zalSortAsc ? (a.count-b.count || a.guests-b.guests) : (b.count-a.count || b.guests-a.guests));
-    const maxZalCount = Math.max(1, ...sortedZals.map(z => z.count));
-    const lowBadge = c => c === 0 ? `<span class="zero-tag">0 rezerv</span>` : `<span class="low-tag">${c} rezerv</span>`;
+    const leastCabs=[...agg.cabList].sort((a,b)=>a.count-b.count||a.guests-b.guests).slice(0,5), leastZalNight=[...agg.zalNightList].sort((a,b)=>a.count-b.count||a.guests-b.guests).slice(0,5), leastZalDay=[...agg.zalDayList].sort((a,b)=>a.count-b.count||a.guests-b.guests).slice(0,5);
+    const sortedCabs=[...agg.cabList].sort((a,b)=>cabSortAsc?(a.count-b.count||a.guests-b.guests):(b.count-a.count||b.guests-a.guests)), maxCabCount=Math.max(1,...sortedCabs.map(c=>c.count));
+    const activeZals = reportZalTab==="night"?agg.zalNightList:agg.zalDayList, sortedZals=[...activeZals].sort((a,b)=>zalSortAsc?(a.count-b.count||a.guests-b.guests):(b.count-a.count||b.guests-a.guests)), maxZalCount=Math.max(1,...sortedZals.map(z=>z.count));
+    const lowBadge = c => c===0?`<span class="zero-tag">0 rezerv</span>`:`<span class="low-tag">${c} rezerv</span>`;
 
     document.getElementById("mainContent").innerHTML = periodControls + `
-      <div class="report-total">
-        <div class="rt-box"><div class="rt-lbl">Ümumi Qonaq</div><div class="rt-val" style="color:var(--gold);">${s.totalGuests.toLocaleString("az-AZ")} nəfər</div></div>
-        <div class="rt-box"><div class="rt-lbl">Alınan Ümumi BEH</div><div class="rt-val" style="color:#4ade80;">${formatMoney(s.totalBeh)}</div></div>
-        <div class="rt-box"><div class="rt-lbl">Ümumi Rezerv</div><div class="rt-val" style="font-size:16px;">${s.totalRes} rezerv (${agg.dayList.length} gün)</div></div>
-        <div class="rt-box"><div class="rt-lbl">Statuslar</div><div class="rt-val" style="font-size:14px;">🟢 ${s.confirmed} • 🟡 ${s.pending}</div></div>
-      </div>
-
-      <div class="report-card">
-        <div class="report-title" style="margin-bottom:6px;">📌 BÖLMƏLƏR ÜZRƏ YEKUN</div>
-        <div class="report-row"><span>🚪 Kabinet (17:00-a qədər)</span><b>${s.kabDayRes} rez • ${s.kabDayGuests} qonaq • ${formatMoney(s.kabDayBeh)}</b></div>
-        <div class="report-row"><span>🌙 Kabinet (18:00-dan)</span><b>${s.kabNightRes} rez • ${s.kabNightGuests} qonaq • ${formatMoney(s.kabNightBeh)}</b></div>
-        <div class="report-row"><span>☀️ Zal (Səhər)</span><b>${s.zalDayRes} rez • ${s.zalDayGuests} qonaq • ${formatMoney(s.zalDayBeh)}</b></div>
-        <div class="report-row"><span>🎤 Zal (Şou Proqram)</span><b>${s.zalNightRes} rez • ${s.zalNightGuests} qonaq • ${formatMoney(s.zalNightBeh)}</b></div>
-        <div class="report-row"><span>💳 Kabinet Depozit Dəyəri</span><b>${formatMoney(s.totalDeposit)}</b></div>
-      </div>
-
-      <div class="report-card low-alert">
-        <div class="report-title" style="color:#92400e; margin-bottom:8px;">📉 ƏN AZ REZERV OLUNANLAR</div>
-        <div style="font-size:11px; font-weight:800; color:#475569;">Kabinetlər:</div>
-        ${leastCabs.map(c => `<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(c.name)}</b> (${c.guests} qonaq)</span>${lowBadge(c.count)}</div>`).join("")}
-        <div style="font-size:11px; font-weight:800; color:#475569; margin-top:8px;">Şou Proqram Zalları:</div>
-        ${leastZalNight.map(z => `<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(z.name)}</b> (${z.guests} qonaq)</span>${lowBadge(z.count)}</div>`).join("")}
-        <div style="font-size:11px; font-weight:800; color:#475569; margin-top:8px;">Zal (Səhər):</div>
-        ${leastZalDay.map(z => `<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(z.name)}</b> (${z.guests} qonaq)</span>${lowBadge(z.count)}</div>`).join("")}
-      </div>
-
-      <div class="report-card">
-        <div class="report-head-row"><div class="report-title">🚪 KABİNETLƏR (${sortedCabs.length})</div><button class="sort-btn" onclick="cabSortAsc=!cabSortAsc; renderReportScreen()">${cabSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div>
-        ${sortedCabs.map(c => `<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(c.name)}</b><span><b>${c.count} rez</b> • ${c.guests} qonaq • <b style="color:#16a34a;">${formatMoney(c.beh)}</b></span></div><div class="stat-item-sub"><span>Səhər: ${c.dayCount} • Axşam: ${c.nightCount}</span><span>Depozit: ${formatMoney(c.depositSum)}</span></div><div class="bar-bg"><div class="bar-fill gold" style="width:${c.count?Math.max(6,Math.round(c.count/maxCabCount*100)):0}%"></div></div></div>`).join("")}
-      </div>
-
-      <div class="report-card">
-        <div class="report-head-row"><div class="report-title">🪑 MASALAR ÜZRƏ</div><button class="sort-btn" onclick="zalSortAsc=!zalSortAsc; renderReportScreen()">${zalSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div>
-        <div style="display:flex; gap:6px; margin-bottom:8px;"><button class="pill ${reportZalTab==='night'?'active':''}" style="flex:1;" onclick="reportZalTab='night'; renderReportScreen()">🎤 Şou (${agg.zalNightList.length})</button><button class="pill ${reportZalTab==='day'?'active':''}" style="flex:1;" onclick="reportZalTab='day'; renderReportScreen()">☀️ Zal Səhər (${agg.zalDayList.length})</button></div>
-        ${sortedZals.map(z => `<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(z.name)}</b><span><b>${z.count} rez</b> • ${z.guests} qonaq • <b style="color:#16a34a;">${formatMoney(z.beh)}</b></span></div><div class="bar-bg"><div class="bar-fill" style="width:${z.count?Math.max(6,Math.round(z.count/maxZalCount*100)):0}%"></div></div></div>`).join("")}
-      </div>
-
-      <div class="report-card">
-        <div class="report-title" style="margin-bottom:6px;">👤 MENECERLƏR ÜZRƏ</div>
-        ${agg.staffList.length ? agg.staffList.map(m => `<div class="report-row"><span><b>${escHtml(m.name)}</b> (${m.count} rez)</span><span>${m.guests} qonaq • <b style="color:#16a34a;">${formatMoney(m.beh)}</b></span></div>`).join("") : `<div style="color:#94a3b8; font-size:13px;">Rezerv yoxdur</div>`}
-      </div>
-
-      ${reportPeriod!=='day'?`<div class="report-card"><div class="report-title" style="margin-bottom:6px;">📅 AKTİV GÜNLƏR (${agg.dayList.length})</div>${agg.dayList.length?agg.dayList.map(d => `<div class="report-row" style="cursor:pointer;" onclick="jumpToDateFromReport('${d.date}')"><span><b>${formatDisplayDate(d.date)}</b> (${d.count} rez)</span><span>${d.guests} qonaq • <b style="color:#16a34a;">${formatMoney(d.beh)}</b> ↗</span></div>`).join(""):`<div style="color:#94a3b8; font-size:13px;">Məlumat yoxdur</div>`}</div>`:''}
-
-      ${!isGuest() ? `
-        <div class="report-card">
-          <div class="report-title" style="margin-bottom:8px;">💾 TAM EHTİYAT NÜSXƏ (BACKUP)</div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn btn-save btn-sm" style="flex:1;" onclick="downloadFullBackupJSON()">💾 Tam Yedək Yüklə</button>
-            <label class="btn btn-cancel btn-sm" style="flex:1; cursor:pointer;">♻️ Yedəkdən Bərpa<input type="file" accept=".json" style="display:none;" onchange="restoreFullBackupJSON(this)" /></label>
-          </div>
-          <div id="restorePinBox" class="pin-box" style="margin-top:10px;">
-            <div style="font-size:12px; font-weight:700; color:var(--navy); text-align:center;">Bərpa etmək üçün admin kodunu yazın:</div>
-            <input type="password" inputmode="numeric" maxlength="4" id="restorePinInput" class="pin-input" placeholder="••••" />
-            <div id="restorePinErr" class="pin-err">❌ Kod səhvdir!</div>
-            <div style="display:flex; gap:8px;">
-              <button class="btn btn-cancel btn-sm" style="flex:1;" onclick="document.getElementById('restorePinBox').style.display='none'">Ləğv</button>
-              <button class="btn btn-save btn-sm" style="flex:1;" onclick="confirmRestoreBackup()">Təsdiqlə</button>
-            </div>
-          </div>
-        </div>
-      ` : ''}
-
-      ${(reportPeriod === 'day' && !isGuest()) ? `
-        <div class="report-card" style="background:#fef2f2; border-color:#fecaca;">
-          <div id="clearAllBox"><button class="btn" style="background:#dc2626; color:#fff; width:100%;" onclick="askClearAll()">🔒 Bu günün bütün rezervlərini boşalt</button></div>
-          <div id="clearAllPinBox" class="pin-box">
-            <div style="font-size:13px; font-weight:700; color:#991b1b; text-align:center;">Bütün masaları boşaltmaq üçün kodu daxil edin:</div>
-            <input type="password" inputmode="numeric" maxlength="4" id="clearPinInput" class="pin-input danger" placeholder="••••" />
-            <div id="clearPinErr" class="pin-err">❌ Kod səhvdir!</div>
-            <div style="display:flex; gap:8px;">
-              <button class="btn btn-cancel" style="flex:0.45;" onclick="cancelClearAll()">Ləğv et</button>
-              <button class="btn btn-del-confirm" style="flex:0.55;" onclick="confirmClearAll()">Təsdiqlə & Boşalt</button>
-            </div>
-          </div>
-        </div>
-      ` : ''}
-    `;
+      <div class="report-total"><div class="rt-box"><div class="rt-lbl">Ümumi Qonaq</div><div class="rt-val" style="color:var(--gold);">${s.totalGuests.toLocaleString("az-AZ")} nəfər</div></div><div class="rt-box"><div class="rt-lbl">Alınan Ümumi BEH</div><div class="rt-val" style="color:#4ade80;">${formatMoney(s.totalBeh)}</div></div><div class="rt-box"><div class="rt-lbl">Ümumi Rezerv</div><div class="rt-val" style="font-size:16px;">${s.totalRes} rezerv (${agg.dayList.length} gün)</div></div><div class="rt-box"><div class="rt-lbl">Statuslar</div><div class="rt-val" style="font-size:14px;">🟢 ${s.confirmed} • 🟡 ${s.pending}</div></div></div>
+      <div class="report-card"><div class="report-title" style="margin-bottom:6px;">📌 BÖLMƏLƏR ÜZRƏ YEKUN</div><div class="report-row"><span>🚪 Kabinet (17:00-a qədər)</span><b>${s.kabDayRes} rez • ${s.kabDayGuests} qonaq • ${formatMoney(s.kabDayBeh)}</b></div><div class="report-row"><span>🌙 Kabinet (18:00-dan)</span><b>${s.kabNightRes} rez • ${s.kabNightGuests} qonaq • ${formatMoney(s.kabNightBeh)}</b></div><div class="report-row"><span>☀️ Zal (Səhər)</span><b>${s.zalDayRes} rez • ${s.zalDayGuests} qonaq • ${formatMoney(s.zalDayBeh)}</b></div><div class="report-row"><span>🎤 Zal (Şou Proqram)</span><b>${s.zalNightRes} rez • ${s.zalNightGuests} qonaq • ${formatMoney(s.zalNightBeh)}</b></div><div class="report-row"><span>💳 Kabinet Depozit Dəyəri</span><b>${formatMoney(s.totalDeposit)}</b></div></div>
+      <div class="report-card low-alert"><div class="report-title" style="color:#92400e; margin-bottom:8px;">📉 ƏN AZ REZERV OLUNANLAR</div><div style="font-size:11px; font-weight:800; color:#475569;">Kabinetlər:</div>${leastCabs.map(c=>`<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(c.name)}</b> (${c.guests} qonaq)</span>${lowBadge(c.count)}</div>`).join("")}<div style="font-size:11px; font-weight:800; color:#475569; margin-top:8px;">Şou Proqram Zalları:</div>${leastZalNight.map(z=>`<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(z.name)}</b> (${z.guests} qonaq)</span>${lowBadge(z.count)}</div>`).join("")}<div style="font-size:11px; font-weight:800; color:#475569; margin-top:8px;">Zal (Səhər):</div>${leastZalDay.map(z=>`<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(z.name)}</b> (${z.guests} qonaq)</span>${lowBadge(z.count)}</div>`).join("")}</div>
+      <div class="report-card"><div class="report-head-row"><div class="report-title">🚪 KABİNETLƏR (${sortedCabs.length})</div><button class="sort-btn" onclick="cabSortAsc=!cabSortAsc; renderReportScreen()">${cabSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div>${sortedCabs.map(c=>`<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(c.name)}</b><span><b>${c.count} rez</b> • ${c.guests} qonaq • <b style="color:#16a34a;">${formatMoney(c.beh)}</b></span></div><div class="stat-item-sub"><span>Səhər: ${c.dayCount} • Axşam: ${c.nightCount}</span><span>Depozit: ${formatMoney(c.depositSum)}</span></div><div class="bar-bg"><div class="bar-fill gold" style="width:${c.count?Math.max(6,Math.round(c.count/maxCabCount*100)):0}%"></div></div></div>`).join("")}</div>
+      <div class="report-card"><div class="report-head-row"><div class="report-title">🪑 MASALAR ÜZRƏ</div><button class="sort-btn" onclick="zalSortAsc=!zalSortAsc; renderReportScreen()">${zalSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div><div style="display:flex; gap:6px; margin-bottom:8px;"><button class="pill ${reportZalTab==='night'?'active':''}" style="flex:1;" onclick="reportZalTab='night'; renderReportScreen()">🎤 Şou (${agg.zalNightList.length})</button><button class="pill ${reportZalTab==='day'?'active':''}" style="flex:1;" onclick="reportZalTab='day'; renderReportScreen()">☀️ Zal Səhər (${agg.zalDayList.length})</button></div>${sortedZals.map(z=>`<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(z.name)}</b><span><b>${z.count} rez</b> • ${z.guests} qonaq • <b style="color:#16a34a;">${formatMoney(z.beh)}</b></span></div><div class="bar-bg"><div class="bar-fill" style="width:${z.count?Math.max(6,Math.round(z.count/maxZalCount*100)):0}%"></div></div></div>`).join("")}</div>
+      <div class="report-card"><div class="report-title" style="margin-bottom:6px;">👤 MENECERLƏR ÜZRƏ</div>${agg.staffList.length?agg.staffList.map(m=>`<div class="report-row"><span><b>${escHtml(m.name)}</b> (${m.count} rez)</span><span>${m.guests} qonaq • <b style="color:#16a34a;">${formatMoney(m.beh)}</b></span></div>`).join(""):`<div style="color:#94a3b8; font-size:13px;">Rezerv yoxdur</div>`}</div>
+      ${reportPeriod!=='day'?`<div class="report-card"><div class="report-title" style="margin-bottom:6px;">📅 AKTİV GÜNLƏR (${agg.dayList.length})</div>${agg.dayList.length?agg.dayList.map(d=>`<div class="report-row" style="cursor:pointer;" onclick="jumpToDateFromReport('${d.date}')"><span><b>${formatDisplayDate(d.date)}</b> (${d.count} rez)</span><span>${d.guests} qonaq • <b style="color:#16a34a;">${formatMoney(d.beh)}</b> ↗</span></div>`).join(""):`<div style="color:#94a3b8; font-size:13px;">Məlumat yoxdur</div>`}</div>`:''}
+      ${!isGuest()?`<div class="report-card"><div class="report-title" style="margin-bottom:8px;">💾 TAM EHTİYAT NÜSXƏ (BACKUP)</div><div style="display:flex; gap:8px;"><button class="btn btn-save btn-sm" style="flex:1;" onclick="downloadFullBackupJSON()">💾 Tam Yedək Yüklə</button><label class="btn btn-cancel btn-sm" style="flex:1; cursor:pointer;">♻️ Yedəkdən Bərpa<input type="file" accept=".json" style="display:none;" onchange="restoreFullBackupJSON(this)" /></label></div><div id="restorePinBox" class="pin-box" style="margin-top:10px;"><div style="font-size:12px; font-weight:700; color:var(--navy); text-align:center;">Bərpa etmək üçün admin kodunu yazın:</div><input type="password" inputmode="numeric" maxlength="4" id="restorePinInput" class="pin-input" placeholder="••••" /><div id="restorePinErr" class="pin-err">❌ Kod səhvdir!</div><div style="display:flex; gap:8px;"><button class="btn btn-cancel btn-sm" style="flex:1;" onclick="document.getElementById('restorePinBox').style.display='none'">Ləğv</button><button class="btn btn-save btn-sm" style="flex:1;" onclick="confirmRestoreBackup()">Təsdiqlə</button></div></div></div>`:''}
+      ${(reportPeriod==='day'&&!isGuest())?`<div class="report-card" style="background:#fef2f2; border-color:#fecaca;"><div id="clearAllBox"><button class="btn" style="background:#dc2626; color:#fff; width:100%;" onclick="askClearAll()">🔒 Bu günün bütün rezervlərini boşalt</button></div><div id="clearAllPinBox" class="pin-box"><div style="font-size:13px; font-weight:700; color:#991b1b; text-align:center;">Kodu daxil edin:</div><input type="password" inputmode="numeric" maxlength="4" id="clearPinInput" class="pin-input danger" placeholder="••••" /><div id="clearPinErr" class="pin-err">❌ Kod səhvdir!</div><div style="display:flex; gap:8px;"><button class="btn btn-cancel" style="flex:0.45;" onclick="cancelClearAll()">Ləğv</button><button class="btn btn-del-confirm" style="flex:0.55;" onclick="confirmClearAll()">Boşalt</button></div></div></div>`:''}`;
   }
-
   function askClearAll() { document.getElementById("clearAllBox").style.display="none"; document.getElementById("clearAllPinBox").style.display="flex"; document.getElementById("clearPinErr").style.display="none"; const i=document.getElementById("clearPinInput"); i.value=""; i.focus(); }
   function cancelClearAll() { document.getElementById("clearAllBox").style.display="block"; document.getElementById("clearAllPinBox").style.display="none"; }
-  function confirmClearAll() {
-    if (isGuest()) return;
-    if (document.getElementById("clearPinInput").value.trim() !== CLEAR_PIN) { document.getElementById("clearPinErr").style.display="block"; return; }
-    cloudReservations = {}; if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}`).remove();
-    showToast("Bu günün bütün masaları boşaldıldı!"); renderApp();
-  }
+  function confirmClearAll() { if (isGuest()) return; if (document.getElementById("clearPinInput").value.trim()!==CLEAR_PIN) { document.getElementById("clearPinErr").style.display="block"; return; } cloudReservations={}; if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}`).remove(); showToast("Boşaldıldı!"); renderApp(); }
 
-  function setSettingsSub(sub) { settingsSubTab = sub; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=null; showNewCabForm=false; renderSettings(); }
+  // AYARLAR (TARİFLƏR, MENECER, KABİNET, ZALLAR, QEYDLƏR)
+  function setSettingsSub(sub) { settingsSubTab=sub; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false; renderSettings(); }
   function renderSettings() {
     let html = `<div class="sub-tabs">
-      <button class="sub-tab ${settingsSubTab==='managers'?'active':''}" onclick="setSettingsSub('managers')">👤 Menecer</button>
+      <button class="sub-tab ${settingsSubTab==='tariffs'?'active':''}" onclick="setSettingsSub('tariffs')">📅 Tariflər</button>
       <button class="sub-tab ${settingsSubTab==='kabinets'?'active':''}" onclick="setSettingsSub('kabinets')">🚪 Kabinet</button>
+      <button class="sub-tab ${settingsSubTab==='managers'?'active':''}" onclick="setSettingsSub('managers')">👤 Menecer</button>
       <button class="sub-tab ${settingsSubTab==='zal_day'?'active':''}" onclick="setSettingsSub('zal_day')">☀️ Zal Səhər</button>
       <button class="sub-tab ${settingsSubTab==='zal_night'?'active':''}" onclick="setSettingsSub('zal_night')">🎤 Şou Zal</button>
-      <button class="sub-tab ${settingsSubTab==='chips'?'active':''}" onclick="setSettingsSub('chips')">🏷️ Hazır Qeydlər</button>
+      <button class="sub-tab ${settingsSubTab==='chips'?'active':''}" onclick="setSettingsSub('chips')">🏷️ Qeydlər</button>
     </div>`;
-    if (settingsSubTab === "managers") html += renderManagersSettings();
-    else if (settingsSubTab === "kabinets") html += renderCabinetsSettings();
-    else if (settingsSubTab === "zal_day") html += renderZalSettings("day");
-    else if (settingsSubTab === "zal_night") html += renderZalSettings("night");
-    else if (settingsSubTab === "chips") html += renderChipsSettings();
+    if (settingsSubTab==="tariffs") html += renderTariffsSettings();
+    else if (settingsSubTab==="managers") html += renderManagersSettings();
+    else if (settingsSubTab==="kabinets") html += renderCabinetsSettings();
+    else if (settingsSubTab==="zal_day") html += renderZalSettings("day");
+    else if (settingsSubTab==="zal_night") html += renderZalSettings("night");
+    else if (settingsSubTab==="chips") html += renderChipsSettings();
     document.getElementById("mainContent").innerHTML = html;
   }
 
+  // XÜSUSİ TARİX TARİFLƏRİ (Dekabr 1-15, 16-31 və istənilən yeni günlər)
+  function renderTariffsSettings() {
+    const cabs = getCabinetsConfig(), tariffs = cloudTariffs || [];
+    let html = `<p style="font-size:11.5px; color:var(--muted); margin:0 0 8px;">Xüsusi günlər (bayramlar, Dekabr 1-15, 16-31 və s.) üçün kabinetlərin depozit qiymətlərini buradan təyin edib dəyişə bilərsiniz.</p>
+      <div style="margin-bottom:10px;"><button class="btn btn-save" style="width:100%; padding:10px;" onclick="showNewTariffForm=!showNewTariffForm; renderSettings()">${showNewTariffForm?"✕ Bağla":"+ Yeni Tarix Tarifi əlavə et"}</button></div>`;
+    if (showNewTariffForm) {
+      html += `<div class="setting-row" style="border:2px solid var(--navy);"><b style="font-size:13px;">Yeni Tarix Tarifi</b><div class="edit-panel" style="border-top:none; padding-top:8px;">
+        <div class="field full"><label>Ad / Qeyd *</label><input type="text" id="ntTitle" placeholder="Məs: Novruz 20-25 Mart • Xidmət 10%" /></div>
+        <div class="field"><label>Başlanğıc</label><input type="date" id="ntFrom" value="${todayStr}" /></div>
+        <div class="field"><label>Bitiş</label><input type="date" id="ntTo" value="${todayStr}" /></div>
+        <div class="field full"><button class="btn btn-save btn-sm" onclick="addTariff()">Yarat və Qiymətləri Yaz</button></div>
+      </div></div>`;
+    }
+    tariffs.forEach((tr, idx) => {
+      const ed = editingTariffIdx === idx;
+      html += `<div class="setting-row"><div class="setting-top">
+        <div style="flex:1; min-width:0;"><b style="font-size:13.5px; display:block;">📅 ${escHtml(tr.title)}</b><div style="font-size:11px; color:var(--green); font-weight:700; margin-top:2px;">${formatDisplayDate(tr.from)} — ${formatDisplayDate(tr.to)}</div></div>
+        <button class="icon-btn" onclick="editingTariffIdx=${ed?'null':idx}; renderSettings()">${ed?'✕':'✏️ Düzəliş'}</button>
+      </div>
+      ${ed ? `<div class="edit-panel">
+        <div class="field full"><label>Başlıq / Qeyd</label><input type="text" id="etTitle_${idx}" value="${escHtml(tr.title)}" /></div>
+        <div class="field"><label>Başlanğıc tarix</label><input type="date" id="etFrom_${idx}" value="${tr.from}" /></div>
+        <div class="field"><label>Bitiş tarix</label><input type="date" id="etTo_${idx}" value="${tr.to}" /></div>
+        <div class="field full" style="margin-top:4px;"><label style="color:var(--navy);">Kabinet Qiymətləri (₼):</label></div>
+        ${cabs.map(c => {
+          const v = (tr.prices && tr.prices[c.id] !== undefined) ? tr.prices[c.id] : c.depositVal;
+          return `<div class="field"><label>${escHtml(c.name)}</label><input type="number" id="etP_${idx}_${c.id}" value="${v}" /></div>`;
+        }).join("")}
+        <div class="field full" style="flex-direction:row; gap:8px; margin-top:6px;" id="trAct_${idx}">
+          <button class="icon-btn del" onclick="askDelItem('trAct_${idx}','trConf_${idx}')">🗑️ Tarifi sil</button>
+          <button class="btn btn-save btn-sm" style="flex:1;" onclick="saveTariffEdit(${idx})">Yadda saxla</button>
+        </div>
+        <div class="field full" style="display:none; flex-direction:row; gap:8px; margin-top:6px;" id="trConf_${idx}">
+          <button class="btn btn-cancel btn-sm" style="flex:1;" onclick="cancelDelItem('trAct_${idx}','trConf_${idx}')">Xeyr</button>
+          <button class="btn btn-del-confirm btn-sm" style="flex:1;" onclick="deleteTariff(${idx})">Bəli, Sil</button>
+        </div>
+      </div>` : ''}</div>`;
+    });
+    return html;
+  }
+  function addTariff() {
+    const title = document.getElementById("ntTitle").value.trim(), from = document.getElementById("ntFrom").value, to = document.getElementById("ntTo").value;
+    if (!title || !from || !to) return;
+    const prices = {}; getCabinetsConfig().forEach(c => prices[c.id] = c.depositVal);
+    const list = [...(cloudTariffs||[]), { id:"tr_"+Date.now(), title, from:from<=to?from:to, to:from<=to?to:from, prices }];
+    saveTariffsConfig(list); showNewTariffForm = false; editingTariffIdx = list.length - 1; showToast("Tarif yaradıldı, qiymətləri yazın!"); renderSettings();
+  }
+  function saveTariffEdit(idx) {
+    const list = JSON.parse(JSON.stringify(cloudTariffs||[])), tr = list[idx], cabs = getCabinetsConfig();
+    const t = document.getElementById(`etTitle_${idx}`).value.trim(), f = document.getElementById(`etFrom_${idx}`).value, to = document.getElementById(`etTo_${idx}`).value;
+    if (t) tr.title = t; if (f && to) { tr.from = f<=to?f:to; tr.to = f<=to?to:f; }
+    tr.prices = tr.prices || {};
+    cabs.forEach(c => { const inp = document.getElementById(`etP_${idx}_${c.id}`); if (inp) tr.prices[c.id] = Number(inp.value) || 0; });
+    saveTariffsConfig(list); editingTariffIdx = null; showToast("Tarif yadda saxlanıldı!"); renderApp();
+  }
+  function deleteTariff(idx) { const l=[...(cloudTariffs||[])]; l.splice(idx,1); saveTariffsConfig(l); editingTariffIdx=null; showToast("Tarif silindi!"); renderApp(); }
+
   function renderManagersSettings() {
     const mgrs = getManagers();
-    let html = `
-      <p style="font-size:11px; color:var(--muted); margin:0 0 8px;">Hər menecerə giriş üçün ayrıca PIN kod qoya bilərsiniz (boş qalsa kodsuz daxil olar).</p>
-      <div class="add-bar">
-        <input type="text" id="newMgrInput" placeholder="Yeni menecer adı..." />
-        <input type="password" inputmode="numeric" maxlength="6" id="newMgrPin" placeholder="PIN (ixtiyari)" style="max-width:110px;" />
-        <button class="btn btn-save btn-sm" onclick="addManager()">+ Əlavə et</button>
-      </div>`;
+    let html = `<p style="font-size:11px; color:var(--muted); margin:0 0 8px;">Hər menecerə giriş üçün ayrıca PIN kod qoya bilərsiniz.</p><div class="add-bar"><input type="text" id="newMgrInput" placeholder="Yeni menecer adı..." /><input type="password" inputmode="numeric" maxlength="6" id="newMgrPin" placeholder="PIN (ixtiyari)" style="max-width:110px;" /><button class="btn btn-save btn-sm" onclick="addManager()">+ Əlavə</button></div>`;
     mgrs.forEach((m, i) => {
-      if (editingMgrIdx === i) {
-        html += `<div class="setting-row"><div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <input type="text" id="editMgrInput" value="${escHtml(m.name)}" style="flex:1; min-width:120px; padding:8px; border:1px solid var(--navy); border-radius:8px;" />
-          <input type="text" inputmode="numeric" maxlength="6" id="editMgrPin" value="${escHtml(m.pin)}" placeholder="PIN" style="width:90px; padding:8px; border:1px solid var(--navy); border-radius:8px;" />
-          <button class="btn btn-save btn-sm" onclick="saveManagerEdit(${i})">Saxla</button>
-          <button class="btn btn-cancel btn-sm" onclick="editingMgrIdx=null; renderSettings()">Ləğv</button>
-        </div></div>`;
-      } else {
-        html += `<div class="setting-row"><div class="setting-top">
-          <div><b style="font-size:14px;">${m.pin?'🔒':'👤'} ${escHtml(m.name)}</b><div style="font-size:11px; color:var(--muted);">${m.pin?'PIN kod: '+escHtml(m.pin):'PIN kod qoyulmayıb'}</div></div>
-          <div style="display:flex; gap:6px;" id="mgrActions_${i}"><button class="icon-btn" onclick="editingMgrIdx=${i}; renderSettings()">✏️ Düzəliş</button><button class="icon-btn del" onclick="askDelItem('mgrActions_${i}','mgrConfirm_${i}')">🗑️</button></div>
-          <div style="display:none; gap:6px;" id="mgrConfirm_${i}"><button class="btn btn-cancel btn-sm" onclick="cancelDelItem('mgrActions_${i}','mgrConfirm_${i}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" onclick="deleteManager(${i})">Sil</button></div>
-        </div></div>`;
-      }
+      html += editingMgrIdx === i
+        ? `<div class="setting-row"><div style="display:flex; gap:6px; flex-wrap:wrap;"><input type="text" id="editMgrInput" value="${escHtml(m.name)}" style="flex:1; min-width:120px; padding:8px; border:1px solid var(--navy); border-radius:8px;" /><input type="text" inputmode="numeric" maxlength="6" id="editMgrPin" value="${escHtml(m.pin)}" placeholder="PIN" style="width:90px; padding:8px; border:1px solid var(--navy); border-radius:8px;" /><button class="btn btn-save btn-sm" onclick="saveManagerEdit(${i})">Saxla</button><button class="btn btn-cancel btn-sm" onclick="editingMgrIdx=null; renderSettings()">Ləğv</button></div></div>`
+        : `<div class="setting-row"><div class="setting-top"><div><b style="font-size:14px;">${m.pin?'🔒':'👤'} ${escHtml(m.name)}</b><div style="font-size:11px; color:var(--muted);">${m.pin?'PIN kod: '+escHtml(m.pin):'PIN kod qoyulmayıb'}</div></div><div style="display:flex; gap:6px;" id="mgrActions_${i}"><button class="icon-btn" onclick="editingMgrIdx=${i}; renderSettings()">✏️ Düzəliş</button><button class="icon-btn del" onclick="askDelItem('mgrActions_${i}','mgrConfirm_${i}')">🗑️</button></div><div style="display:none; gap:6px;" id="mgrConfirm_${i}"><button class="btn btn-cancel btn-sm" onclick="cancelDelItem('mgrActions_${i}','mgrConfirm_${i}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" onclick="deleteManager(${i})">Sil</button></div></div></div>`;
     });
     return html;
   }
-  function addManager() {
-    const name = document.getElementById("newMgrInput").value.trim(), pin = document.getElementById("newMgrPin").value.trim();
-    if (!name) return; saveManagers([...getManagers(), { name, pin }]); showToast("Menecer əlavə olundu!"); renderSettings();
-  }
-  function saveManagerEdit(idx) {
-    const name = document.getElementById("editMgrInput").value.trim(), pin = document.getElementById("editMgrPin").value.trim();
-    if (!name) return; const mgrs = [...getManagers()], oldName = mgrs[idx].name;
-    mgrs[idx] = { name, pin }; saveManagers(mgrs);
-    if (currentManager === oldName) { applyIdentityUI(name); safeSetLocal("elpiano_current_manager", name); }
-    editingMgrIdx = null; showToast("Menecer yeniləndi!"); renderSettings();
-  }
-  function deleteManager(idx) { const mgrs = [...getManagers()]; mgrs.splice(idx,1); saveManagers(mgrs); showToast("Menecer silindi!"); renderSettings(); }
+  function addManager() { const n=document.getElementById("newMgrInput").value.trim(), p=document.getElementById("newMgrPin").value.trim(); if (!n) return; saveManagers([...getManagers(),{name:n,pin:p}]); showToast("Əlavə olundu!"); renderSettings(); }
+  function saveManagerEdit(i) { const n=document.getElementById("editMgrInput").value.trim(), p=document.getElementById("editMgrPin").value.trim(); if (!n) return; const m=[...getManagers()], old=m[i].name; m[i]={name:n,pin:p}; saveManagers(m); if(currentManager===old){applyIdentityUI(n); safeSetLocal("elpiano_current_manager",n);} editingMgrIdx=null; showToast("Yeniləndi!"); renderSettings(); }
+  function deleteManager(i) { const m=[...getManagers()]; m.splice(i,1); saveManagers(m); showToast("Silindi!"); renderSettings(); }
 
   function renderChipsSettings() {
-    const chips = getNoteChips();
-    let html = `<div class="add-bar"><input type="text" id="newChipInput" placeholder="Məs: Tort olacaq, DJ var..." /><button class="btn btn-save btn-sm" onclick="addNoteChip()">+ Əlavə et</button></div>`;
-    chips.forEach((c, i) => {
-      if (editingChipIdx === i) {
-        html += `<div class="setting-row"><div style="display:flex; gap:8px;"><input type="text" id="editChipInput" value="${escHtml(c)}" style="flex:1; padding:8px; border:1px solid var(--navy); border-radius:8px;" /><button class="btn btn-save btn-sm" onclick="saveNoteChipEdit(${i})">Saxla</button><button class="btn btn-cancel btn-sm" onclick="editingChipIdx=null; renderSettings()">Ləğv</button></div></div>`;
-      } else {
-        html += `<div class="setting-row"><div class="setting-top"><b style="font-size:14px;">🏷️ ${escHtml(c)}</b><div style="display:flex; gap:6px;" id="chipAct_${i}"><button class="icon-btn" onclick="editingChipIdx=${i}; renderSettings()">✏️ Düzəliş</button><button class="icon-btn del" onclick="askDelItem('chipAct_${i}','chipConf_${i}')">🗑️</button></div><div style="display:none; gap:6px;" id="chipConf_${i}"><button class="btn btn-cancel btn-sm" onclick="cancelDelItem('chipAct_${i}','chipConf_${i}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" onclick="deleteNoteChip(${i})">Sil</button></div></div></div>`;
-      }
+    let html = `<div class="add-bar"><input type="text" id="newChipInput" placeholder="Məs: Tort olacaq, DJ var..." /><button class="btn btn-save btn-sm" onclick="addNoteChip()">+ Əlavə</button></div>`;
+    getNoteChips().forEach((c, i) => {
+      html += editingChipIdx === i
+        ? `<div class="setting-row"><div style="display:flex; gap:8px;"><input type="text" id="editChipInput" value="${escHtml(c)}" style="flex:1; padding:8px; border:1px solid var(--navy); border-radius:8px;" /><button class="btn btn-save btn-sm" onclick="saveNoteChipEdit(${i})">Saxla</button><button class="btn btn-cancel btn-sm" onclick="editingChipIdx=null; renderSettings()">Ləğv</button></div></div>`
+        : `<div class="setting-row"><div class="setting-top"><b style="font-size:14px;">🏷️ ${escHtml(c)}</b><div style="display:flex; gap:6px;" id="chipAct_${i}"><button class="icon-btn" onclick="editingChipIdx=${i}; renderSettings()">✏️ Düzəliş</button><button class="icon-btn del" onclick="askDelItem('chipAct_${i}','chipConf_${i}')">🗑️</button></div><div style="display:none; gap:6px;" id="chipConf_${i}"><button class="btn btn-cancel btn-sm" onclick="cancelDelItem('chipAct_${i}','chipConf_${i}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" onclick="deleteNoteChip(${i})">Sil</button></div></div></div>`;
     });
     return html;
   }
-  function addNoteChip() { const v = document.getElementById("newChipInput").value.trim(); if (!v) return; saveNoteChips([...getNoteChips(), v]); showToast("Hazır qeyd əlavə olundu!"); renderSettings(); }
-  function saveNoteChipEdit(i) { const v = document.getElementById("editChipInput").value.trim(); if (!v) return; const a=[...getNoteChips()]; a[i]=v; saveNoteChips(a); editingChipIdx=null; showToast("Yeniləndi!"); renderSettings(); }
+  function addNoteChip() { const v=document.getElementById("newChipInput").value.trim(); if(!v) return; saveNoteChips([...getNoteChips(),v]); showToast("Əlavə olundu!"); renderSettings(); }
+  function saveNoteChipEdit(i) { const v=document.getElementById("editChipInput").value.trim(); if(!v) return; const a=[...getNoteChips()]; a[i]=v; saveNoteChips(a); editingChipIdx=null; showToast("Yeniləndi!"); renderSettings(); }
   function deleteNoteChip(i) { const a=[...getNoteChips()]; a.splice(i,1); saveNoteChips(a); showToast("Silindi!"); renderSettings(); }
 
   function renderCabinetsSettings() {
     const cabs = getCabinetsConfig();
-    let html = `<div style="margin-bottom:10px;"><button class="btn btn-save" style="width:100%; padding:10px;" onclick="showNewCabForm=!showNewCabForm; renderSettings()">${showNewCabForm?"✕ Bağla":"+ Yeni Kabinet əlavə et"}</button></div>`;
-    if (showNewCabForm) {
-      html += `<div class="setting-row" style="border:2px solid var(--navy);"><b style="font-size:13px;">Yeni Kabinet</b><div class="edit-panel" style="border-top:none; padding-top:8px;"><div class="field"><label>Adı *</label><input type="text" id="ncName" placeholder="VIP Room" /></div><div class="field"><label>Max nəfər</label><input type="number" id="ncMax" value="15" /></div><div class="field"><label>Depozit (₼)</label><input type="number" id="ncDep" value="300" /></div><div class="field"><label>Smen</label><select id="ncShifts"><option value="2">2 smen</option><option value="1">1 smen</option></select></div><div class="field full"><button class="btn btn-save btn-sm" onclick="addCabinet()">Əlavə et</button></div></div></div>`;
-    }
+    let html = `<p style="font-size:11px; color:var(--muted); margin:0 0 8px;">Standart (adi gün) depozitlər və smen saatları:</p><div style="margin-bottom:10px;"><button class="btn btn-save" style="width:100%; padding:10px;" onclick="showNewCabForm=!showNewCabForm; renderSettings()">${showNewCabForm?"✕ Bağla":"+ Yeni Kabinet əlavə et"}</button></div>`;
+    if (showNewCabForm) html += `<div class="setting-row" style="border:2px solid var(--navy);"><b style="font-size:13px;">Yeni Kabinet</b><div class="edit-panel" style="border-top:none; padding-top:8px;"><div class="field"><label>Adı *</label><input type="text" id="ncName" placeholder="VIP Room" /></div><div class="field"><label>Max nəfər</label><input type="number" id="ncMax" value="15" /></div><div class="field"><label>Adi Depozit (₼)</label><input type="number" id="ncDep" value="300" /></div><div class="field"><label>Smen</label><select id="ncShifts"><option value="2">2 smen</option><option value="1">1 smen</option></select></div><div class="field full"><button class="btn btn-save btn-sm" onclick="addCabinet()">Əlavə et</button></div></div></div>`;
     cabs.forEach((cab, idx) => {
       const ed = editingCabIdx === idx;
-      html += `<div class="setting-row"><div class="setting-top"><div><b style="font-size:14px;">${escHtml(cab.name)}</b><div style="font-size:11px; color:var(--muted);">Max ${cab.max} nəfər • ${formatMoney(cab.depositVal)}</div></div><div style="display:flex; align-items:center; gap:6px;"><div class="toggle-group"><button class="t-btn ${cab.shifts===1?'active':''}" onclick="setCabShifts(${idx},1)">1 smen</button><button class="t-btn ${cab.shifts===2?'active':''}" onclick="setCabShifts(${idx},2)">2 smen</button></div><button class="icon-btn" onclick="editingCabIdx=${ed?'null':idx}; renderSettings()">✏️</button></div></div>
-      ${ed?`<div class="edit-panel"><div class="field"><label>Adı</label><input type="text" id="ecName_${idx}" value="${escHtml(cab.name)}" /></div><div class="field"><label>Max nəfər</label><input type="number" id="ecMax_${idx}" value="${cab.max}" /></div><div class="field"><label>Depozit (₼)</label><input type="number" id="ecDep_${idx}" value="${cab.depositVal}" /></div><div class="field"><label>${cab.shifts===1?'Tam gün':'17:00-a qədər'}</label><input type="text" id="ecS1_${idx}" value="${escHtml(cab.s1)}" /></div>${cab.shifts===2?`<div class="field full"><label>18:00-dan</label><input type="text" id="ecS2_${idx}" value="${escHtml(cab.s2)}" /></div>`:''}<div class="field full" style="flex-direction:row; gap:8px; margin-top:4px;" id="cabAct_${idx}"><button class="icon-btn del" onclick="askDelItem('cabAct_${idx}','cabConf_${idx}')">🗑️ Sil</button><button class="btn btn-save btn-sm" style="flex:1;" onclick="saveCabinetEdit(${idx})">Yadda saxla</button></div><div class="field full" style="display:none; flex-direction:row; gap:8px; margin-top:4px;" id="cabConf_${idx}"><button class="btn btn-cancel btn-sm" style="flex:1;" onclick="cancelDelItem('cabAct_${idx}','cabConf_${idx}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" style="flex:1;" onclick="deleteCabinet(${idx})">Bəli, Sil</button></div></div>`:''}</div>`;
+      html += `<div class="setting-row"><div class="setting-top"><div><b style="font-size:14px;">${escHtml(cab.name)}</b><div style="font-size:11px; color:var(--muted);">Max ${cab.max} nəfər • Adi gün: ${formatMoney(cab.depositVal)}</div></div><div style="display:flex; align-items:center; gap:6px;"><div class="toggle-group"><button class="t-btn ${cab.shifts===1?'active':''}" onclick="setCabShifts(${idx},1)">1 smen</button><button class="t-btn ${cab.shifts===2?'active':''}" onclick="setCabShifts(${idx},2)">2 smen</button></div><button class="icon-btn" onclick="editingCabIdx=${ed?'null':idx}; renderSettings()">✏️</button></div></div>
+      ${ed?`<div class="edit-panel"><div class="field"><label>Adı</label><input type="text" id="ecName_${idx}" value="${escHtml(cab.name)}" /></div><div class="field"><label>Max nəfər</label><input type="number" id="ecMax_${idx}" value="${cab.max}" /></div><div class="field"><label>Adi Depozit (₼)</label><input type="number" id="ecDep_${idx}" value="${cab.depositVal}" /></div><div class="field"><label>${cab.shifts===1?'Tam gün':'17:00-a qədər'}</label><input type="text" id="ecS1_${idx}" value="${escHtml(cab.s1)}" /></div>${cab.shifts===2?`<div class="field full"><label>18:00-dan</label><input type="text" id="ecS2_${idx}" value="${escHtml(cab.s2)}" /></div>`:''}<div class="field full" style="flex-direction:row; gap:8px; margin-top:4px;" id="cabAct_${idx}"><button class="icon-btn del" onclick="askDelItem('cabAct_${idx}','cabConf_${idx}')">🗑️ Sil</button><button class="btn btn-save btn-sm" style="flex:1;" onclick="saveCabinetEdit(${idx})">Yadda saxla</button></div><div class="field full" style="display:none; flex-direction:row; gap:8px; margin-top:4px;" id="cabConf_${idx}"><button class="btn btn-cancel btn-sm" style="flex:1;" onclick="cancelDelItem('cabAct_${idx}','cabConf_${idx}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" style="flex:1;" onclick="deleteCabinet(${idx})">Bəli, Sil</button></div></div>`:''}</div>`;
     });
     return html;
   }
-  function addCabinet() {
-    const name = document.getElementById("ncName").value.trim(); if (!name) return;
-    saveCabinetsConfig([...getCabinetsConfig(), { id:"cab_"+Date.now(), name, max:Number(document.getElementById("ncMax").value)||10, depositVal:Number(document.getElementById("ncDep").value)||0, shifts:Number(document.getElementById("ncShifts").value)||2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" }]);
-    showNewCabForm = false; showToast("Kabinet əlavə olundu!"); renderApp();
-  }
-  function setCabShifts(i, c) { const cabs=[...getCabinetsConfig()]; cabs[i].shifts=c; saveCabinetsConfig(cabs); renderApp(); }
-  function saveCabinetEdit(i) {
-    const cabs=[...getCabinetsConfig()], c=cabs[i], nm=document.getElementById(`ecName_${i}`).value.trim();
-    if (nm) c.name = nm; c.max = Number(document.getElementById(`ecMax_${i}`).value)||1;
-    c.depositVal = Number(document.getElementById(`ecDep_${i}`).value)||0; c.s1 = document.getElementById(`ecS1_${i}`).value.trim()||c.s1;
-    if (c.shifts===2 && document.getElementById(`ecS2_${i}`)) c.s2 = document.getElementById(`ecS2_${i}`).value.trim()||c.s2;
-    saveCabinetsConfig(cabs); editingCabIdx=null; showToast("Yeniləndi!"); renderApp();
-  }
+  function addCabinet() { const name=document.getElementById("ncName").value.trim(); if(!name) return; saveCabinetsConfig([...getCabinetsConfig(),{id:"cab_"+Date.now(),name,max:Number(document.getElementById("ncMax").value)||10,depositVal:Number(document.getElementById("ncDep").value)||0,shifts:Number(document.getElementById("ncShifts").value)||2,s1:"11:00 - 17:00",s2:"18:00 - 23:00"}]); showNewCabForm=false; showToast("Əlavə olundu!"); renderApp(); }
+  function setCabShifts(i,c) { const cabs=[...getCabinetsConfig()]; cabs[i].shifts=c; saveCabinetsConfig(cabs); renderApp(); }
+  function saveCabinetEdit(i) { const cabs=[...getCabinetsConfig()], c=cabs[i], nm=document.getElementById(`ecName_${i}`).value.trim(); if(nm) c.name=nm; c.max=Number(document.getElementById(`ecMax_${i}`).value)||1; c.depositVal=Number(document.getElementById(`ecDep_${i}`).value)||0; c.s1=document.getElementById(`ecS1_${i}`).value.trim()||c.s1; if(c.shifts===2&&document.getElementById(`ecS2_${i}`)) c.s2=document.getElementById(`ecS2_${i}`).value.trim()||c.s2; saveCabinetsConfig(cabs); editingCabIdx=null; showToast("Yeniləndi!"); renderApp(); }
   function deleteCabinet(i) { const c=[...getCabinetsConfig()]; c.splice(i,1); saveCabinetsConfig(c); editingCabIdx=null; showToast("Silindi!"); renderApp(); }
 
   function renderZalSettings(type) {
-    const list = getZalList(type);
-    let html = `<p style="font-size:11px; color:var(--muted); margin:0 0 8px;">Həftəiçi (${list.length} zal). 6-cı və Bazar günləri avtomatik ${type==='day'?'20':'30'} zal olur.</p><div class="add-bar"><input type="text" id="newZalInput" placeholder="Yeni zal adı..." /><button class="btn btn-save btn-sm" onclick="addZal('${type}')">+ Əlavə et</button></div>`;
+    const list = getZalList(type), wkCount = type==="day"?(cloudWeekendCounts.day||20):(cloudWeekendCounts.night||30);
+    let html = `<div class="setting-row"><div class="setting-top"><div><b style="font-size:13px;">📅 6-cı gün & Bazar sayı</b><div style="font-size:11px; color:var(--muted);">Həftəsonu avtomatik zal sayı</div></div><div style="display:flex; gap:6px; align-items:center;"><input type="number" id="wkCountInp" value="${wkCount}" style="width:65px; padding:6px; border:1px solid var(--border); border-radius:8px; text-align:center; font-weight:700;" /><button class="btn btn-save btn-sm" onclick="updateWeekendZalCount('${type}')">Saxla</button></div></div></div>
+      <div class="add-bar"><input type="text" id="newZalInput" placeholder="Yeni zal adı..." /><button class="btn btn-save btn-sm" onclick="addZal('${type}')">+ Əlavə</button></div>`;
     list.forEach((z, i) => {
       html += editingZalIdx === i
         ? `<div class="setting-row"><div style="display:flex; gap:8px;"><input type="text" id="editZalInput" value="${escHtml(z.name)}" style="flex:1; padding:8px; border:1px solid var(--navy); border-radius:8px;" /><button class="btn btn-save btn-sm" onclick="saveZalEdit('${type}',${i})">Saxla</button><button class="btn btn-cancel btn-sm" onclick="editingZalIdx=null; renderSettings()">Ləğv</button></div></div>`
@@ -1271,56 +982,49 @@
     });
     return html;
   }
-  function addZal(t) { const v=document.getElementById("newZalInput").value.trim(); if(!v) return; saveZalList(t,[...getZalList(t),{id:"z_"+Date.now(),name:v}]); showToast("Zal əlavə olundu!"); renderApp(); }
+  function updateWeekendZalCount(type) { const v=Number(document.getElementById("wkCountInp").value)||14; const wc={...cloudWeekendCounts}; wc[type]=v; saveWeekendCounts(wc); showToast("Həftəsonu sayı yeniləndi!"); renderApp(); }
+  function addZal(t) { const v=document.getElementById("newZalInput").value.trim(); if(!v) return; saveZalList(t,[...getZalList(t),{id:"z_"+Date.now(),name:v}]); showToast("Əlavə olundu!"); renderApp(); }
   function saveZalEdit(t,i) { const v=document.getElementById("editZalInput").value.trim(); if(!v) return; const l=[...getZalList(t)]; l[i].name=v; saveZalList(t,l); editingZalIdx=null; showToast("Yeniləndi!"); renderApp(); }
   function deleteZal(t,i) { const l=[...getZalList(t)]; l.splice(i,1); saveZalList(t,l); showToast("Silindi!"); renderApp(); }
   function askDelItem(a,c) { document.getElementById(a).style.display="none"; document.getElementById(c).style.display="flex"; }
   function cancelDelItem(a,c) { document.getElementById(a).style.display="flex"; document.getElementById(c).style.display="none"; }
 
+  // REZERV MODALI
   function populateStaffSelect(selectedVal) {
-    const names = getManagers().map(m => m.name);
-    const sel = document.getElementById("fStaff");
-    let opts = `<option value="">Seçin...</option>`;
-    names.forEach(n => { opts += `<option value="${escHtml(n)}">${escHtml(n)}</option>`; });
+    const names = getManagers().map(m=>m.name), sel = document.getElementById("fStaff");
+    let opts = `<option value="">Seçin...</option>` + names.map(n=>`<option value="${escHtml(n)}">${escHtml(n)}</option>`).join("");
     if (selectedVal && !names.includes(selectedVal)) opts += `<option value="${escHtml(selectedVal)}">${escHtml(selectedVal)}</option>`;
     sel.innerHTML = opts; sel.value = selectedVal || "";
   }
   function renderNoteChips() {
-    const box = document.getElementById("quickChipsBox");
-    if (isGuest()) { box.innerHTML = ""; return; }
-    const parts = document.getElementById("fNote").value.split(",").map(s => s.trim()).filter(Boolean);
+    const box = document.getElementById("quickChipsBox"); if (isGuest()) { box.innerHTML=""; return; }
+    const parts = document.getElementById("fNote").value.split(",").map(s=>s.trim()).filter(Boolean);
     box.innerHTML = getNoteChips().map(opt => {
-      const on = parts.some(p => p.toLowerCase() === opt.toLowerCase());
+      const on = parts.some(p => p.toLowerCase()===opt.toLowerCase());
       return `<span class="q-chip ${on?'active':''}" onclick="toggleQuickNote('${escHtml(opt).replace(/'/g,"\\'")}')">${on?'✓ ':'+ '}${escHtml(opt)}</span>`;
     }).join("");
   }
   function toggleQuickNote(opt) {
-    if (isGuest()) return;
-    const inp = document.getElementById("fNote");
-    let parts = inp.value.split(",").map(s => s.trim()).filter(Boolean);
-    const idx = parts.findIndex(p => p.toLowerCase() === opt.toLowerCase());
-    if (idx >= 0) parts.splice(idx, 1); else parts.push(opt);
-    inp.value = parts.join(", "); renderNoteChips();
+    if (isGuest()) return; const inp = document.getElementById("fNote");
+    let parts = inp.value.split(",").map(s=>s.trim()).filter(Boolean); const idx = parts.findIndex(p=>p.toLowerCase()===opt.toLowerCase());
+    if (idx>=0) parts.splice(idx,1); else parts.push(opt); inp.value = parts.join(", "); renderNoteChips();
   }
   function clearNoteField() { if (!isGuest()) { document.getElementById("fNote").value=""; renderNoteChips(); } }
 
   function openSheet(section, itemId, shiftNum) {
-    const resData = getDayReservations();
-    let key, title, sub, defaultTime, maxCap = null, placeLabel = itemId;
+    const resData = getDayReservations(); let key, title, sub, defaultTime, maxCap=null, placeLabel=itemId;
     if (section === "kabinet") {
-      const cab = getCabinetsConfig().find(c => c.id === itemId);
+      const cab = getCabinetsConfig().find(c=>c.id===itemId), dep = getCabinetDepositForDate(cab, datePicker.value);
       key = `kabinet_${itemId}_${shiftNum}`; placeLabel = `${cab.name} kabineti`;
       title = `${cab.name} — ${cab.shifts===1?"Tam gün":(shiftNum===1?"17:00-a qədər":"18:00-dan")}`;
-      sub = `Max: ${cab.max} nəfər • Depozit: ${formatMoney(cab.depositVal)}`;
-      defaultTime = shiftNum === 1 ? cab.s1 : cab.s2; maxCap = cab.max;
+      sub = `Max: ${cab.max} nəfər • Depozit: ${formatMoney(dep)}`;
+      defaultTime = shiftNum===1 ? cab.s1 : cab.s2; maxCap = cab.max;
     } else if (section === "zal_day") {
-      const z = getEffectiveZalList("day", datePicker.value).find(x => x.id === itemId);
-      key = `zal_day_${itemId}`; placeLabel = z ? z.name : itemId;
-      title = `${placeLabel} — Zal (Səhər)`; sub = "Səhər zalı • 10:00 - 17:00"; defaultTime = "13:00";
+      const z = getEffectiveZalList("day", datePicker.value).find(x=>x.id===itemId);
+      key = `zal_day_${itemId}`; placeLabel = z?z.name:itemId; title = `${placeLabel} — Zal (Səhər)`; sub = "Səhər zalı • 10:00 - 17:00"; defaultTime = "13:00";
     } else {
-      const z = getEffectiveZalList("night", datePicker.value).find(x => x.id === itemId);
-      key = `zal_night_${itemId}`; placeLabel = z ? z.name : itemId;
-      title = `${placeLabel} — Şou Proqram`; sub = "Axşam şou proqram zalı • 18:00 - 23:00"; defaultTime = "19:00";
+      const z = getEffectiveZalList("night", datePicker.value).find(x=>x.id===itemId);
+      key = `zal_night_${itemId}`; placeLabel = z?z.name:itemId; title = `${placeLabel} — Şou Proqram`; sub = "Axşam şou proqram zalı • 18:00 - 23:00"; defaultTime = "19:00";
     }
     const res = resData[key] || {}, isExisting = Boolean(res.name);
     if (isGuest() && !isExisting) { showToast("👁️ Qonaq rejimində rezerv etmək olmaz"); return; }
@@ -1333,7 +1037,7 @@
     document.getElementById("fPhone").value = res.phone || "";
     document.getElementById("fTime").value = res.time || defaultTime;
     document.getElementById("fBeh").value = res.beh || "";
-    populateStaffSelect(isExisting ? (res.staff || "") : (!isGuest() ? currentManager : ""));
+    populateStaffSelect(isExisting ? (res.staff||"") : (!isGuest()?currentManager:""));
     document.getElementById("fStatus").value = res.status || "confirmed";
     document.getElementById("fNote").value = res.note || "";
 
@@ -1350,19 +1054,16 @@
   }
   function closeSheet() { document.getElementById("resSheet").classList.remove("open"); }
   function checkCap() {
-    const warn = document.getElementById("capWarn"), g = Number(document.getElementById("fGuests").value) || 0;
-    if (editingTarget?.maxCap && g > editingTarget.maxCap) {
-      warn.style.display = "block"; warn.textContent = `⚠️ Diqqət: ${editingTarget.placeLabel} maksimum ${editingTarget.maxCap} nəfərlikdir!`;
-    } else warn.style.display = "none";
+    const warn = document.getElementById("capWarn"), g = Number(document.getElementById("fGuests").value)||0;
+    if (editingTarget?.maxCap && g > editingTarget.maxCap) { warn.style.display="block"; warn.textContent=`⚠️ Diqqət: ${editingTarget.placeLabel} maksimum ${editingTarget.maxCap} nəfərlikdir!`; }
+    else warn.style.display="none";
   }
   function updateQuickContact() {
-    const raw = document.getElementById("fPhone").value.replace(/\D/g, ""), box = document.getElementById("contactActions");
+    const raw = document.getElementById("fPhone").value.replace(/\D/g,""), box = document.getElementById("contactActions");
     if (raw.length >= 7 && !isGuest()) {
-      box.style.display = "flex";
-      const fullNum = raw.startsWith("994") ? raw : "994" + raw.replace(/^0/, "");
-      document.getElementById("btnCall").href = "tel:+" + fullNum;
-      const msg = encodeURIComponent(`Salam! EL PIANO restoranında ${datePicker.value} tarixi üçün ${editingTarget.placeLabel} rezervasiyanız qeydə alındı.`);
-      document.getElementById("btnWa").href = `https://wa.me/${fullNum}?text=${msg}`;
+      box.style.display = "flex"; const fn = raw.startsWith("994") ? raw : "994"+raw.replace(/^0/,"");
+      document.getElementById("btnCall").href = "tel:+"+fn;
+      document.getElementById("btnWa").href = `https://wa.me/${fn}?text=${encodeURIComponent(`Salam! EL PIANO restoranında ${datePicker.value} tarixi üçün ${editingTarget.placeLabel} rezervasiyanız qeydə alındı.`)}`;
     } else box.style.display = "none";
   }
   function saveRes() {
@@ -1370,24 +1071,14 @@
     const name = document.getElementById("fName").value.trim(), err = document.getElementById("formErr");
     if (!name) { err.style.display="block"; err.textContent="⚠️ Qonağın adını yazın."; return; }
     err.style.display = "none";
-    const record = {
-      name, guests:Number(document.getElementById("fGuests").value)||0,
-      phone:document.getElementById("fPhone").value.trim(), time:document.getElementById("fTime").value.trim(),
-      beh:Number(document.getElementById("fBeh").value)||0, staff:document.getElementById("fStaff").value,
-      status:document.getElementById("fStatus").value, note:document.getElementById("fNote").value.trim(), updatedAt:Date.now()
-    };
+    const record = { name, guests:Number(document.getElementById("fGuests").value)||0, phone:document.getElementById("fPhone").value.trim(), time:document.getElementById("fTime").value.trim(), beh:Number(document.getElementById("fBeh").value)||0, staff:document.getElementById("fStaff").value, status:document.getElementById("fStatus").value, note:document.getElementById("fNote").value.trim(), updatedAt:Date.now() };
     cloudReservations[editingTarget.key] = record;
     if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).set(record);
     closeSheet(); showToast("Rezerv canlı bazaya yazıldı!"); renderApp();
   }
   function askDelete() { if (!isGuest()) { document.getElementById("normalActions").style.display="none"; document.getElementById("confirmDeleteBar").style.display="flex"; } }
   function cancelDelete() { document.getElementById("confirmDeleteBar").style.display="none"; document.getElementById("normalActions").style.display="flex"; }
-  function confirmDeleteRes() {
-    if (isGuest()) return;
-    delete cloudReservations[editingTarget.key];
-    if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).remove();
-    closeSheet(); showToast("Masa boşaldıldı!"); renderApp();
-  }
+  function confirmDeleteRes() { if (isGuest()) return; delete cloudReservations[editingTarget.key]; if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).remove(); closeSheet(); showToast("Masa boşaldıldı!"); renderApp(); }
 
   datePicker.addEventListener("change", () => { cloudReservations={}; cloudDateSingers=[]; listenToSelectedDate(); renderApp(); });
   initManagerIdentity(); renderApp(); startFirebaseSync();
