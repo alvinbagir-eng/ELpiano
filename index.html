@@ -66,21 +66,38 @@
     .shift-box { border-radius:10px; padding:9px 10px; cursor:pointer; border:1.5px dashed #cbd5e1; background:#f8fafc; display:flex; flex-direction:column; justify-content:space-between; min-height:70px; }
     .shift-box.confirmed { border:1.5px solid #22c55e; background:var(--green-bg); }
     .shift-box.pending { border:1.5px solid #f59e0b; background:var(--amber-bg); }
-    .shift-time { font-size:11px; font-weight:700; color:#475569; }
-    .shift-guest { font-size:14px; font-weight:800; color:var(--navy); margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .shift-time { font-size:11px; font-weight:700; opacity:0.85; }
+    .shift-guest { font-size:14px; font-weight:800; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .shift-empty { font-size:13px; font-weight:600; color:#94a3b8; margin-top:6px; }
-    .shift-info { font-size:11px; color:#334155; font-weight:600; margin-top:3px; display:flex; justify-content:space-between; }
+    .shift-info { font-size:11px; opacity:0.9; font-weight:600; margin-top:3px; display:flex; justify-content:space-between; }
     .zal-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .zal-tile { background:var(--card); border-radius:12px; padding:11px; cursor:pointer; border:1.5px dashed #cbd5e1; display:flex; flex-direction:column; justify-content:space-between; min-height:86px; }
     .zal-tile.confirmed { border:1.5px solid #22c55e; background:var(--green-bg); }
     .zal-tile.pending { border:1.5px solid #f59e0b; background:var(--amber-bg); }
+    .zal-tile.merged-child { border-style:dashed; opacity:0.94; }
     .zal-top { display:flex; justify-content:space-between; align-items:center; gap:4px; }
-    .zal-num { font-size:12px; font-weight:800; color:var(--navy); background:rgba(15,23,42,0.07); padding:2px 7px; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px; }
-    .zal-time { font-size:11px; font-weight:700; color:#475569; white-space:nowrap; }
-    .zal-guest { font-size:14px; font-weight:800; color:var(--navy); margin:6px 0 3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .zal-num { font-size:12px; font-weight:800; background:rgba(15,23,42,0.08); padding:2px 7px; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px; }
+    .zal-merge-tag { font-size:10px; font-weight:800; background:var(--navy); color:var(--gold); padding:1px 5px; border-radius:6px; margin-left:3px; }
+    .zal-time { font-size:11px; font-weight:700; opacity:0.85; white-space:nowrap; }
+    .zal-guest { font-size:14px; font-weight:800; margin:6px 0 3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .zal-empty { font-size:12px; font-weight:600; color:#94a3b8; margin:10px 0 4px; }
-    .zal-foot { display:flex; justify-content:space-between; font-size:11px; font-weight:600; color:#334155; }
-    .zal-note { font-size:10px; color:#1e293b; background:rgba(255,255,255,0.65); padding:2px 6px; border-radius:5px; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .zal-foot { display:flex; justify-content:space-between; font-size:11px; font-weight:600; opacity:0.9; }
+    .zal-note { font-size:10px; color:#1e293b; background:rgba(255,255,255,0.72); padding:2px 6px; border-radius:5px; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .zal-merge-list { font-size:10px; font-weight:700; color:#0f172a; background:rgba(255,255,255,0.65); padding:2px 6px; border-radius:5px; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .res-flags-row { display:flex; flex-wrap:wrap; gap:3px; margin-top:4px; }
+    .res-flag-pill { font-size:9.5px; font-weight:800; background:rgba(255,255,255,0.82); color:#0f172a; padding:1.5px 6px; border-radius:6px; border:1px solid rgba(0,0,0,0.12); display:inline-flex; align-items:center; gap:3px; }
+    .flag-dot { width:8px; height:8px; border-radius:50%; display:inline-block; border:1px solid rgba(0,0,0,0.2); flex-shrink:0; }
+    .flags-check-grid { display:flex; flex-wrap:wrap; gap:6px; }
+    .flag-check-item { display:inline-flex; align-items:center; gap:6px; padding:7px 10px; border-radius:10px; border:1.5px solid var(--border); background:#f8fafc; font-size:12.5px; font-weight:700; color:var(--navy); cursor:pointer; }
+    .flag-check-item.checked { border-color:var(--navy); box-shadow:0 1px 4px rgba(0,0,0,0.08); }
+    .flag-check-item input { width:16px; height:16px; accent-color:var(--navy); margin:0; }
+    .color-presets { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+    .color-swatch { width:26px; height:26px; border-radius:8px; border:2px solid rgba(0,0,0,0.15); cursor:pointer; }
+    .color-swatch.active { border:2.5px solid var(--navy); transform:scale(1.1); }
+    .merge-box { display:flex; flex-wrap:wrap; gap:6px; max-height:132px; overflow-y:auto; padding:8px; background:#f8fafc; border:1.5px solid var(--border); border-radius:10px; }
+    .m-chip { font-size:11.5px; font-weight:700; padding:5px 9px; border-radius:8px; background:#fff; border:1px solid #cbd5e1; color:#334155; cursor:pointer; }
+    .m-chip.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
+    .m-chip.busy { background:#f1f5f9; color:#94a3b8; border-color:#e2e8f0; cursor:not-allowed; text-decoration:line-through; opacity:0.7; }
     .sheet-backdrop { position:fixed; inset:0; background:rgba(15,23,42,0.72); z-index:100; display:none; justify-content:center; align-items:center; padding:14px 12px 78px; }
     .sheet-backdrop.open { display:flex; }
     .sheet { width:100%; max-width:440px; background:#fff; border-radius:18px; padding:16px; max-height:calc(100dvh - 96px); overflow-y:auto; box-shadow:0 20px 45px rgba(0,0,0,0.35); }
@@ -168,7 +185,7 @@
     .pin-input.danger { border-color:#fca5a5; }
     .pin-err { color:var(--red); font-size:12px; font-weight:700; text-align:center; display:none; }
     .sub-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 12px; }
-    .sub-tab { flex:1 1 30%; padding:8px 6px; border:1px solid var(--border); border-radius:10px; background:var(--card); font-size:11px; font-weight:700; color:var(--muted); cursor:pointer; text-align:center; white-space:nowrap; }
+    .sub-tab { flex:1 1 22%; padding:8px 5px; border:1px solid var(--border); border-radius:10px; background:var(--card); font-size:11px; font-weight:700; color:var(--muted); cursor:pointer; text-align:center; white-space:nowrap; }
     .sub-tab.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
     .setting-row { background:var(--card); border-radius:12px; padding:12px; margin-bottom:8px; border:1px solid var(--border); }
     .setting-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
@@ -318,10 +335,21 @@
       <div class="field full"><label>Status</label>
         <select id="fStatus"><option value="confirmed">🟢 Təsdiqlənib / Beh ödənilib</option><option value="pending">🟡 Gözləmədə / Behsiz</option></select>
       </div>
+      <div class="field full" id="flagsFieldWrap" style="display:none;">
+        <label>☑️ Xüsusi İşarələr (Rəngli seçim)</label>
+        <div class="flags-check-grid" id="resFlagsGrid"></div>
+      </div>
+      <div class="field full" id="mergeFieldWrap" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <label>🔗 Birləşdirilən masalar</label>
+          <span id="mergeSummaryLbl" style="font-size:11px; font-weight:700; color:var(--navy);"></span>
+        </div>
+        <div class="merge-box" id="mergeChipsGrid"></div>
+      </div>
       <div class="field full">
         <label>Əlavə Məlumat / Qeyd</label>
         <div class="note-input-wrap">
-          <input type="text" id="fNote" placeholder="Məs: stol bəzəyi, menyu var" oninput="renderNoteChips()" />
+          <input type="text" id="fNote" placeholder="Məs: stol bəzəyi, menyu var" oninput="renderNoteChips(editingTarget?.canWrite)" />
           <button type="button" id="clearNoteBtn" class="clear-note-btn" onclick="clearNoteField()">✕</button>
         </div>
         <div class="quick-chips" id="quickChipsBox"></div>
@@ -394,6 +422,8 @@
     { name:"Rüfət", pin:"1996", perms:{...FULL_PERMS} }
   ];
   const DEFAULT_NOTE_CHIPS = ["Menyu var", "Menyu yerində olacaq", "Stol bəzəyi", "Fotoqraf olacaq 150"];
+  const DEFAULT_RES_FLAGS = [{ id:"flag_menu", name:"Menyu var", color:"#fbcfe8" }];
+  const FLAG_COLOR_PRESETS = ["#fbcfe8","#ddd6fe","#bae6fd","#99f6e4","#fed7aa","#fecaca","#fef08a","#bbf7d0"];
 
   const DEFAULT_CABINETS = [
     { id:"prime_hall", name:"Prime Hall", max:80, depositVal:3000, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" },
@@ -423,6 +453,7 @@
 
   let cloudManagers = JSON.parse(JSON.stringify(DEFAULT_MANAGERS));
   let cloudNoteChips = [...DEFAULT_NOTE_CHIPS];
+  let cloudResFlags = JSON.parse(JSON.stringify(DEFAULT_RES_FLAGS));
   let cloudCabinets = JSON.parse(JSON.stringify(DEFAULT_CABINETS));
   let cloudTariffs = JSON.parse(JSON.stringify(DEFAULT_TARIFFS));
   let cloudWeekendCounts = { day: 20, night: 30 };
@@ -431,7 +462,8 @@
   let cloudReservations = {}, cloudDateSingers = [], cloudSingerPresets = [], cloudChat = [], cloudLogs = [];
 
   let currentManager = "", sessionSwitchedFrom = "", pendingLoginManager = null, currentTab = "kabinet", settingsSubTab = "tariffs", currentFilter = "all";
-  let editingTarget = null, editingCabIdx = null, editingMgrIdx = null, editingZalIdx = null, editingChipIdx = null, editingTariffIdx = null;
+  let editingTarget = null, editingMergedIds = [], editingMergeOptions = [], editingFlagIds = [];
+  let editingCabIdx = null, editingMgrIdx = null, editingZalIdx = null, editingChipIdx = null, editingFlagIdx = null, editingTariffIdx = null;
   let showNewCabForm = false, showNewTariffForm = false, activeResRefPath = null, activeSingerRefPath = null;
   let lastChatSeenTs = Number(safeGetLocal("elpiano_chat_seen") || 0);
   let reportPeriod = "day", reportCustomFrom = "", reportCustomTo = "", reportRangeData = null, reportLoading = false, cabSortAsc = false, zalSortAsc = false, reportZalTab = "night";
@@ -463,6 +495,61 @@
       num++;
     }
     return base;
+  }
+
+  function getZalNameById(section, zalId, dateStr) {
+    const t = section === "zal_day" ? "day" : "night";
+    const found = getEffectiveZalList(t, dateStr || datePicker.value).find(z => z.id === zalId);
+    return found ? found.name : zalId;
+  }
+
+  function getMergedOwner(section, zalId, resData) {
+    const prefix = `${section}_`;
+    for (const [k, r] of Object.entries(resData || {})) {
+      if (!k.startsWith(prefix) || !r || !r.name) continue;
+      if (Array.isArray(r.mergedIds) && r.mergedIds.includes(zalId)) {
+        const ownerId = k.slice(prefix.length);
+        if (ownerId !== zalId) return { ownerId, ownerName: getZalNameById(section, ownerId), res: r };
+      }
+    }
+    return null;
+  }
+
+  function formatMergedNames(section, ids, dateStr) {
+    if (!Array.isArray(ids) || !ids.length) return "";
+    return ids.map(id => getZalNameById(section, id, dateStr)).join(", ");
+  }
+
+  // XÜSUSİ RƏNGLİ QUŞ İŞARƏLƏRİ (FLAGS)
+  function getResFlags() { return cloudResFlags || []; }
+  function saveResFlags(a) { cloudResFlags = a; if (db) { db.ref(`${ROOT_PATH}/config/res_flags_init`).set(true); db.ref(`${ROOT_PATH}/config/res_flags`).set(a); } }
+  function getActiveFlagsForRes(res) {
+    if (!res || !Array.isArray(res.flags) || !res.flags.length) return [];
+    return res.flags.map(id => getResFlags().find(f => f.id === id)).filter(Boolean);
+  }
+  function formatFlagNames(ids) {
+    if (!Array.isArray(ids) || !ids.length) return "";
+    return ids.map(id => { const f = getResFlags().find(x => x.id === id); return f ? f.name : ""; }).filter(Boolean).join(", ");
+  }
+  function isDarkHex(hex) {
+    const h = String(hex || "").replace("#", "");
+    if (h.length !== 6) return false;
+    const r = parseInt(h.slice(0,2), 16), g = parseInt(h.slice(2,4), 16), b = parseInt(h.slice(4,6), 16);
+    return (0.299*r + 0.587*g + 0.114*b) < 138;
+  }
+  function getResCardStyle(res) {
+    const active = getActiveFlagsForRes(res);
+    if (!active.length) return "";
+    const colors = active.map(f => f.color || "#fbcfe8");
+    const bg = colors.length === 1 ? colors[0] : `linear-gradient(135deg, ${colors.join(", ")})`;
+    const dark = isDarkHex(colors[0]);
+    const borderCol = dark ? "rgba(255,255,255,0.45)" : "rgba(15,23,42,0.28)";
+    return `background:${bg}; border:1.5px solid ${borderCol}; color:${dark?"#ffffff":"#0f172a"};`;
+  }
+  function renderFlagsBadgesHtml(res) {
+    const active = getActiveFlagsForRes(res);
+    if (!active.length) return "";
+    return `<div class="res-flags-row">${active.map(f => `<span class="res-flag-pill"><span class="flag-dot" style="background:${escHtml(f.color)}"></span>✓ ${escHtml(f.name)}</span>`).join("")}</div>`;
   }
 
   const datePicker = document.getElementById("datePicker");
@@ -518,8 +605,13 @@
     if (cloudLogs.length > 300) cloudLogs.length = 300;
     if (db) db.ref(`${ROOT_PATH}/logs`).push(entry);
   }
-  function formatResSnapshot(r) { return r ? `Qonaq: ${r.name} • Say: ${r.guests||0} • Vaxt: ${r.time||"-"} • BEH: ${r.beh||0}₼ • Menecer: ${r.staff||"-"} • Status: ${r.status==="confirmed"?"Təsdiq":"Gözləmə"}${r.note?` • Qeyd: ${r.note}`:""}` : ""; }
-  function diffReservations(oldR, newR) {
+  function formatResSnapshot(r, section) {
+    if (!r) return "";
+    const mNames = (section && Array.isArray(r.mergedIds) && r.mergedIds.length) ? ` • Birləşən: ${formatMergedNames(section, r.mergedIds)}` : "";
+    const fNames = (Array.isArray(r.flags) && r.flags.length) ? ` • İşarələr: ${formatFlagNames(r.flags)}` : "";
+    return `Qonaq: ${r.name} • Say: ${r.guests||0} • Vaxt: ${r.time||"-"} • BEH: ${r.beh||0}₼ • Menecer: ${r.staff||"-"} • Status: ${r.status==="confirmed"?"Təsdiq":"Gözləmə"}${mNames}${fNames}${r.note?` • Qeyd: ${r.note}`:""}`;
+  }
+  function diffReservations(oldR, newR, section) {
     const diffs = [];
     if ((oldR.name||"") !== (newR.name||"")) diffs.push(`Ad: ${oldR.name||"-"} → ${newR.name||"-"}`);
     if (Number(oldR.guests||0) !== Number(newR.guests||0)) diffs.push(`Say: ${oldR.guests||0} → ${newR.guests||0}`);
@@ -528,6 +620,10 @@
     if (Number(oldR.beh||0) !== Number(newR.beh||0)) diffs.push(`BEH: ${oldR.beh||0}₼ → ${newR.beh||0}₼`);
     if ((oldR.staff||"") !== (newR.staff||"")) diffs.push(`Menecer: ${oldR.staff||"-"} → ${newR.staff||"-"}`);
     if ((oldR.status||"") !== (newR.status||"")) diffs.push(`Status: ${oldR.status==="confirmed"?"Təsdiq":"Gözləmə"} → ${newR.status==="confirmed"?"Təsdiq":"Gözləmə"}`);
+    const oF = (Array.isArray(oldR.flags)?oldR.flags:[]).join(","), nF = (Array.isArray(newR.flags)?newR.flags:[]).join(",");
+    if (oF !== nF) diffs.push(`İşarələr: ${formatFlagNames(oldR.flags)||"-"} → ${formatFlagNames(newR.flags)||"-"}`);
+    const oM = (Array.isArray(oldR.mergedIds)?oldR.mergedIds:[]).join(","), nM = (Array.isArray(newR.mergedIds)?newR.mergedIds:[]).join(",");
+    if (oM !== nM) diffs.push(`Birləşən masalar: ${formatMergedNames(section, oldR.mergedIds)||"-"} → ${formatMergedNames(section, newR.mergedIds)||"-"}`);
     if ((oldR.note||"") !== (newR.note||"")) diffs.push(`Qeyd: ${oldR.note||"-"} → ${newR.note||"-"}`);
     return diffs.length ? diffs.join("\n") : "Dəyişiklik yoxdur (yenidən saxlanıldı)";
   }
@@ -622,7 +718,7 @@
     if (document.getElementById("settingsPinInput").value.trim() === SETTINGS_PIN) {
       closeSettingsPin();
       writeAuditLog("auth", "🔓 Nastroykaya daxil olundu", "Kod təsdiqləndi");
-      currentTab = "settings"; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
+      currentTab = "settings"; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingFlagIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
       document.querySelectorAll(".top-nav-item").forEach(n => n.classList.remove("active"));
       document.getElementById("logsNavBtn").classList.remove("active");
       document.getElementById("settingsGearBtn").classList.add("active");
@@ -643,11 +739,12 @@
       if (!snap.exists()) {
         db.ref(`${ROOT_PATH}/config`).set({
           managers:DEFAULT_MANAGERS, managers_v3_init:true, cabinets:DEFAULT_CABINETS, zal_day:DEFAULT_ZAL_DAY, zal_night:DEFAULT_ZAL_NIGHT,
-          note_chips:DEFAULT_NOTE_CHIPS, note_chips_init:true, singer_presets:[], tariffs:DEFAULT_TARIFFS, tariffs_init:true, weekend_counts:{ day:20, night:30 }
+          note_chips:DEFAULT_NOTE_CHIPS, note_chips_init:true, res_flags:DEFAULT_RES_FLAGS, res_flags_init:true, singer_presets:[], tariffs:DEFAULT_TARIFFS, tariffs_init:true, weekend_counts:{ day:20, night:30 }
         });
       } else {
         const v = snap.val();
         if (!v.note_chips_init) { db.ref(`${ROOT_PATH}/config/note_chips`).set(DEFAULT_NOTE_CHIPS); db.ref(`${ROOT_PATH}/config/note_chips_init`).set(true); }
+        if (!v.res_flags_init) { db.ref(`${ROOT_PATH}/config/res_flags`).set(DEFAULT_RES_FLAGS); db.ref(`${ROOT_PATH}/config/res_flags_init`).set(true); }
         if (!v.tariffs_init) { db.ref(`${ROOT_PATH}/config/tariffs`).set(DEFAULT_TARIFFS); db.ref(`${ROOT_PATH}/config/tariffs_init`).set(true); }
         if (!v.managers_v3_init) {
           const migrated = normalizeManagers(v.managers || DEFAULT_MANAGERS);
@@ -665,6 +762,7 @@
         if (cfg.zal_day) cloudZalDay = toArray(cfg.zal_day);
         if (cfg.zal_night) cloudZalNight = toArray(cfg.zal_night);
         if (cfg.note_chips_init) cloudNoteChips = toArray(cfg.note_chips);
+        if (cfg.res_flags_init) cloudResFlags = toArray(cfg.res_flags);
         if (cfg.tariffs_init) cloudTariffs = toArray(cfg.tariffs);
         if (cfg.weekend_counts) cloudWeekendCounts = cfg.weekend_counts;
         cloudSingerPresets = cfg.singer_presets ? toArray(cfg.singer_presets) : [];
@@ -774,7 +872,7 @@
   function setFilter(f, btn) { currentFilter=f; document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active")); btn.classList.add("active"); renderApp(); }
   function switchTab(tab, btn) {
     if (tab==="report" && !isGuest() && !hasPerm("report_view")) { showToast("⚠️ Hesabat icazəniz yoxdur"); return; }
-    currentTab = tab; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
+    currentTab = tab; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingFlagIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
     document.querySelectorAll(".top-nav-item").forEach(n => n.classList.remove("active"));
     if (btn) btn.classList.add("active");
     document.getElementById("settingsGearBtn").classList.remove("active");
@@ -803,8 +901,16 @@
       const r1 = resData[`kabinet_${cab.id}_1`]; if (r1?.name) { s.kabDayG += Number(r1.guests)||0; s.kabBeh += Number(r1.beh)||0; }
       if (cab.shifts===2) { const r2 = resData[`kabinet_${cab.id}_2`]; if (r2?.name) { s.kabNightG += Number(r2.guests)||0; s.kabBeh += Number(r2.beh)||0; } }
     });
-    zalDay.forEach(z => { const r=resData[`zal_day_${z.id}`]; if (r?.name) { s.zalDayFilled++; s.zalDayG += Number(r.guests)||0; s.zalDayBeh += Number(r.beh)||0; } });
-    zalNight.forEach(z => { const r=resData[`zal_night_${z.id}`]; if (r?.name) { s.zalNightFilled++; s.zalNightG += Number(r.guests)||0; s.zalNightBeh += Number(r.beh)||0; } });
+    zalDay.forEach(z => {
+      const r=resData[`zal_day_${z.id}`];
+      if (r?.name) { s.zalDayFilled++; s.zalDayG += Number(r.guests)||0; s.zalDayBeh += Number(r.beh)||0; }
+      else if (getMergedOwner("zal_day", z.id, resData)) { s.zalDayFilled++; }
+    });
+    zalNight.forEach(z => {
+      const r=resData[`zal_night_${z.id}`];
+      if (r?.name) { s.zalNightFilled++; s.zalNightG += Number(r.guests)||0; s.zalNightBeh += Number(r.beh)||0; }
+      else if (getMergedOwner("zal_night", z.id, resData)) { s.zalNightFilled++; }
+    });
     s.totalGuests = s.kabDayG + s.kabNightG + s.zalDayG + s.zalNightG;
     s.totalBeh = s.kabBeh + s.zalDayBeh + s.zalNightBeh;
     return s;
@@ -850,7 +956,7 @@
       const hasAny = Boolean(r1?.name || r2?.name), hasFree = Boolean(!r1?.name || (cab.shifts===2 && !r2?.name));
       if (currentFilter==="free" && !hasFree) return;
       if (currentFilter==="booked" && !hasAny) return;
-      if (q && !`${cab.name} ${r1?.name||""} ${r1?.phone||""} ${r2?.name||""} ${r2?.phone||""}`.toLowerCase().includes(q)) return;
+      if (q && !`${cab.name} ${r1?.name||""} ${r1?.phone||""} ${formatFlagNames(r1?.flags)} ${r2?.name||""} ${r2?.phone||""} ${formatFlagNames(r2?.flags)}`.toLowerCase().includes(q)) return;
       const depVal = getCabinetDepositForDate(cab, datePicker.value);
       html += `<div class="cab-card"><div class="cab-head"><div><div class="cab-title">${escHtml(cab.name)}</div><div class="cab-meta"><span class="meta-tag">👥 Max ${cab.max} nəfər</span><span class="meta-tag ${hasSpecialTariff?'special':'gold'}">💳 Depozit: ${formatMoney(depVal)}</span></div></div><span class="smen-badge">${cab.shifts===2?"2 smen":"1 smen"}</span></div><div class="shifts-grid ${cab.shifts===1?"single":""}">${renderCabShiftBox(cab,1,r1,cab.shifts===1?"Tam gün":"☀️ 17:00-a qədər",cab.s1)}${cab.shifts===2?renderCabShiftBox(cab,2,r2,"🌙 18:00-dan",cab.s2):""}</div></div>`;
     });
@@ -858,22 +964,39 @@
   }
   function renderCabShiftBox(cab, shiftNum, res, label, defaultTime) {
     const cls = res?.name ? (res.status === "confirmed" ? "confirmed" : "pending") : "";
-    if (res?.name) return `<div class="shift-box ${cls}" onclick="openSheet('kabinet','${escHtml(cab.id)}',${shiftNum})"><div class="shift-time">${label}</div><div class="shift-guest">${escHtml(res.name)}</div><div class="shift-info"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div></div>`;
+    if (res?.name) {
+      const cStyle = getResCardStyle(res);
+      const stDot = cStyle ? (res.status==="confirmed"?"🟢 ":"🟡 ") : "";
+      return `<div class="shift-box ${cls}" style="${cStyle}" onclick="openSheet('kabinet','${escHtml(cab.id)}',${shiftNum})"><div class="shift-time">${stDot}${label}</div><div class="shift-guest">${escHtml(res.name)}</div><div class="shift-info"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div>${renderFlagsBadgesHtml(res)}</div>`;
+    }
     return `<div class="shift-box" onclick="openSheet('kabinet','${escHtml(cab.id)}',${shiftNum})"><div class="shift-time">${label}</div><div class="shift-empty">${hasPerm("res_create")?"+ Rezerv yaz":"Boşdur"}</div><div class="shift-info" style="color:#94a3b8;">🕒 ${escHtml(defaultTime)}</div></div>`;
   }
   function renderZalGrid(section, list, resData, defaultTime) {
     const q = document.getElementById("searchInput").value.trim().toLowerCase();
     let html = `<div class="zal-grid">`, count = 0;
     list.forEach(zal => {
-      const res = resData[`${section}_${zal.id}`], isBooked = Boolean(res?.name);
+      const res = resData[`${section}_${zal.id}`];
+      const owner = (!res?.name) ? getMergedOwner(section, zal.id, resData) : null;
+      const isBooked = Boolean(res?.name || owner);
       if (currentFilter==="free" && isBooked) return;
       if (currentFilter==="booked" && !isBooked) return;
-      if (q && !`${zal.name} ${res?.name||""} ${res?.phone||""} ${res?.staff||""}`.toLowerCase().includes(q)) return;
+      const activeRes = res?.name ? res : (owner ? owner.res : null);
+      const mergedNames = res?.name ? formatMergedNames(section, res.mergedIds) : "";
+      if (q && !`${zal.name} ${activeRes?.name||""} ${activeRes?.phone||""} ${activeRes?.staff||""} ${formatFlagNames(activeRes?.flags)} ${mergedNames} ${owner?.ownerName||""}`.toLowerCase().includes(q)) return;
       count++;
-      const cls = isBooked ? (res.status === "confirmed" ? "confirmed" : "pending") : "";
-      html += isBooked
-        ? `<div class="zal-tile ${cls}" onclick="openSheet('${section}','${escHtml(zal.id)}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time">${res.time?"🕒 "+escHtml(res.time):""}</span></div><div class="zal-guest">${escHtml(res.name)}</div><div class="zal-foot"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div>${res.note?`<div class="zal-note">${escHtml(res.note)}</div>`:""}</div>`
-        : `<div class="zal-tile" onclick="openSheet('${section}','${escHtml(zal.id)}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time" style="color:#94a3b8;">Boş</span></div><div class="zal-empty">${hasPerm("res_create")?"+ Rezerv yaz":"Boşdur"}</div><div class="zal-foot" style="color:#94a3b8;"><span>${defaultTime}</span></div></div>`;
+      if (res?.name) {
+        const cls = res.status === "confirmed" ? "confirmed" : "pending";
+        const cStyle = getResCardStyle(res);
+        const stDot = cStyle ? (res.status==="confirmed"?"🟢 ":"🟡 ") : "";
+        const mCnt = Array.isArray(res.mergedIds) ? res.mergedIds.length : 0;
+        html += `<div class="zal-tile ${cls}" style="${cStyle}" onclick="openSheet('${section}','${escHtml(zal.id)}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}${mCnt?`<span class="zal-merge-tag">+${mCnt}</span>`:''}</span><span class="zal-time">${stDot}${res.time?"🕒 "+escHtml(res.time):""}</span></div><div class="zal-guest">${escHtml(res.name)}</div><div class="zal-foot"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div>${renderFlagsBadgesHtml(res)}${mCnt?`<div class="zal-merge-list">🔗 + ${escHtml(mergedNames)}</div>`:""}${res.note?`<div class="zal-note">${escHtml(res.note)}</div>`:""}</div>`;
+      } else if (owner) {
+        const cls = owner.res.status === "confirmed" ? "confirmed" : "pending";
+        const cStyle = getResCardStyle(owner.res);
+        html += `<div class="zal-tile ${cls} merged-child" style="${cStyle}" onclick="openSheet('${section}','${escHtml(owner.ownerId)}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time">🔗 ${escHtml(owner.ownerName)}</span></div><div class="zal-guest">${escHtml(owner.res.name)}</div><div class="zal-foot"><span>Birləşmiş masa</span><span>👥 ${owner.res.guests||0}</span></div>${renderFlagsBadgesHtml(owner.res)}</div>`;
+      } else {
+        html += `<div class="zal-tile" onclick="openSheet('${section}','${escHtml(zal.id)}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time" style="color:#94a3b8;">Boş</span></div><div class="zal-empty">${hasPerm("res_create")?"+ Rezerv yaz":"Boşdur"}</div><div class="zal-foot" style="color:#94a3b8;"><span>${defaultTime}</span></div></div>`;
+      }
     });
     document.getElementById("mainContent").innerHTML = count ? html + `</div>` : `<div style="text-align:center; padding:40px; color:#94a3b8;">Heç nə tapılmadı</div>`;
   }
@@ -959,8 +1082,8 @@
     const zalNight = reportPeriod==="day" ? getEffectiveZalList("night", datePicker.value) : getEffectiveZalList("night", "2026-11-21");
     const cabMap={}, zalDayMap={}, zalNightMap={}, staffMap={}, dayMap={};
     cabs.forEach(c => cabMap[c.id]={id:c.id,name:c.name,max:c.max,count:0,dayCount:0,nightCount:0,guests:0,beh:0,depositSum:0});
-    zalDay.forEach(z => zalDayMap[z.id]={id:z.id,name:z.name,count:0,guests:0,beh:0});
-    zalNight.forEach(z => zalNightMap[z.id]={id:z.id,name:z.name,count:0,guests:0,beh:0});
+    zalDay.forEach(z => zalDayMap[z.id]={id:z.id,name:z.name,count:0,mergedCount:0,guests:0,beh:0});
+    zalNight.forEach(z => zalNightMap[z.id]={id:z.id,name:z.name,count:0,mergedCount:0,guests:0,beh:0});
     const summary = { totalRes:0, totalGuests:0, totalBeh:0, totalDeposit:0, confirmed:0, pending:0, kabDayRes:0, kabDayGuests:0, kabDayBeh:0, kabNightRes:0, kabNightGuests:0, kabNightBeh:0, zalDayRes:0, zalDayGuests:0, zalDayBeh:0, zalNightRes:0, zalNightGuests:0, zalNightBeh:0 };
 
     Object.entries(dataByDate || {}).forEach(([dateKey, dayObj]) => {
@@ -984,12 +1107,20 @@
           if (shift==="1") { cabMap[cabId].dayCount++; summary.kabDayRes++; summary.kabDayGuests += g; summary.kabDayBeh += b; }
           else { cabMap[cabId].nightCount++; summary.kabNightRes++; summary.kabNightGuests += g; summary.kabNightBeh += b; }
         } else if (resKey.startsWith("zal_day_")) {
-          const zId = resKey.slice(8); if (!zalDayMap[zId]) zalDayMap[zId] = { id:zId, name:zId, count:0, guests:0, beh:0 };
+          const zId = resKey.slice(8); if (!zalDayMap[zId]) zalDayMap[zId] = { id:zId, name:zId, count:0, mergedCount:0, guests:0, beh:0 };
           zalDayMap[zId].count++; zalDayMap[zId].guests += g; zalDayMap[zId].beh += b;
+          if (Array.isArray(r.mergedIds)) r.mergedIds.forEach(mId => {
+            if (!zalDayMap[mId]) zalDayMap[mId] = { id:mId, name:mId, count:0, mergedCount:0, guests:0, beh:0 };
+            zalDayMap[mId].count++; zalDayMap[mId].mergedCount++;
+          });
           summary.zalDayRes++; summary.zalDayGuests += g; summary.zalDayBeh += b;
         } else if (resKey.startsWith("zal_night_")) {
-          const zId = resKey.slice(10); if (!zalNightMap[zId]) zalNightMap[zId] = { id:zId, name:zId, count:0, guests:0, beh:0 };
+          const zId = resKey.slice(10); if (!zalNightMap[zId]) zalNightMap[zId] = { id:zId, name:zId, count:0, mergedCount:0, guests:0, beh:0 };
           zalNightMap[zId].count++; zalNightMap[zId].guests += g; zalNightMap[zId].beh += b;
+          if (Array.isArray(r.mergedIds)) r.mergedIds.forEach(mId => {
+            if (!zalNightMap[mId]) zalNightMap[mId] = { id:mId, name:mId, count:0, mergedCount:0, guests:0, beh:0 };
+            zalNightMap[mId].count++; zalNightMap[mId].mergedCount++;
+          });
           summary.zalNightRes++; summary.zalNightGuests += g; summary.zalNightBeh += b;
         }
       });
@@ -1000,15 +1131,15 @@
   function exportReportCSV() {
     if (!hasPerm("excel")) { showToast("⚠️ Excel yükləmə icazəniz yoxdur"); return; }
     const { from, to } = getPeriodDates(), sourceData = reportPeriod==="day" ? {[datePicker.value]:getDayReservations()} : (reportRangeData||{}), cabs = getCabinetsConfig();
-    let csv = "\uFEFFTarix,Bolme,Yer,Qonaq,Say,Vaxt,Telefon,BEH,Menecer,Status,Qeyd\n";
+    let csv = "\uFEFFTarix,Bolme,Yer,Qonaq,Say,Vaxt,Telefon,BEH,Menecer,Status,Isareler,Qeyd\n";
     Object.keys(sourceData).sort().forEach(d => {
       Object.entries(sourceData[d]||{}).forEach(([k, r]) => {
         if (!r || !r.name) return;
         let sec="Zal", place=k;
         if (k.startsWith("kabinet_")) { sec="Kabinet"; const rest=k.slice(8), idx=rest.lastIndexOf("_"), cid=idx>0?rest.slice(0,idx):rest, sh=idx>0?rest.slice(idx+1):"1", co=cabs.find(x=>x.id===cid); place=(co?co.name:cid)+(sh==="1"?" (Seher)":" (Axsam)"); }
-        else if (k.startsWith("zal_day_")) { sec="Zal Seher"; place=k.slice(8); }
-        else if (k.startsWith("zal_night_")) { sec="Sou Proqram"; place=k.slice(10); }
-        csv += [d,sec,place,r.name,r.guests||0,r.time||"",r.phone||"",r.beh||0,r.staff||"",r.status==="confirmed"?"Tesdiq":"Gozleme",r.note||""].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")+"\n";
+        else if (k.startsWith("zal_day_")) { sec="Zal Seher"; place=getZalNameById("zal_day",k.slice(8),d)+(Array.isArray(r.mergedIds)&&r.mergedIds.length?" (+ "+formatMergedNames("zal_day",r.mergedIds,d)+")":""); }
+        else if (k.startsWith("zal_night_")) { sec="Sou Proqram"; place=getZalNameById("zal_night",k.slice(10),d)+(Array.isArray(r.mergedIds)&&r.mergedIds.length?" (+ "+formatMergedNames("zal_night",r.mergedIds,d)+")":""); }
+        csv += [d,sec,place,r.name,r.guests||0,r.time||"",r.phone||"",r.beh||0,r.staff||"",r.status==="confirmed"?"Tesdiq":"Gozleme",formatFlagNames(r.flags),r.note||""].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")+"\n";
       });
     });
     const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"})); a.download=`elpiano_${from}_${to}.csv`; a.click();
@@ -1069,7 +1200,7 @@
       <div class="report-card"><div class="report-title" style="margin-bottom:6px;">📌 BÖLMƏLƏR ÜZRƏ YEKUN</div><div class="report-row"><span>🚪 Kabinet (17:00-a qədər)</span><b>${s.kabDayRes} rez • ${s.kabDayGuests} qonaq • ${formatMoney(s.kabDayBeh)}</b></div><div class="report-row"><span>🌙 Kabinet (18:00-dan)</span><b>${s.kabNightRes} rez • ${s.kabNightGuests} qonaq • ${formatMoney(s.kabNightBeh)}</b></div><div class="report-row"><span>☀️ Zal (Səhər)</span><b>${s.zalDayRes} rez • ${s.zalDayGuests} qonaq • ${formatMoney(s.zalDayBeh)}</b></div><div class="report-row"><span>🎤 Zal (Şou Proqram)</span><b>${s.zalNightRes} rez • ${s.zalNightGuests} qonaq • ${formatMoney(s.zalNightBeh)}</b></div><div class="report-row"><span>💳 Kabinet Depozit Dəyəri</span><b>${formatMoney(s.totalDeposit)}</b></div></div>
       <div class="report-card low-alert"><div class="report-title" style="color:#92400e; margin-bottom:8px;">📉 ƏN AZ REZERV OLUNANLAR</div><div style="font-size:11px; font-weight:800; color:#475569;">Kabinetlər:</div>${leastCabs.map(c=>`<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(c.name)}</b> (${c.guests} qonaq)</span>${lowBadge(c.count)}</div>`).join("")}<div style="font-size:11px; font-weight:800; color:#475569; margin-top:8px;">Şou Proqram Zalları:</div>${leastZalNight.map(z=>`<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(z.name)}</b> (${z.guests} qonaq)</span>${lowBadge(z.count)}</div>`).join("")}<div style="font-size:11px; font-weight:800; color:#475569; margin-top:8px;">Zal (Səhər):</div>${leastZalDay.map(z=>`<div class="report-row" style="padding:4px 0;"><span><b>${escHtml(z.name)}</b> (${z.guests} qonaq)</span>${lowBadge(z.count)}</div>`).join("")}</div>
       <div class="report-card"><div class="report-head-row"><div class="report-title">🚪 KABİNETLƏR (${sortedCabs.length})</div><button class="sort-btn" onclick="cabSortAsc=!cabSortAsc; renderReportScreen()">${cabSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div>${sortedCabs.map(c=>`<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(c.name)}</b><span><b>${c.count} rez</b> • ${c.guests} qonaq • <b style="color:#16a34a;">${formatMoney(c.beh)}</b></span></div><div class="stat-item-sub"><span>Səhər: ${c.dayCount} • Axşam: ${c.nightCount}</span><span>Depozit: ${formatMoney(c.depositSum)}</span></div><div class="bar-bg"><div class="bar-fill gold" style="width:${c.count?Math.max(6,Math.round(c.count/maxCabCount*100)):0}%"></div></div></div>`).join("")}</div>
-      <div class="report-card"><div class="report-head-row"><div class="report-title">🪑 MASALAR ÜZRƏ</div><button class="sort-btn" onclick="zalSortAsc=!zalSortAsc; renderReportScreen()">${zalSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div><div style="display:flex; gap:6px; margin-bottom:8px;"><button class="pill ${reportZalTab==='night'?'active':''}" style="flex:1;" onclick="reportZalTab='night'; renderReportScreen()">🎤 Şou (${agg.zalNightList.length})</button><button class="pill ${reportZalTab==='day'?'active':''}" style="flex:1;" onclick="reportZalTab='day'; renderReportScreen()">☀️ Zal Səhər (${agg.zalDayList.length})</button></div>${sortedZals.map(z=>`<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(z.name)}</b><span><b>${z.count} rez</b> • ${z.guests} qonaq • <b style="color:#16a34a;">${formatMoney(z.beh)}</b></span></div><div class="bar-bg"><div class="bar-fill" style="width:${z.count?Math.max(6,Math.round(z.count/maxZalCount*100)):0}%"></div></div></div>`).join("")}</div>
+      <div class="report-card"><div class="report-head-row"><div class="report-title">🪑 MASALAR ÜZRƏ</div><button class="sort-btn" onclick="zalSortAsc=!zalSortAsc; renderReportScreen()">${zalSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div><div style="display:flex; gap:6px; margin-bottom:8px;"><button class="pill ${reportZalTab==='night'?'active':''}" style="flex:1;" onclick="reportZalTab='night'; renderReportScreen()">🎤 Şou (${agg.zalNightList.length})</button><button class="pill ${reportZalTab==='day'?'active':''}" style="flex:1;" onclick="reportZalTab='day'; renderReportScreen()">☀️ Zal Səhər (${agg.zalDayList.length})</button></div>${sortedZals.map(z=>`<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(z.name)}</b><span><b>${z.count} dəfə</b>${z.mergedCount?` (${z.mergedCount} birləş.)`:''} • ${z.guests} qonaq • <b style="color:#16a34a;">${formatMoney(z.beh)}</b></span></div><div class="bar-bg"><div class="bar-fill" style="width:${z.count?Math.max(6,Math.round(z.count/maxZalCount*100)):0}%"></div></div></div>`).join("")}</div>
       <div class="report-card"><div class="report-title" style="margin-bottom:6px;">👤 MENECERLƏR ÜZRƏ</div>${agg.staffList.length?agg.staffList.map(m=>`<div class="report-row"><span><b>${escHtml(m.name)}</b> (${m.count} rez)</span><span>${m.guests} qonaq • <b style="color:#16a34a;">${formatMoney(m.beh)}</b></span></div>`).join(""):`<div style="color:#94a3b8; font-size:13px;">Rezerv yoxdur</div>`}</div>
       ${reportPeriod!=='day'?`<div class="report-card"><div class="report-title" style="margin-bottom:6px;">📅 AKTİV GÜNLƏR (${agg.dayList.length})</div>${agg.dayList.length?agg.dayList.map(d=>`<div class="report-row" style="cursor:pointer;" onclick="jumpToDateFromReport('${d.date}')"><span><b>${formatDisplayDate(d.date)}</b> (${d.count} rez)</span><span>${d.guests} qonaq • <b style="color:#16a34a;">${formatMoney(d.beh)}</b> ↗</span></div>`).join(""):`<div style="color:#94a3b8; font-size:13px;">Məlumat yoxdur</div>`}</div>`:''}
       ${canBackup?`<div class="report-card"><div class="report-title" style="margin-bottom:8px;">💾 TAM EHTİYAT NÜSXƏ (BACKUP)</div><div style="display:flex; gap:8px;"><button class="btn btn-save btn-sm" style="flex:1;" onclick="downloadFullBackupJSON()">💾 Tam Yedək Yüklə</button><label class="btn btn-cancel btn-sm" style="flex:1; cursor:pointer;">♻️ Yedəkdən Bərpa<input type="file" accept=".json" style="display:none;" onchange="restoreFullBackupJSON(this)" /></label></div><div id="restorePinBox" class="pin-box" style="margin-top:10px;"><div style="font-size:12px; font-weight:700; color:var(--navy); text-align:center;">Bərpa etmək üçün admin kodunu yazın:</div><input type="password" inputmode="numeric" maxlength="4" id="restorePinInput" class="pin-input" placeholder="••••" /><div id="restorePinErr" class="pin-err">❌ Kod səhvdir!</div><div style="display:flex; gap:8px;"><button class="btn btn-cancel btn-sm" style="flex:1;" onclick="document.getElementById('restorePinBox').style.display='none'">Ləğv</button><button class="btn btn-save btn-sm" style="flex:1;" onclick="confirmRestoreBackup()">Təsdiqlə</button></div></div></div>`:''}
@@ -1091,11 +1222,12 @@
   }
 
   // NASTROYKA (YALNIZ RÜFƏT)
-  function setSettingsSub(sub) { settingsSubTab=sub; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false; renderSettings(); }
+  function setSettingsSub(sub) { settingsSubTab=sub; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingFlagIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false; renderSettings(); }
   function renderSettings() {
     if (!isRufet()) return;
     let html = `<div class="sub-tabs">
       <button class="sub-tab ${settingsSubTab==='tariffs'?'active':''}" onclick="setSettingsSub('tariffs')">📅 Tariflər</button>
+      <button class="sub-tab ${settingsSubTab==='flags'?'active':''}" onclick="setSettingsSub('flags')">☑️ İşarələr</button>
       <button class="sub-tab ${settingsSubTab==='kabinets'?'active':''}" onclick="setSettingsSub('kabinets')">🚪 Kabinet</button>
       <button class="sub-tab ${settingsSubTab==='managers'?'active':''}" onclick="setSettingsSub('managers')">👤 Menecer</button>
       <button class="sub-tab ${settingsSubTab==='zal_day'?'active':''}" onclick="setSettingsSub('zal_day')">☀️ Zal Səhər</button>
@@ -1103,12 +1235,83 @@
       <button class="sub-tab ${settingsSubTab==='chips'?'active':''}" onclick="setSettingsSub('chips')">🏷️ Qeydlər</button>
     </div>`;
     if (settingsSubTab==="tariffs") html += renderTariffsSettings();
+    else if (settingsSubTab==="flags") html += renderFlagsSettings();
     else if (settingsSubTab==="managers") html += renderManagersSettings();
     else if (settingsSubTab==="kabinets") html += renderCabinetsSettings();
     else if (settingsSubTab==="zal_day") html += renderZalSettings("day");
     else if (settingsSubTab==="zal_night") html += renderZalSettings("night");
     else if (settingsSubTab==="chips") html += renderChipsSettings();
     document.getElementById("mainContent").innerHTML = html;
+  }
+
+  // ☑️ XÜSUSİ RƏNGLİ QUŞ İŞARƏLƏRİ (SETTINGS)
+  function renderColorSwatches(targetInputId, currentHex) {
+    return `<div class="color-presets">${FLAG_COLOR_PRESETS.map(c => `<span class="color-swatch ${String(currentHex).toLowerCase()===c?'active':''}" style="background:${c}" onclick="document.getElementById('${targetInputId}').value='${c}'; this.parentNode.querySelectorAll('.color-swatch').forEach(x=>x.classList.remove('active')); this.classList.add('active');"></span>`).join("")}<input type="color" id="${targetInputId}" value="${escHtml(currentHex||'#fbcfe8')}" style="width:34px; height:28px; padding:1px; border:1px solid var(--border); border-radius:7px; background:#fff; cursor:pointer;" /></div>`;
+  }
+  function renderFlagsSettings() {
+    const flags = getResFlags();
+    let html = `<p style="font-size:11.5px; color:var(--muted); margin:0 0 8px;">Rezervlərdə quş işarəsi (☑️) qoymaq üçün seçimlər yaradın və hər birinə ayrı rəng verin. Seçildikdə rezerv kartı həmin rəngdə görünəcək.</p>
+      <div class="setting-row" style="border:1.5px solid var(--navy);">
+        <b style="font-size:13px; color:var(--navy);">+ Yeni İşarə Əlavə Et</b>
+        <div style="display:flex; gap:6px; margin:8px 0;">
+          <input type="text" id="newFlagName" placeholder="Məs: Menyu var, Tort, VIP..." style="flex:1; padding:8px 10px; border:1px solid var(--border); border-radius:8px; font-size:13px;" />
+        </div>
+        <div style="margin-bottom:8px;">
+          <div style="font-size:10.5px; font-weight:700; color:var(--muted); margin-bottom:4px;">RƏNG SEÇİN:</div>
+          ${renderColorSwatches("newFlagColor", "#fbcfe8")}
+        </div>
+        <button class="btn btn-save btn-sm" style="width:100%;" onclick="addResFlag()">+ Əlavə et</button>
+      </div>`;
+    flags.forEach((f, i) => {
+      if (editingFlagIdx === i) {
+        html += `<div class="setting-row" style="border:2px solid var(--navy);">
+          <div class="field" style="margin-bottom:8px;"><label>İşarənin adı</label><input type="text" id="editFlagName_${i}" value="${escHtml(f.name)}" /></div>
+          <div style="margin-bottom:10px;"><div style="font-size:10.5px; font-weight:700; color:var(--muted); margin-bottom:4px;">RƏNG:</div>${renderColorSwatches("editFlagColor_"+i, f.color || "#fbcfe8")}</div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-cancel btn-sm" style="flex:0.4;" onclick="editingFlagIdx=null; renderSettings()">Ləğv</button>
+            <button class="btn btn-save btn-sm" style="flex:0.6;" onclick="saveResFlagEdit(${i})">Yadda saxla</button>
+          </div>
+        </div>`;
+      } else {
+        html += `<div class="setting-row"><div class="setting-top">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="width:22px; height:22px; border-radius:7px; background:${escHtml(f.color||'#fbcfe8')}; border:1.5px solid rgba(15,23,42,0.25); display:inline-block;"></span>
+            <div><b style="font-size:14px;">☑️ ${escHtml(f.name)}</b><div style="font-size:10.5px; color:var(--muted);">Rəng kodu: ${escHtml(f.color)}</div></div>
+          </div>
+          <div style="display:flex; gap:6px;" id="flgAct_${i}">
+            <button class="icon-btn" onclick="editingFlagIdx=${i}; renderSettings()">✏️ Düzəliş</button>
+            <button class="icon-btn del" onclick="askDelItem('flgAct_${i}','flgConf_${i}')">🗑️</button>
+          </div>
+          <div style="display:none; gap:6px;" id="flgConf_${i}">
+            <button class="btn btn-cancel btn-sm" onclick="cancelDelItem('flgAct_${i}','flgConf_${i}')">Xeyr</button>
+            <button class="btn btn-del-confirm btn-sm" onclick="deleteResFlag(${i})">Sil</button>
+          </div>
+        </div></div>`;
+      }
+    });
+    return html;
+  }
+  function addResFlag() {
+    const name = document.getElementById("newFlagName").value.trim(), color = document.getElementById("newFlagColor").value || "#fbcfe8";
+    if (!name) return;
+    saveResFlags([...getResFlags(), { id:"flg_"+Date.now(), name, color }]);
+    writeAuditLog("cfg", `☑️ Yeni işarə əlavə edildi: ${name}`, `Rəng: ${color}`);
+    showToast("Əlavə olundu!"); renderApp();
+  }
+  function saveResFlagEdit(i) {
+    const name = document.getElementById(`editFlagName_${i}`).value.trim(), color = document.getElementById(`editFlagColor_${i}`).value || "#fbcfe8";
+    if (!name) return;
+    const list = [...getResFlags()], old = list[i].name;
+    list[i] = { ...list[i], name, color };
+    saveResFlags(list); editingFlagIdx = null;
+    writeAuditLog("cfg", `☑️ İşarə redaktə edildi: ${old} → ${name}`, `Rəng: ${color}`);
+    showToast("Yeniləndi!"); renderApp();
+  }
+  function deleteResFlag(i) {
+    const list = [...getResFlags()], removed = list[i];
+    list.splice(i, 1); saveResFlags(list);
+    writeAuditLog("del", `☑️ İşarə silindi: ${removed?.name||""}`);
+    showToast("Silindi!"); renderApp();
   }
 
   function renderTariffsSettings() {
@@ -1131,16 +1334,12 @@
     return `<div class="perm-grid">${PERM_DEFS.map(p => `<label class="perm-item"><input type="checkbox" id="${prefix}_${p.key}" ${permsObj[p.key]?'checked':''} /><span>${p.lbl}</span></label>`).join("")}</div>`;
   }
   function collectPermCheckboxes(prefix) {
-    const out = {};
-    PERM_DEFS.forEach(p => { const el = document.getElementById(`${prefix}_${p.key}`); out[p.key] = el ? el.checked : false; });
-    return out;
+    const out = {}; PERM_DEFS.forEach(p => { const el = document.getElementById(`${prefix}_${p.key}`); out[p.key] = el ? el.checked : false; }); return out;
   }
   function setPresetPerms(prefix, all) {
     PERM_DEFS.forEach(p => { const el = document.getElementById(`${prefix}_${p.key}`); if (el) el.checked = all ? true : Boolean(DEFAULT_MGR_PERMS[p.key]); });
   }
-  function formatPermSummary(perms) {
-    return PERM_DEFS.filter(p => perms && perms[p.key]).map(p => p.lbl.split(" ")[0]).join(" ");
-  }
+  function formatPermSummary(perms) { return PERM_DEFS.filter(p => perms && perms[p.key]).map(p => p.lbl.split(" ")[0]).join(" "); }
 
   function renderManagersSettings() {
     const mgrs = getManagers();
@@ -1163,8 +1362,7 @@
       </div>`;
 
     mgrs.forEach((m, i) => {
-      const isR = m.name === RUFET_NAME;
-      const pList = PERM_DEFS.filter(p => m.perms && m.perms[p.key]);
+      const isR = m.name === RUFET_NAME, pList = PERM_DEFS.filter(p => m.perms && m.perms[p.key]);
       if (editingMgrIdx === i) {
         html += `<div class="setting-row" style="border:2px solid var(--navy);">
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
@@ -1213,10 +1411,8 @@
     const p = document.getElementById("editMgrPin").value.trim();
     if (!n) return;
     if (isR && !p) { showToast("⚠️ Rüfət üçün PIN boş ola bilməz!"); return; }
-    const perms = isR ? {...FULL_PERMS} : collectPermCheckboxes("edP_"+i);
-    const oldName = cur.name;
-    m[i] = { name:n, pin:p, perms };
-    saveManagers(m);
+    const perms = isR ? {...FULL_PERMS} : collectPermCheckboxes("edP_"+i), oldName = cur.name;
+    m[i] = { name:n, pin:p, perms }; saveManagers(m);
     if (currentManager === oldName && !isR) { applyIdentityUI(n); safeSetLocal("elpiano_current_manager", n); }
     editingMgrIdx = null;
     writeAuditLog("cfg", `👤 Menecer redaktə edildi: ${oldName} → ${n}`, `${p?"PIN var":"PIN yoxdur"} • İcazələr: ${isR?"Tam Admin":(formatPermSummary(perms)||"Yox")}`);
@@ -1277,7 +1473,7 @@
   function askDelItem(a,c) { document.getElementById(a).style.display="none"; document.getElementById(c).style.display="flex"; }
   function cancelDelItem(a,c) { document.getElementById(a).style.display="flex"; document.getElementById(c).style.display="none"; }
 
-  // REZERV MODALI
+  // REZERV MODALI + QUŞ İŞARƏLƏRİ + MASA BİRLƏŞDİRMƏ
   function populateStaffSelect(selectedVal) {
     const names = getManagers().map(m=>m.name), sel = document.getElementById("fStaff");
     let opts = `<option value="">Seçin...</option>` + names.map(n=>`<option value="${escHtml(n)}">${escHtml(n)}</option>`).join("");
@@ -1301,6 +1497,53 @@
   }
   function clearNoteField() { if (editingTarget?.canWrite) { document.getElementById("fNote").value=""; renderNoteChips(true); } }
 
+  function renderResFlagsInSheet() {
+    const wrap = document.getElementById("flagsFieldWrap"), grid = document.getElementById("resFlagsGrid"), list = getResFlags();
+    if (!list.length) { wrap.style.display = "none"; return; }
+    wrap.style.display = "block";
+    const dis = editingTarget?.canWrite ? "" : "disabled";
+    grid.innerHTML = list.map((f, idx) => {
+      const chk = editingFlagIds.includes(f.id);
+      const bg = chk ? `background:${escHtml(f.color)}; color:${isDarkHex(f.color)?'#fff':'#0f172a'}; border-color:#0f172a;` : "";
+      return `<label class="flag-check-item ${chk?'checked':''}" style="${bg}"><input type="checkbox" ${chk?'checked':''} ${dis} onchange="toggleResFlag(${idx})" /><span class="flag-dot" style="background:${escHtml(f.color)}"></span><span>${escHtml(f.name)}</span></label>`;
+    }).join("");
+  }
+  function toggleResFlag(idx) {
+    if (!editingTarget?.canWrite) return;
+    const f = getResFlags()[idx]; if (!f) return;
+    const pos = editingFlagIds.indexOf(f.id);
+    if (pos >= 0) editingFlagIds.splice(pos, 1); else editingFlagIds.push(f.id);
+    renderResFlagsInSheet();
+  }
+
+  function renderMergeChips() {
+    const wrap = document.getElementById("mergeFieldWrap");
+    if (!editingTarget || editingTarget.section === "kabinet") { wrap.style.display = "none"; return; }
+    wrap.style.display = "block";
+    const sec = editingTarget.section, itemId = editingTarget.itemId, resData = getDayReservations();
+    const list = getEffectiveZalList(sec === "zal_day" ? "day" : "night", datePicker.value);
+    editingMergeOptions = list.filter(z => z.id !== itemId);
+    const grid = document.getElementById("mergeChipsGrid");
+    grid.innerHTML = editingMergeOptions.map((z, idx) => {
+      const sel = editingMergedIds.includes(z.id);
+      const directBusy = Boolean(resData[`${sec}_${z.id}`]?.name);
+      const owner = getMergedOwner(sec, z.id, resData);
+      const busyByOther = directBusy || (owner && owner.ownerId !== itemId);
+      if (busyByOther && !sel) return `<span class="m-chip busy">${escHtml(z.name)} (Dolu)</span>`;
+      const clk = editingTarget.canWrite ? `onclick="toggleMergeTableIdx(${idx})"` : `style="cursor:default;"`;
+      return `<span class="m-chip ${sel?'active':''}" ${clk}>${sel?'✓ ':''}${escHtml(z.name)}</span>`;
+    }).join("");
+    document.getElementById("mergeSummaryLbl").textContent = editingMergedIds.length
+      ? `+${editingMergedIds.length} masa (${formatMergedNames(sec, editingMergedIds)})` : "Seçilməyib";
+  }
+  function toggleMergeTableIdx(idx) {
+    if (!editingTarget?.canWrite) return;
+    const z = editingMergeOptions[idx]; if (!z) return;
+    const pos = editingMergedIds.indexOf(z.id);
+    if (pos >= 0) editingMergedIds.splice(pos, 1); else editingMergedIds.push(z.id);
+    renderMergeChips(); updateQuickContact();
+  }
+
   function openSheet(section, itemId, shiftNum) {
     const resData = getDayReservations(); let key, title, sub, defaultTime, maxCap=null, placeLabel=itemId;
     if (section === "kabinet") {
@@ -1322,7 +1565,10 @@
     const canWrite = isExisting ? hasPerm("res_edit") : hasPerm("res_create");
     const canDel = isExisting && hasPerm("res_delete");
 
-    editingTarget = { key, maxCap, placeLabel, isExisting, canWrite, canDel };
+    editingTarget = { key, section, itemId, maxCap, placeLabel, isExisting, canWrite, canDel };
+    editingMergedIds = (section !== "kabinet" && Array.isArray(res.mergedIds)) ? [...res.mergedIds] : [];
+    editingFlagIds = Array.isArray(res.flags) ? [...res.flags] : [];
+
     document.getElementById("sheetTitle").textContent = title;
     document.getElementById("sheetSub").textContent = sub;
     document.getElementById("fName").value = res.name || "";
@@ -1345,7 +1591,7 @@
     document.getElementById("btnDelete").style.display = canDel ? "block" : "none";
     document.getElementById("confirmDeleteBar").style.display = "none";
     document.getElementById("formErr").style.display = "none";
-    renderNoteChips(canWrite); checkCap(); updateQuickContact();
+    renderResFlagsInSheet(); renderMergeChips(); renderNoteChips(canWrite); checkCap(); updateQuickContact();
     document.getElementById("resSheet").classList.add("open");
   }
   function closeSheet() { document.getElementById("resSheet").classList.remove("open"); }
@@ -1356,10 +1602,11 @@
   }
   function updateQuickContact() {
     const raw = document.getElementById("fPhone").value.replace(/\D/g,""), box = document.getElementById("contactActions");
-    if (raw.length >= 7 && !isGuest()) {
+    if (raw.length >= 7 && !isGuest() && editingTarget) {
       box.style.display = "flex"; const fn = raw.startsWith("994") ? raw : "994"+raw.replace(/^0/,"");
+      const mTxt = (editingTarget.section !== "kabinet" && editingMergedIds.length) ? ` (+ ${formatMergedNames(editingTarget.section, editingMergedIds)})` : "";
       document.getElementById("btnCall").href = "tel:+"+fn;
-      document.getElementById("btnWa").href = `https://wa.me/${fn}?text=${encodeURIComponent(`Salam! EL PIANO restoranında ${datePicker.value} tarixi üçün ${editingTarget.placeLabel} rezervasiyanız qeydə alındı.`)}`;
+      document.getElementById("btnWa").href = `https://wa.me/${fn}?text=${encodeURIComponent(`Salam! EL PIANO restoranında ${datePicker.value} tarixi üçün ${editingTarget.placeLabel}${mTxt} rezervasiyanız qeydə alındı.`)}`;
     } else box.style.display = "none";
   }
   function saveRes() {
@@ -1372,10 +1619,22 @@
     err.style.display = "none";
     const staffVal = (!isRufet() && !isEdit) ? currentManager : document.getElementById("fStaff").value;
     const record = { name, guests:Number(document.getElementById("fGuests").value)||0, phone:document.getElementById("fPhone").value.trim(), time:document.getElementById("fTime").value.trim(), beh:Number(document.getElementById("fBeh").value)||0, staff:staffVal, status:document.getElementById("fStatus").value, note:document.getElementById("fNote").value.trim(), updatedAt:Date.now() };
+    const validFlags = editingFlagIds.filter(id => getResFlags().some(f => f.id === id));
+    if (validFlags.length) record.flags = validFlags;
+    if (editingTarget.section !== "kabinet") {
+      const resData = getDayReservations();
+      const validMerged = editingMergedIds.filter(mId => {
+        if (mId === editingTarget.itemId) return false;
+        if (resData[`${editingTarget.section}_${mId}`]?.name) return false;
+        const ow = getMergedOwner(editingTarget.section, mId, resData);
+        return !ow || ow.ownerId === editingTarget.itemId;
+      });
+      if (validMerged.length) record.mergedIds = validMerged;
+    }
     cloudReservations[editingTarget.key] = record;
     if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).set(record);
-    if (isEdit) writeAuditLog("res", `✏️ Rezerv dəyişdirildi: ${editingTarget.placeLabel}`, diffReservations(oldRes, record), datePicker.value);
-    else writeAuditLog("res", `➕ Yeni rezerv: ${editingTarget.placeLabel}`, formatResSnapshot(record), datePicker.value);
+    if (isEdit) writeAuditLog("res", `✏️ Rezerv dəyişdirildi: ${editingTarget.placeLabel}`, diffReservations(oldRes, record, editingTarget.section), datePicker.value);
+    else writeAuditLog("res", `➕ Yeni rezerv: ${editingTarget.placeLabel}`, formatResSnapshot(record, editingTarget.section), datePicker.value);
     closeSheet(); showToast("Rezerv canlı bazaya yazıldı!"); renderApp();
   }
   function askDelete() { if (editingTarget?.canDel) { document.getElementById("normalActions").style.display="none"; document.getElementById("confirmDeleteBar").style.display="flex"; } }
@@ -1385,7 +1644,7 @@
     const oldRes = cloudReservations[editingTarget.key];
     delete cloudReservations[editingTarget.key];
     if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).remove();
-    writeAuditLog("del", `🗑️ Rezerv silindi: ${editingTarget.placeLabel}`, formatResSnapshot(oldRes), datePicker.value);
+    writeAuditLog("del", `🗑️ Rezerv silindi: ${editingTarget.placeLabel}`, formatResSnapshot(oldRes, editingTarget.section), datePicker.value);
     closeSheet(); showToast("Masa boşaldıldı!"); renderApp();
   }
 
