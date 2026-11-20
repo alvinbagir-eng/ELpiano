@@ -24,12 +24,12 @@
     .dot { width:7px; height:7px; border-radius:50%; display:inline-block; }
     .dot.online { background:#22c55e; box-shadow:0 0 6px #22c55e; }
     .dot.offline { background:#f59e0b; }
-    .top-actions { display:flex; align-items:center; gap:6px; }
+    .top-actions { display:flex; align-items:center; gap:5px; }
     .mgr-pill { background:rgba(212,175,55,0.16); color:var(--gold); border:1px solid rgba(212,175,55,0.45); padding:4px 8px; border-radius:18px; font-size:11.5px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
     .settings-gear-btn { background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.18); width:30px; height:30px; border-radius:9px; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
     .settings-gear-btn.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
-    .top-nav { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; background:var(--navy-light); padding:4px; border-radius:10px; margin-bottom:8px; }
-    .top-nav-item { border:none; background:transparent; color:#94a3b8; border-radius:8px; padding:6px 2px; display:flex; flex-direction:column; align-items:center; gap:2px; font-size:10px; font-weight:700; cursor:pointer; position:relative; }
+    .top-nav { display:flex; gap:4px; background:var(--navy-light); padding:4px; border-radius:10px; margin-bottom:8px; }
+    .top-nav-item { flex:1; border:none; background:transparent; color:#94a3b8; border-radius:8px; padding:6px 2px; display:flex; flex-direction:column; align-items:center; gap:2px; font-size:10px; font-weight:700; cursor:pointer; position:relative; }
     .top-nav-item .nav-ico { font-size:14px; line-height:1; }
     .top-nav-item.active { background:var(--gold); color:var(--navy); box-shadow:0 2px 6px rgba(0,0,0,0.25); }
     .chat-badge { position:absolute; top:1px; right:6px; background:var(--red); color:#fff; font-size:9px; font-weight:800; padding:1px 5px; border-radius:10px; display:none; }
@@ -181,6 +181,24 @@
     .add-bar input { flex:1; min-width:110px; padding:8px 10px; border:1px solid var(--border); border-radius:8px; font-size:13px; outline:none; }
     .icon-btn { border:1px solid var(--border); background:#f8fafc; border-radius:8px; padding:6px 9px; font-size:13px; cursor:pointer; font-weight:700; }
     .icon-btn.del { background:#fef2f2; border-color:#fecaca; color:var(--red); }
+    .perm-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; width:100%; margin-top:6px; }
+    .perm-item { display:flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:var(--navy); background:#f8fafc; padding:6px 8px; border-radius:8px; border:1px solid var(--border); cursor:pointer; }
+    .perm-item input { width:15px; height:15px; accent-color:var(--navy); margin:0; }
+    .perm-badges { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px; }
+    .perm-badge { font-size:10px; font-weight:700; background:#f1f5f9; color:#334155; padding:2px 6px; border-radius:6px; }
+    .perm-badge.admin { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+    .log-card { background:var(--card); border-radius:12px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--border); border-left:4px solid var(--navy); }
+    .log-card.cat-auth { border-left-color:#d97706; background:#fffdf7; }
+    .log-card.cat-del { border-left-color:var(--red); background:#fef8f8; }
+    .log-card.cat-cfg { border-left-color:#0284c7; }
+    .log-card.cat-res { border-left-color:var(--green); }
+    .log-top { display:flex; justify-content:space-between; align-items:flex-start; gap:6px; font-size:11px; color:var(--muted); }
+    .log-actor { font-weight:800; color:var(--navy); font-size:12.5px; }
+    .log-switch-tag { display:inline-block; background:#fef3c7; color:#92400e; border:1px solid #fde68a; font-size:10px; font-weight:800; padding:1px 6px; border-radius:6px; margin-left:4px; }
+    .log-action { font-size:13px; font-weight:700; color:var(--navy); margin-top:4px; }
+    .log-detail { font-size:11.5px; color:#334155; margin-top:3px; line-height:1.4; white-space:pre-line; }
+    .log-foot { display:flex; justify-content:space-between; align-items:center; margin-top:6px; font-size:10px; color:var(--muted); }
+    .log-jump { background:#f1f5f9; border:1px solid var(--border); color:var(--navy); font-weight:700; padding:2px 7px; border-radius:6px; cursor:pointer; font-size:10.5px; }
     .toast { position:fixed; top:18px; left:50%; transform:translateX(-50%); background:var(--navy); color:var(--gold); padding:10px 18px; border-radius:24px; font-size:13px; font-weight:700; z-index:400; display:none; box-shadow:0 8px 20px rgba(0,0,0,0.25); border:1px solid var(--gold); white-space:nowrap; }
   </style>
 </head>
@@ -211,6 +229,20 @@
   </div>
 </div>
 
+<div class="mgr-overlay" id="settingsPinOverlay" style="z-index:280;">
+  <div class="mgr-modal">
+    <div class="mgr-logo-big">⚙️</div>
+    <div style="font-size:17px; font-weight:900; color:var(--navy);">🔒 Nastroyka Bölməsi</div>
+    <div style="font-size:12px; color:var(--muted); margin:4px 0 12px;">Daxil olmaq üçün kodu yazın:</div>
+    <input type="password" inputmode="numeric" maxlength="6" id="settingsPinInput" class="pin-input" placeholder="••••" onkeydown="if(event.key==='Enter') verifySettingsPin()" />
+    <div id="settingsPinErr" class="pin-err" style="margin-top:8px;">❌ Kod səhvdir!</div>
+    <div style="display:flex; gap:8px; margin-top:14px;">
+      <button class="btn btn-cancel" onclick="closeSettingsPin()">Ləğv</button>
+      <button class="btn btn-save" onclick="verifySettingsPin()">Daxil ol</button>
+    </div>
+  </div>
+</div>
+
 <div class="app-shell">
   <div class="topbar">
     <div class="brand-row">
@@ -224,7 +256,8 @@
       <div style="display:flex; flex-direction:column; align-items:flex-end; gap:3px;">
         <div class="top-actions">
           <button class="mgr-pill" onclick="openMgrPicker(true)"><span id="activeMgrIcon">👤</span><span id="activeMgrLabel">Seçin</span><span>▾</span></button>
-          <button id="settingsGearBtn" class="settings-gear-btn" onclick="openSettingsTab()" title="Ayarlar">⚙️</button>
+          <button id="logsNavBtn" class="settings-gear-btn" style="display:none;" onclick="openLogsTab()" title="Loglar">📜</button>
+          <button id="settingsGearBtn" class="settings-gear-btn" style="display:none;" onclick="openSettingsTab()" title="Nastroyka">⚙️</button>
         </div>
         <div style="font-size:10.5px; font-weight:700; color:#facc15;"><span id="topTotalGuests">0 qonaq</span> • <span id="topTotalBeh" style="color:#4ade80;">0 ₼</span></div>
       </div>
@@ -268,7 +301,7 @@
       <div><div class="sheet-title" id="sheetTitle">Rezerv</div><div class="sheet-sub" id="sheetSub">Məlumatlar</div></div>
       <button onclick="closeSheet()" style="border:none; background:#f1f5f9; border-radius:50%; width:32px; height:32px; font-weight:700; cursor:pointer;">✕</button>
     </div>
-    <div id="guestReadOnlyBanner" class="guest-readonly-banner">👁️ Qonaq rejimi — Yalnız baxış (dəyişiklik etmək olmaz)</div>
+    <div id="guestReadOnlyBanner" class="guest-readonly-banner">👁️ Yalnız baxış — dəyişiklik etmək icazəniz yoxdur</div>
     <div class="form-grid">
       <div id="capWarn" class="warn-banner"></div>
       <div id="formErr" class="warn-banner"></div>
@@ -335,10 +368,31 @@
   };
 
   let db = null;
-  const ROOT_PATH = "elpiano_app", GUEST_ID = "__GUEST__", CLEAR_PIN = "4411";
+  const ROOT_PATH = "elpiano_app", GUEST_ID = "__GUEST__", RUFET_NAME = "Rüfət", RUFET_PIN = "1996", SETTINGS_PIN = "1996", CLEAR_PIN = "1996";
   try { if (typeof firebase !== "undefined") { if (!firebase.apps.length) firebase.initializeApp(firebaseConfig); db = firebase.database(); } } catch (e) {}
 
-  const DEFAULT_MANAGERS = [{ name:"Şəbnəm", pin:"" }, { name:"Firudin", pin:"" }, { name:"Hüseyn", pin:"" }, { name:"Musa", pin:"" }, { name:"Rüfət", pin:"" }];
+  const PERM_DEFS = [
+    { key:"res_create", lbl:"➕ Yeni rezerv yaratmaq" },
+    { key:"res_edit", lbl:"✏️ Rezervi redaktə etmək" },
+    { key:"res_delete", lbl:"🗑️ Rezervi silmək / boşaltmaq" },
+    { key:"singers", lbl:"🎤 Müğənni əlavə / silmək" },
+    { key:"chat_write", lbl:"💬 Chatda mesaj yazmaq" },
+    { key:"chat_clear", lbl:"🧹 Chatı sıfırlamaq" },
+    { key:"report_view", lbl:"📊 Hesabatı görmək" },
+    { key:"excel", lbl:"📥 Excel (CSV) yükləmək" },
+    { key:"day_clear", lbl:"🚨 Günü tam boşaltmaq" },
+    { key:"backup", lbl:"💾 Yedək yükləmək / Bərpa" }
+  ];
+  const DEFAULT_MGR_PERMS = { res_create:true, res_edit:true, res_delete:false, singers:true, chat_write:true, chat_clear:false, report_view:true, excel:false, day_clear:false, backup:false };
+  const FULL_PERMS = { res_create:true, res_edit:true, res_delete:true, singers:true, chat_write:true, chat_clear:true, report_view:true, excel:true, day_clear:true, backup:true };
+
+  const DEFAULT_MANAGERS = [
+    { name:"Şəbnəm", pin:"", perms:{...DEFAULT_MGR_PERMS} },
+    { name:"Firudin", pin:"", perms:{...DEFAULT_MGR_PERMS} },
+    { name:"Hüseyn", pin:"", perms:{...DEFAULT_MGR_PERMS} },
+    { name:"Musa", pin:"", perms:{...DEFAULT_MGR_PERMS} },
+    { name:"Rüfət", pin:"1996", perms:{...FULL_PERMS} }
+  ];
   const DEFAULT_NOTE_CHIPS = ["Menyu var", "Menyu yerində olacaq", "Stol bəzəyi", "Fotoqraf olacaq 150"];
 
   const DEFAULT_CABINETS = [
@@ -359,22 +413,9 @@
     { id:"boss", name:"Boss", max:6, depositVal:150, shifts:2, s1:"11:00 - 17:00", s2:"18:00 - 23:00" }
   ];
 
-  // ŞƏKİLDƏKİ DEKABR 1-15 və 16-31 TARİFLƏRİ (Ayarlardan da istənilən gün dəyişmək olur)
   const DEFAULT_TARIFFS = [
-    {
-      id: "dec_1_15",
-      title: "Dekabr 1-15 • Xidmət haqqı 10% • Menyu qiymətə daxildir",
-      from: "2026-12-01",
-      to: "2026-12-15",
-      prices: { prime_hall:4000, chanel:1800, dolce_gabana:1500, dior:1300, valentino:1000, tiffany:400, versace:400, armani:500, prada:500, hermes:300, etro:200, bvlgari:300, rich:300, gucci:300, boss:200 }
-    },
-    {
-      id: "dec_16_31",
-      title: "Dekabr 16-31 • Xidmət haqqı 10% • Menyu qiymətə daxildir",
-      from: "2026-12-16",
-      to: "2026-12-31",
-      prices: { prime_hall:5000, chanel:2000, dolce_gabana:1800, dior:1500, valentino:1200, tiffany:500, versace:500, armani:800, prada:800, hermes:300, etro:250, bvlgari:300, rich:300, gucci:300, boss:200 }
-    }
+    { id:"dec_1_15", title:"Dekabr 1-15 • Xidmət haqqı 10% • Menyu qiymətə daxildir", from:"2026-12-01", to:"2026-12-15", prices:{ prime_hall:4000, chanel:1800, dolce_gabana:1500, dior:1300, valentino:1000, tiffany:400, versace:400, armani:500, prada:500, hermes:300, etro:200, bvlgari:300, rich:300, gucci:300, boss:200 } },
+    { id:"dec_16_31", title:"Dekabr 16-31 • Xidmət haqqı 10% • Menyu qiymətə daxildir", from:"2026-12-16", to:"2026-12-31", prices:{ prime_hall:5000, chanel:2000, dolce_gabana:1800, dior:1500, valentino:1200, tiffany:500, versace:500, armani:800, prada:800, hermes:300, etro:250, bvlgari:300, rich:300, gucci:300, boss:200 } }
   ];
 
   const DEFAULT_ZAL_DAY = Array.from({ length: 14 }, (_, i) => ({ id:`Zal-${i+1}`, name:`Zal-${i+1}` }));
@@ -387,29 +428,25 @@
   let cloudWeekendCounts = { day: 20, night: 30 };
   let cloudZalDay = JSON.parse(JSON.stringify(DEFAULT_ZAL_DAY));
   let cloudZalNight = JSON.parse(JSON.stringify(DEFAULT_ZAL_NIGHT));
-  let cloudReservations = {}, cloudDateSingers = [], cloudSingerPresets = [], cloudChat = [];
+  let cloudReservations = {}, cloudDateSingers = [], cloudSingerPresets = [], cloudChat = [], cloudLogs = [];
 
-  let currentManager = "", pendingLoginManager = null, currentTab = "kabinet", settingsSubTab = "tariffs", currentFilter = "all";
+  let currentManager = "", sessionSwitchedFrom = "", pendingLoginManager = null, currentTab = "kabinet", settingsSubTab = "tariffs", currentFilter = "all";
   let editingTarget = null, editingCabIdx = null, editingMgrIdx = null, editingZalIdx = null, editingChipIdx = null, editingTariffIdx = null;
   let showNewCabForm = false, showNewTariffForm = false, activeResRefPath = null, activeSingerRefPath = null;
   let lastChatSeenTs = Number(safeGetLocal("elpiano_chat_seen") || 0);
   let reportPeriod = "day", reportCustomFrom = "", reportCustomTo = "", reportRangeData = null, reportLoading = false, cabSortAsc = false, zalSortAsc = false, reportZalTab = "night";
+  let logFilterCat = "all", logFilterActor = "all", logSearchQuery = "";
 
   function formatDateISO(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
   function formatDisplayDate(iso) { if (!iso || !iso.includes("-")) return iso; const [y,m,d] = iso.split("-"); return `${d}.${m}.${y}`; }
   function isWeekend(dateStr) { if (!dateStr || !dateStr.includes("-")) return false; const [y,m,d] = dateStr.split("-").map(Number); const day = new Date(y,m-1,d).getDay(); return day===0 || day===6; }
   function getDayNameAz(dateStr) { if (!dateStr || !dateStr.includes("-")) return ""; const [y,m,d] = dateStr.split("-").map(Number); return ["Bazar","B.e","Ç.a","Çərş","C.a","Cümə","6-cı gün"][new Date(y,m-1,d).getDay()] || ""; }
 
-  function getActiveTariff(dateStr) {
-    const dt = dateStr || datePicker.value;
-    return (cloudTariffs || []).find(t => t && t.from && t.to && dt >= t.from && dt <= t.to) || null;
-  }
+  function getActiveTariff(dateStr) { const dt = dateStr || datePicker.value; return (cloudTariffs || []).find(t => t && t.from && t.to && dt >= t.from && dt <= t.to) || null; }
   function getCabinetDepositForDate(cab, dateStr) {
     if (!cab) return 0;
     const tr = getActiveTariff(dateStr);
-    if (tr && tr.prices && tr.prices[cab.id] !== undefined && tr.prices[cab.id] !== "") {
-      return Number(tr.prices[cab.id]) || 0;
-    }
+    if (tr && tr.prices && tr.prices[cab.id] !== undefined && tr.prices[cab.id] !== "") return Number(tr.prices[cab.id]) || 0;
     return Number(cab.depositVal) || 0;
   }
 
@@ -435,25 +472,89 @@
   reportCustomFrom = formatDateISO(oneMonthAgo); reportCustomTo = todayStr;
 
   function isGuest() { return currentManager === GUEST_ID; }
+  function isRufet() { return currentManager === RUFET_NAME; }
+  function hasPerm(k) {
+    if (isGuest() || !currentManager) return false;
+    if (isRufet()) return true;
+    const m = getManagers().find(x => x.name === currentManager);
+    if (!m) return false;
+    if (m.perms && m.perms[k] !== undefined) return Boolean(m.perms[k]);
+    return Boolean(DEFAULT_MGR_PERMS[k]);
+  }
   function toArray(val) { if (!val) return []; if (Array.isArray(val)) return val.filter(Boolean); if (typeof val === "object") return Object.values(val).filter(Boolean); return []; }
-  function normalizeManagers(raw) { return toArray(raw).map(i => typeof i==="string" ? {name:i,pin:""} : {name:String(i.name||""),pin:String(i.pin||"")}).filter(m => m.name); }
+  function normalizeManagers(raw) {
+    return toArray(raw).map(i => {
+      const name = String(typeof i==="string" ? i : (i.name||""));
+      if (!name) return null;
+      const isR = name === RUFET_NAME;
+      const pin = isR ? (String((typeof i==="object" && i.pin) ? i.pin : RUFET_PIN) || RUFET_PIN) : String(typeof i==="object" ? (i.pin||"") : "");
+      const baseP = isR ? FULL_PERMS : DEFAULT_MGR_PERMS;
+      const perms = isR ? {...FULL_PERMS} : { ...baseP, ...(typeof i==="object" && i.perms ? i.perms : {}) };
+      return { name, pin, perms };
+    }).filter(Boolean);
+  }
   function safeGetLocal(k) { try { return localStorage.getItem(k); } catch { return null; } }
   function safeSetLocal(k, v) { try { localStorage.setItem(k, v); } catch {} }
   function formatMoney(n) { return (Number(n) || 0).toLocaleString("de-DE") + " ₼"; }
-  function escHtml(s) { return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+  function escHtml(s) { return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
   function showToast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(window._toastTimer); window._toastTimer = setTimeout(() => { t.style.display = "none"; }, 2200); }
 
-  // KİMLİK + PIN
-  function initManagerIdentity() { const s = safeGetLocal("elpiano_current_manager"); if (s) applyIdentityUI(s); else openMgrPicker(false); }
+  // CİHAZ ID VƏ AUDİT LOG
+  function getDeviceLabel() {
+    let id = safeGetLocal("elpiano_device_id");
+    if (!id) {
+      const ua = navigator.userAgent || "";
+      const os = /iPhone|iPad|iPod/i.test(ua) ? "iOS" : (/Android/i.test(ua) ? "Android" : (/Mac/i.test(ua) ? "Mac" : (/Win/i.test(ua) ? "Windows" : "Web")));
+      id = `${os} #${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+      safeSetLocal("elpiano_device_id", id);
+    }
+    return id;
+  }
+  function formatActorName(actor) { return actor === GUEST_ID ? "Qonaq" : (actor || "Naməlum"); }
+  function writeAuditLog(category, action, detail, targetDate, customActor) {
+    const actor = customActor || formatActorName(currentManager);
+    const entry = { ts:Date.now(), actor, switchedFrom:(sessionSwitchedFrom && sessionSwitchedFrom !== actor) ? sessionSwitchedFrom : "", device:getDeviceLabel(), category:category||"res", action:action||"", detail:detail||"", date:targetDate||"" };
+    cloudLogs.unshift(entry);
+    if (cloudLogs.length > 300) cloudLogs.length = 300;
+    if (db) db.ref(`${ROOT_PATH}/logs`).push(entry);
+  }
+  function formatResSnapshot(r) { return r ? `Qonaq: ${r.name} • Say: ${r.guests||0} • Vaxt: ${r.time||"-"} • BEH: ${r.beh||0}₼ • Menecer: ${r.staff||"-"} • Status: ${r.status==="confirmed"?"Təsdiq":"Gözləmə"}${r.note?` • Qeyd: ${r.note}`:""}` : ""; }
+  function diffReservations(oldR, newR) {
+    const diffs = [];
+    if ((oldR.name||"") !== (newR.name||"")) diffs.push(`Ad: ${oldR.name||"-"} → ${newR.name||"-"}`);
+    if (Number(oldR.guests||0) !== Number(newR.guests||0)) diffs.push(`Say: ${oldR.guests||0} → ${newR.guests||0}`);
+    if ((oldR.phone||"") !== (newR.phone||"")) diffs.push(`Tel: ${oldR.phone||"-"} → ${newR.phone||"-"}`);
+    if ((oldR.time||"") !== (newR.time||"")) diffs.push(`Vaxt: ${oldR.time||"-"} → ${newR.time||"-"}`);
+    if (Number(oldR.beh||0) !== Number(newR.beh||0)) diffs.push(`BEH: ${oldR.beh||0}₼ → ${newR.beh||0}₼`);
+    if ((oldR.staff||"") !== (newR.staff||"")) diffs.push(`Menecer: ${oldR.staff||"-"} → ${newR.staff||"-"}`);
+    if ((oldR.status||"") !== (newR.status||"")) diffs.push(`Status: ${oldR.status==="confirmed"?"Təsdiq":"Gözləmə"} → ${newR.status==="confirmed"?"Təsdiq":"Gözləmə"}`);
+    if ((oldR.note||"") !== (newR.note||"")) diffs.push(`Qeyd: ${oldR.note||"-"} → ${newR.note||"-"}`);
+    return diffs.length ? diffs.join("\n") : "Dəyişiklik yoxdur (yenidən saxlanıldı)";
+  }
+
+  // KİMLİK + PIN + İCAZƏ UI
+  function initManagerIdentity() {
+    sessionSwitchedFrom = safeGetLocal("elpiano_switched_from") || "";
+    const s = safeGetLocal("elpiano_current_manager"), v2 = safeGetLocal("elpiano_auth_v2");
+    if (s && (s !== RUFET_NAME || v2 === "1")) applyIdentityUI(s);
+    else openMgrPicker(false);
+  }
   function applyIdentityUI(val) {
     currentManager = val;
-    const lbl = document.getElementById("activeMgrLabel"), ico = document.getElementById("activeMgrIcon"), gear = document.getElementById("settingsGearBtn");
-    if (val === GUEST_ID) { ico.textContent="👁️"; lbl.textContent="Qonaq"; gear.style.display="none"; if (currentTab==="settings") switchTab("kabinet", document.getElementById("nav_kabinet")); }
-    else { ico.textContent="👤"; lbl.textContent=val; gear.style.display="flex"; }
+    const lbl = document.getElementById("activeMgrLabel"), ico = document.getElementById("activeMgrIcon"),
+          gear = document.getElementById("settingsGearBtn"), logsBtn = document.getElementById("logsNavBtn"),
+          repNav = document.getElementById("nav_report");
+    if (val === GUEST_ID) { ico.textContent="👁️"; lbl.textContent="Qonaq"; }
+    else { ico.textContent=(val===RUFET_NAME?"👑":"👤"); lbl.textContent=val; }
+    gear.style.display = isRufet() ? "flex" : "none";
+    logsBtn.style.display = isRufet() ? "flex" : "none";
+    repNav.style.display = (isGuest() || hasPerm("report_view")) ? "flex" : "none";
+    if (!isRufet() && (currentTab==="settings" || currentTab==="logs")) switchTab("kabinet", document.getElementById("nav_kabinet"));
+    if (!isGuest() && !hasPerm("report_view") && currentTab==="report") switchTab("kabinet", document.getElementById("nav_kabinet"));
   }
   function openMgrPicker(allowClose) {
     backToMgrList();
-    document.getElementById("mgrPickGrid").innerHTML = getManagers().map((m, i) => `<button class="mgr-pick-btn ${m.name===currentManager?'selected':''}" onclick="tryPickManager(${i})"><span style="font-size:20px;">${m.pin?'🔒':'👤'}</span><span>${escHtml(m.name)}</span></button>`).join("");
+    document.getElementById("mgrPickGrid").innerHTML = getManagers().map((m, i) => `<button class="mgr-pick-btn ${m.name===currentManager?'selected':''}" onclick="tryPickManager(${i})"><span style="font-size:20px;">${m.name===RUFET_NAME?'👑':(m.pin?'🔒':'👤')}</span><span>${escHtml(m.name)}</span></button>`).join("");
     document.getElementById("guestPickBtn").className = "guest-pick-btn" + (currentManager === GUEST_ID ? " selected" : "");
     document.getElementById("mgrCloseBtn").style.display = (allowClose && currentManager) ? "block" : "none";
     document.getElementById("mgrOverlay").classList.add("open");
@@ -472,12 +573,67 @@
   function backToMgrList() { pendingLoginManager = null; document.getElementById("mgrSelectStep").style.display = "block"; document.getElementById("mgrPinStep").style.display = "none"; }
   function verifyMgrPin() {
     if (!pendingLoginManager) return;
-    if (document.getElementById("mgrLoginPinInput").value.trim() === pendingLoginManager.pin.trim()) completeManagerLogin(pendingLoginManager.name);
-    else document.getElementById("mgrLoginPinErr").style.display = "block";
+    if (document.getElementById("mgrLoginPinInput").value.trim() === pendingLoginManager.pin.trim()) {
+      completeManagerLogin(pendingLoginManager.name);
+    } else {
+      document.getElementById("mgrLoginPinErr").style.display = "block";
+      const prev = currentManager ? formatActorName(currentManager) : "Naməlum";
+      writeAuditLog("auth", `⚠️ Uğursuz PIN cəhdi (${pendingLoginManager.name})`, `Cəhd edən sessiya: ${prev} • Hədəf: ${pendingLoginManager.name}`, "", prev);
+    }
   }
-  function completeManagerLogin(name) { applyIdentityUI(name); safeSetLocal("elpiano_current_manager", name); document.getElementById("mgrOverlay").classList.remove("open"); showToast(`Xoş gəldiniz, ${name}!`); renderApp(); }
-  function selectGuestMode() { applyIdentityUI(GUEST_ID); safeSetLocal("elpiano_current_manager", GUEST_ID); document.getElementById("mgrOverlay").classList.remove("open"); showToast("Qonaq rejimi (Yalnız baxış)"); renderApp(); }
+  function completeManagerLogin(name) {
+    const prev = currentManager;
+    if (name === RUFET_NAME) safeSetLocal("elpiano_auth_v2", "1");
+    if (prev && prev !== name) {
+      const prevLbl = formatActorName(prev);
+      sessionSwitchedFrom = prevLbl; safeSetLocal("elpiano_switched_from", sessionSwitchedFrom);
+      applyIdentityUI(name); safeSetLocal("elpiano_current_manager", name);
+      writeAuditLog("auth", `🔀 ${prevLbl} → ${name} sessiyasına keçdi`, `Eyni cihazdan aktiv sessiya dəyişdirildi`, "", name);
+    } else {
+      if (!prev) { sessionSwitchedFrom=""; safeSetLocal("elpiano_switched_from",""); writeAuditLog("auth", `🔓 ${name} daxil oldu`, `Sessiya başladıldı`, "", name); }
+      applyIdentityUI(name); safeSetLocal("elpiano_current_manager", name);
+    }
+    document.getElementById("mgrOverlay").classList.remove("open");
+    showToast(`Xoş gəldiniz, ${name}!`); renderApp();
+  }
+  function selectGuestMode() {
+    const prev = currentManager;
+    if (prev && prev !== GUEST_ID) {
+      sessionSwitchedFrom = prev; safeSetLocal("elpiano_switched_from", prev);
+      writeAuditLog("auth", `👁️ ${prev} → Qonaq rejiminə keçdi`, `Yalnız baxış rejimi açıldı`, "", "Qonaq");
+    }
+    applyIdentityUI(GUEST_ID); safeSetLocal("elpiano_current_manager", GUEST_ID);
+    document.getElementById("mgrOverlay").classList.remove("open");
+    showToast("Qonaq rejimi (Yalnız baxış)"); renderApp();
+  }
   function closeMgrPicker() { if (currentManager) document.getElementById("mgrOverlay").classList.remove("open"); }
+
+  // NASTROYKA (YALNIZ RÜFƏT + 1996)
+  function openSettingsTab() {
+    if (!isRufet() || currentTab === "settings") return;
+    document.getElementById("settingsPinErr").style.display = "none";
+    const inp = document.getElementById("settingsPinInput"); inp.value = "";
+    document.getElementById("settingsPinOverlay").classList.add("open");
+    setTimeout(() => inp.focus(), 50);
+  }
+  function closeSettingsPin() { document.getElementById("settingsPinOverlay").classList.remove("open"); }
+  function verifySettingsPin() {
+    if (!isRufet()) { closeSettingsPin(); return; }
+    if (document.getElementById("settingsPinInput").value.trim() === SETTINGS_PIN) {
+      closeSettingsPin();
+      writeAuditLog("auth", "🔓 Nastroykaya daxil olundu", "Kod təsdiqləndi");
+      currentTab = "settings"; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
+      document.querySelectorAll(".top-nav-item").forEach(n => n.classList.remove("active"));
+      document.getElementById("logsNavBtn").classList.remove("active");
+      document.getElementById("settingsGearBtn").classList.add("active");
+      document.getElementById("filterHeader").style.display = "none";
+      document.getElementById("dateBar").style.display = "flex";
+      renderApp();
+    } else {
+      document.getElementById("settingsPinErr").style.display = "block";
+      writeAuditLog("auth", "⚠️ Nastroykaya uğursuz PIN cəhdi", "Yanlış Nastroyka kodu daxil edildi");
+    }
+  }
 
   // FİREBASE
   function startFirebaseSync() {
@@ -486,14 +642,19 @@
     db.ref(`${ROOT_PATH}/config`).once("value", snap => {
       if (!snap.exists()) {
         db.ref(`${ROOT_PATH}/config`).set({
-          managers:DEFAULT_MANAGERS, cabinets:DEFAULT_CABINETS, zal_day:DEFAULT_ZAL_DAY, zal_night:DEFAULT_ZAL_NIGHT,
-          note_chips:DEFAULT_NOTE_CHIPS, note_chips_init:true, singer_presets:[],
-          tariffs:DEFAULT_TARIFFS, tariffs_init:true, weekend_counts:{ day:20, night:30 }
+          managers:DEFAULT_MANAGERS, managers_v3_init:true, cabinets:DEFAULT_CABINETS, zal_day:DEFAULT_ZAL_DAY, zal_night:DEFAULT_ZAL_NIGHT,
+          note_chips:DEFAULT_NOTE_CHIPS, note_chips_init:true, singer_presets:[], tariffs:DEFAULT_TARIFFS, tariffs_init:true, weekend_counts:{ day:20, night:30 }
         });
       } else {
         const v = snap.val();
         if (!v.note_chips_init) { db.ref(`${ROOT_PATH}/config/note_chips`).set(DEFAULT_NOTE_CHIPS); db.ref(`${ROOT_PATH}/config/note_chips_init`).set(true); }
         if (!v.tariffs_init) { db.ref(`${ROOT_PATH}/config/tariffs`).set(DEFAULT_TARIFFS); db.ref(`${ROOT_PATH}/config/tariffs_init`).set(true); }
+        if (!v.managers_v3_init) {
+          const migrated = normalizeManagers(v.managers || DEFAULT_MANAGERS);
+          if (!migrated.some(m => m.name === RUFET_NAME)) migrated.push({ name:RUFET_NAME, pin:RUFET_PIN, perms:{...FULL_PERMS} });
+          db.ref(`${ROOT_PATH}/config/managers`).set(migrated);
+          db.ref(`${ROOT_PATH}/config/managers_v3_init`).set(true);
+        }
       }
     });
     db.ref(`${ROOT_PATH}/config`).on("value", snap => {
@@ -507,15 +668,21 @@
         if (cfg.tariffs_init) cloudTariffs = toArray(cfg.tariffs);
         if (cfg.weekend_counts) cloudWeekendCounts = cfg.weekend_counts;
         cloudSingerPresets = cfg.singer_presets ? toArray(cfg.singer_presets) : [];
+        if (currentManager) applyIdentityUI(currentManager);
         if (document.getElementById("mgrOverlay").classList.contains("open") && document.getElementById("mgrSelectStep").style.display !== "none") openMgrPicker(Boolean(currentManager));
         if (document.getElementById("singerSheet").classList.contains("open")) renderSingerSheetContent();
-        if (currentTab !== "chat") renderApp();
+        if (currentTab !== "chat" && currentTab !== "logs") renderApp();
       }
     });
     db.ref(`${ROOT_PATH}/chat`).limitToLast(100).on("value", snap => {
       const list = []; snap.forEach(c => { list.push({ id:c.key, ...c.val() }); });
       cloudChat = list;
       if (currentTab === "chat") { markChatSeen(); renderChatMessages(); } else updateChatBadge();
+    });
+    db.ref(`${ROOT_PATH}/logs`).limitToLast(250).on("value", snap => {
+      const list = []; snap.forEach(c => { list.push({ id:c.key, ...c.val() }); });
+      cloudLogs = list.sort((a,b) => (b.ts||0) - (a.ts||0));
+      if (currentTab === "logs" && isRufet()) renderLogsScreen();
     });
     listenToSelectedDate();
   }
@@ -527,7 +694,7 @@
     activeResRefPath = newPath;
     db.ref(activeResRefPath).on("value", snap => {
       cloudReservations = snap.val() || {};
-      if (currentTab === "settings" || currentTab === "chat" || (currentTab === "report" && reportPeriod !== "day")) updateTopSummaryOnly();
+      if (currentTab === "settings" || currentTab === "chat" || currentTab === "logs" || (currentTab === "report" && reportPeriod !== "day")) updateTopSummaryOnly();
       else renderApp();
     });
     const newSingerPath = `${ROOT_PATH}/singers/${datePicker.value}`;
@@ -541,7 +708,7 @@
   }
 
   function getManagers() { return cloudManagers; }
-  function saveManagers(a) { cloudManagers = a; if (db) db.ref(`${ROOT_PATH}/config/managers`).set(a); }
+  function saveManagers(a) { cloudManagers = a; if (db) { db.ref(`${ROOT_PATH}/config/managers_v3_init`).set(true); db.ref(`${ROOT_PATH}/config/managers`).set(a); } }
   function getNoteChips() { return cloudNoteChips; }
   function saveNoteChips(a) { cloudNoteChips = a; if (db) { db.ref(`${ROOT_PATH}/config/note_chips_init`).set(true); db.ref(`${ROOT_PATH}/config/note_chips`).set(a); } }
   function getCabinetsConfig() { return cloudCabinets; }
@@ -555,34 +722,50 @@
   // MÜĞƏNNİLƏR
   function renderSingerBanner() {
     const c = document.getElementById("singerBarContainer"); if (!c) return;
-    const singers = cloudDateSingers || [], dateLbl = `${formatDisplayDate(datePicker.value)} (${getDayNameAz(datePicker.value)})`;
-    const namesText = singers.length ? singers.join(" • ") : (isGuest() ? "Bu gün üçün müğənni qeyd olunmayıb" : "Müğənni əlavə etmək üçün toxunun...");
-    c.innerHTML = `<div class="singer-bar" onclick="openSingerSheet()"><div class="singer-bar-left"><div class="singer-bar-title">🎤 Müğənnilər — ${dateLbl}</div><div class="singer-bar-names" style="${!singers.length?'color:#94a3b8;font-weight:500;':''}">${escHtml(namesText)}</div></div>${!isGuest()?`<span class="singer-bar-btn">${singers.length?'✏️ Düzəliş':'+ Əlavə et'}</span>`:''}</div>`;
+    const singers = cloudDateSingers || [], dateLbl = `${formatDisplayDate(datePicker.value)} (${getDayNameAz(datePicker.value)})`, canSingers = hasPerm("singers");
+    const namesText = singers.length ? singers.join(" • ") : (canSingers ? "Müğənni əlavə etmək üçün toxunun..." : "Bu gün üçün müğənni qeyd olunmayıb");
+    c.innerHTML = `<div class="singer-bar" onclick="openSingerSheet()"><div class="singer-bar-left"><div class="singer-bar-title">🎤 Müğənnilər — ${dateLbl}</div><div class="singer-bar-names" style="${!singers.length?'color:#94a3b8;font-weight:500;':''}">${escHtml(namesText)}</div></div>${canSingers?`<span class="singer-bar-btn">${singers.length?'✏️ Düzəliş':'+ Əlavə et'}</span>`:''}</div>`;
   }
   function openSingerSheet() {
-    if (isGuest() && (!cloudDateSingers || !cloudDateSingers.length)) { showToast("👁️ Müğənni təyin edilməyib"); return; }
+    const canSingers = hasPerm("singers");
+    if (!canSingers && (!cloudDateSingers || !cloudDateSingers.length)) { showToast("👁️ Müğənni təyin edilməyib"); return; }
     document.getElementById("singerSheetDateLabel").textContent = `${formatDisplayDate(datePicker.value)} (${getDayNameAz(datePicker.value)})`;
-    document.getElementById("singerEditControls").style.display = isGuest() ? "none" : "block";
+    document.getElementById("singerEditControls").style.display = canSingers ? "block" : "none";
     renderSingerSheetContent(); document.getElementById("singerSheet").classList.add("open");
   }
   function closeSingerSheet() { document.getElementById("singerSheet").classList.remove("open"); }
   function renderSingerSheetContent() {
-    const list = cloudDateSingers || [];
+    const list = cloudDateSingers || [], canSingers = hasPerm("singers");
     document.getElementById("singerListBody").innerHTML = !list.length ? `<div style="text-align:center; padding:16px; color:#94a3b8; font-size:13px;">Bu tarix üçün hələ müğənni əlavə olunmayıb</div>`
-      : list.map((name, i) => `<div class="singer-item"><b style="font-size:14px;">🎤 ${escHtml(name)}</b>${!isGuest()?`<button class="icon-btn del" onclick="removeSingerFromDate(${i})">🗑️</button>`:''}</div>`).join("");
+      : list.map((name, i) => `<div class="singer-item"><b style="font-size:14px;">🎤 ${escHtml(name)}</b>${canSingers?`<button class="icon-btn del" onclick="removeSingerFromDate(${i})">🗑️</button>`:''}</div>`).join("");
     const pw = document.getElementById("singerPresetsWrap");
-    if (!isGuest() && cloudSingerPresets.length) pw.innerHTML = `<div style="font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px;">TEZ SEÇİM:</div><div style="display:flex; flex-wrap:wrap; gap:6px;">${cloudSingerPresets.map((p, idx) => `<span class="preset-chip"><span onclick="pushSingerToCurrentDate('${escHtml(p).replace(/'/g,"\\'")}')">+ ${escHtml(p)}</span><span class="preset-del" onclick="removeSingerPreset(${idx})">×</span></span>`).join("")}</div>`;
+    if (canSingers && cloudSingerPresets.length) pw.innerHTML = `<div style="font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px;">TEZ SEÇİM:</div><div style="display:flex; flex-wrap:wrap; gap:6px;">${cloudSingerPresets.map((p, idx) => `<span class="preset-chip"><span onclick="pushSingerPresetByIdx(${idx})">+ ${escHtml(p)}</span><span class="preset-del" onclick="removeSingerPreset(${idx})">×</span></span>`).join("")}</div>`;
     else pw.innerHTML = "";
   }
-  function addSingerToDate() { if (isGuest()) return; const i=document.getElementById("newDateSingerInput"), v=i.value.trim(); if(!v) return; i.value=""; pushSingerToCurrentDate(v); }
+  function addSingerToDate() { if (!hasPerm("singers")) return; const i=document.getElementById("newDateSingerInput"), v=i.value.trim(); if(!v) return; i.value=""; pushSingerToCurrentDate(v); }
+  function pushSingerPresetByIdx(idx) { const name = cloudSingerPresets[idx]; if (name) pushSingerToCurrentDate(name); }
   function pushSingerToCurrentDate(name) {
+    if (!hasPerm("singers")) return;
     const list = [...(cloudDateSingers || [])];
-    if (!list.some(x => x.toLowerCase() === name.toLowerCase())) { list.push(name); cloudDateSingers = list; if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(list); }
-    if (!cloudSingerPresets.some(x => x.toLowerCase() === name.toLowerCase())) { cloudSingerPresets = [...cloudSingerPresets, name]; if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(cloudSingerPresets); }
+    if (!list.some(x => x.toLowerCase() === name.toLowerCase())) {
+      list.push(name); cloudDateSingers = list;
+      if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(list);
+      writeAuditLog("cfg", `🎤 Müğənni əlavə olundu: ${name}`, `Tarix: ${formatDisplayDate(datePicker.value)}`, datePicker.value);
+    }
+    if (!cloudSingerPresets.some(x => x.toLowerCase() === name.toLowerCase())) {
+      cloudSingerPresets = [...cloudSingerPresets, name];
+      if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(cloudSingerPresets);
+    }
     renderSingerSheetContent(); renderSingerBanner(); showToast(`${name} əlavə olundu!`);
   }
-  function removeSingerFromDate(i) { if (isGuest()) return; const l=[...(cloudDateSingers||[])]; l.splice(i,1); cloudDateSingers=l; if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(l); renderSingerSheetContent(); renderSingerBanner(); }
-  function removeSingerPreset(i) { if (isGuest()) return; const p=[...cloudSingerPresets]; p.splice(i,1); cloudSingerPresets=p; if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(p); renderSingerSheetContent(); }
+  function removeSingerFromDate(i) {
+    if (!hasPerm("singers")) return;
+    const l=[...(cloudDateSingers||[])], removed = l[i]; l.splice(i,1); cloudDateSingers=l;
+    if (db) db.ref(`${ROOT_PATH}/singers/${datePicker.value}`).set(l);
+    writeAuditLog("del", `🎤 Müğənni silindi: ${removed||""}`, `Tarix: ${formatDisplayDate(datePicker.value)}`, datePicker.value);
+    renderSingerSheetContent(); renderSingerBanner();
+  }
+  function removeSingerPreset(i) { if (!hasPerm("singers")) return; const p=[...cloudSingerPresets]; p.splice(i,1); cloudSingerPresets=p; if (db) db.ref(`${ROOT_PATH}/config/singer_presets`).set(p); renderSingerSheetContent(); }
 
   // NAVİQASİYA
   function changeDay(d) { const [y,m,day]=datePicker.value.split("-").map(Number), dt=new Date(y,m-1,day); dt.setDate(dt.getDate()+d); datePicker.value=formatDateISO(dt); cloudReservations={}; cloudDateSingers=[]; listenToSelectedDate(); renderApp(); }
@@ -590,23 +773,26 @@
   function jumpToDateFromReport(iso) { datePicker.value=iso; cloudReservations={}; cloudDateSingers=[]; listenToSelectedDate(); switchTab("kabinet", document.getElementById("nav_kabinet")); }
   function setFilter(f, btn) { currentFilter=f; document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active")); btn.classList.add("active"); renderApp(); }
   function switchTab(tab, btn) {
+    if (tab==="report" && !isGuest() && !hasPerm("report_view")) { showToast("⚠️ Hesabat icazəniz yoxdur"); return; }
     currentTab = tab; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
     document.querySelectorAll(".top-nav-item").forEach(n => n.classList.remove("active"));
     if (btn) btn.classList.add("active");
     document.getElementById("settingsGearBtn").classList.remove("active");
+    document.getElementById("logsNavBtn").classList.remove("active");
     document.getElementById("filterHeader").style.display = (tab==="kabinet"||tab==="zal_day"||tab==="zal_night") ? "block" : "none";
-    document.getElementById("dateBar").style.display = (tab==="chat"||(tab==="report"&&reportPeriod!=="day")) ? "none" : "flex";
+    document.getElementById("dateBar").style.display = (tab==="chat"||tab==="logs"||(tab==="report"&&reportPeriod!=="day")) ? "none" : "flex";
     if (tab==="chat") markChatSeen();
     if (tab==="report" && reportPeriod!=="day") { fetchReportRange(); return; }
     renderApp();
   }
-  function openSettingsTab() {
-    if (isGuest()) return;
-    currentTab = "settings"; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false;
+  function openLogsTab() {
+    if (!isRufet()) return;
+    currentTab = "logs";
     document.querySelectorAll(".top-nav-item").forEach(n => n.classList.remove("active"));
-    document.getElementById("settingsGearBtn").classList.add("active");
+    document.getElementById("settingsGearBtn").classList.remove("active");
+    document.getElementById("logsNavBtn").classList.add("active");
     document.getElementById("filterHeader").style.display = "none";
-    document.getElementById("dateBar").style.display = "flex";
+    document.getElementById("dateBar").style.display = "none";
     renderApp();
   }
 
@@ -632,17 +818,15 @@
   function renderApp() {
     const cabs = getCabinetsConfig(), zalDay = getEffectiveZalList("day", datePicker.value), zalNight = getEffectiveZalList("night", datePicker.value), resData = getDayReservations();
     const st = computeDayMiniStats(cabs, zalDay, zalNight, resData);
-    const titles = { kabinet:`Kabinetlər (${cabs.length} otaq)`, zal_day:`Zal — Səhər (${zalDay.length} zal)`, zal_night:`Zal — Şou Proqram (${zalNight.length} zal)`, chat:"Menecer Chatı", report:"Detallı Hesabat", settings:"Ayarlar & Tariflər" };
-    document.getElementById("sectionSubTitle").textContent = titles[currentTab];
+    const titles = { kabinet:`Kabinetlər (${cabs.length} otaq)`, zal_day:`Zal — Səhər (${zalDay.length} zal)`, zal_night:`Zal — Şou Proqram (${zalNight.length} zal)`, chat:"Menecer Chatı", report:"Detallı Hesabat", settings:"Nastroyka & Tariflər", logs:"Əməliyyat Logları" };
+    document.getElementById("sectionSubTitle").textContent = titles[currentTab] || "";
     document.getElementById("topTotalGuests").textContent = `${st.totalGuests} qonaq`;
     document.getElementById("topTotalBeh").textContent = `${formatMoney(st.totalBeh)}`;
     renderSingerBanner();
 
     const activeTr = getActiveTariff(datePicker.value);
-    document.getElementById("seasonBannerContainer").innerHTML = (activeTr && currentTab === "kabinet")
-      ? `<div class="season-banner">✨ ${escHtml(activeTr.title)}</div>` : "";
-    document.getElementById("weekendBannerContainer").innerHTML = (isWeekend(datePicker.value) && (currentTab==="zal_day"||currentTab==="zal_night"))
-      ? `<div class="weekend-banner">📅 Həftəsonu (${getDayNameAz(datePicker.value)}): Zal Səhər ${zalDay.length}, Şou Proqram ${zalNight.length} zal aktivdir!</div>` : "";
+    document.getElementById("seasonBannerContainer").innerHTML = (activeTr && currentTab === "kabinet") ? `<div class="season-banner">✨ ${escHtml(activeTr.title)}</div>` : "";
+    document.getElementById("weekendBannerContainer").innerHTML = (isWeekend(datePicker.value) && (currentTab==="zal_day"||currentTab==="zal_night")) ? `<div class="weekend-banner">📅 Həftəsonu (${getDayNameAz(datePicker.value)}): Zal Səhər ${zalDay.length}, Şou Proqram ${zalNight.length} zal aktivdir!</div>` : "";
 
     const ms = document.getElementById("miniStats");
     if (currentTab === "kabinet") ms.innerHTML = `<div class="mini-stat"><div class="mini-stat-val">${st.kabDayG}</div><div class="mini-stat-lbl">17:00-a qədər</div></div><div class="mini-stat"><div class="mini-stat-val">${st.kabNightG}</div><div class="mini-stat-lbl">18:00-dan</div></div><div class="mini-stat"><div class="mini-stat-val" style="color:#16a34a;">${formatMoney(st.kabBeh)}</div><div class="mini-stat-lbl">Kabinet BEH</div></div>`;
@@ -654,7 +838,8 @@
     else if (currentTab === "zal_night") renderZalGrid("zal_night", zalNight, resData, "18:00 - 23:00");
     else if (currentTab === "chat") renderChatScreen();
     else if (currentTab === "report") renderReportScreen();
-    else if (currentTab === "settings") renderSettings();
+    else if (currentTab === "settings" && isRufet()) renderSettings();
+    else if (currentTab === "logs" && isRufet()) renderLogsScreen();
   }
 
   function renderCabinets(cabs, resData, hasSpecialTariff) {
@@ -673,8 +858,8 @@
   }
   function renderCabShiftBox(cab, shiftNum, res, label, defaultTime) {
     const cls = res?.name ? (res.status === "confirmed" ? "confirmed" : "pending") : "";
-    if (res?.name) return `<div class="shift-box ${cls}" onclick="openSheet('kabinet','${cab.id}',${shiftNum})"><div class="shift-time">${label}</div><div class="shift-guest">${escHtml(res.name)}</div><div class="shift-info"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div></div>`;
-    return `<div class="shift-box" onclick="openSheet('kabinet','${cab.id}',${shiftNum})"><div class="shift-time">${label}</div><div class="shift-empty">${isGuest()?"Boşdur":"+ Rezerv yaz"}</div><div class="shift-info" style="color:#94a3b8;">🕒 ${escHtml(defaultTime)}</div></div>`;
+    if (res?.name) return `<div class="shift-box ${cls}" onclick="openSheet('kabinet','${escHtml(cab.id)}',${shiftNum})"><div class="shift-time">${label}</div><div class="shift-guest">${escHtml(res.name)}</div><div class="shift-info"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div></div>`;
+    return `<div class="shift-box" onclick="openSheet('kabinet','${escHtml(cab.id)}',${shiftNum})"><div class="shift-time">${label}</div><div class="shift-empty">${hasPerm("res_create")?"+ Rezerv yaz":"Boşdur"}</div><div class="shift-info" style="color:#94a3b8;">🕒 ${escHtml(defaultTime)}</div></div>`;
   }
   function renderZalGrid(section, list, resData, defaultTime) {
     const q = document.getElementById("searchInput").value.trim().toLowerCase();
@@ -687,10 +872,32 @@
       count++;
       const cls = isBooked ? (res.status === "confirmed" ? "confirmed" : "pending") : "";
       html += isBooked
-        ? `<div class="zal-tile ${cls}" onclick="openSheet('${section}','${zal.id}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time">${res.time?"🕒 "+escHtml(res.time):""}</span></div><div class="zal-guest">${escHtml(res.name)}</div><div class="zal-foot"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div>${res.note?`<div class="zal-note">${escHtml(res.note)}</div>`:""}</div>`
-        : `<div class="zal-tile" onclick="openSheet('${section}','${zal.id}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time" style="color:#94a3b8;">Boş</span></div><div class="zal-empty">${isGuest()?"Boşdur":"+ Rezerv yaz"}</div><div class="zal-foot" style="color:#94a3b8;"><span>${defaultTime}</span></div></div>`;
+        ? `<div class="zal-tile ${cls}" onclick="openSheet('${section}','${escHtml(zal.id)}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time">${res.time?"🕒 "+escHtml(res.time):""}</span></div><div class="zal-guest">${escHtml(res.name)}</div><div class="zal-foot"><span>👥 ${res.guests||0} nəfər</span><span>${res.beh?res.beh+"₼ • ":""}${escHtml(res.staff||"")}</span></div>${res.note?`<div class="zal-note">${escHtml(res.note)}</div>`:""}</div>`
+        : `<div class="zal-tile" onclick="openSheet('${section}','${escHtml(zal.id)}',0)"><div class="zal-top"><span class="zal-num">${escHtml(zal.name)}</span><span class="zal-time" style="color:#94a3b8;">Boş</span></div><div class="zal-empty">${hasPerm("res_create")?"+ Rezerv yaz":"Boşdur"}</div><div class="zal-foot" style="color:#94a3b8;"><span>${defaultTime}</span></div></div>`;
     });
     document.getElementById("mainContent").innerHTML = count ? html + `</div>` : `<div style="text-align:center; padding:40px; color:#94a3b8;">Heç nə tapılmadı</div>`;
+  }
+
+  // LOGLAR (YALNIZ RÜFƏT)
+  function renderLogsScreen() {
+    if (!isRufet()) return;
+    const actors = Array.from(new Set(cloudLogs.map(l => l.actor).filter(Boolean)));
+    const q = logSearchQuery.trim().toLowerCase();
+    const filtered = cloudLogs.filter(l => {
+      if (logFilterCat !== "all" && l.category !== logFilterCat) return false;
+      if (logFilterActor !== "all" && l.actor !== logFilterActor) return false;
+      if (q && !`${l.actor||""} ${l.switchedFrom||""} ${l.action||""} ${l.detail||""} ${l.device||""} ${l.date||""}`.toLowerCase().includes(q)) return false;
+      return true;
+    });
+    const catPills = [{id:"all",lbl:`Hamısı (${cloudLogs.length})`},{id:"auth",lbl:"🔀 Sessiya / PIN"},{id:"res",lbl:"📝 Rezervlər"},{id:"del",lbl:"🗑️ Silmələr"},{id:"cfg",lbl:"⚙️ Nastroyka"}];
+    let html = `<div class="report-card" style="padding:10px 12px; margin-bottom:10px;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><b style="font-size:13px; color:var(--navy);">📜 Bütün Əməliyyat Tarixçəsi</b><span style="font-size:11px; font-weight:700; color:var(--muted);">Son ${cloudLogs.length} qeyd</span></div><input type="text" class="search-box" style="margin-bottom:8px;" placeholder="🔍 Menecer, qonaq, cihaz və ya əməliyyat axtar..." value="${escHtml(logSearchQuery)}" oninput="logSearchQuery=this.value; renderLogsScreen()" /><div style="display:flex; gap:6px; align-items:center; margin-bottom:6px;"><select style="flex:1; padding:7px 9px; border:1px solid var(--border); border-radius:9px; font-size:12px; font-weight:700; background:#f8fafc;" onchange="logFilterActor=this.value; renderLogsScreen()"><option value="all">👤 Bütün menecerlər</option>${actors.map(a=>`<option value="${escHtml(a)}" ${logFilterActor===a?'selected':''}>${escHtml(a)}</option>`).join("")}</select><button class="sort-btn" onclick="logFilterCat='all'; logFilterActor='all'; logSearchQuery=''; renderLogsScreen()">Sıfırla</button></div><div class="filter-pills" style="padding-bottom:2px;">${catPills.map(c=>`<button class="pill ${logFilterCat===c.id?'active':''}" onclick="logFilterCat='${c.id}'; renderLogsScreen()">${c.lbl}</button>`).join("")}</div></div>`;
+    if (!filtered.length) html += `<div class="report-card" style="text-align:center; padding:32px; color:#94a3b8; font-weight:700;">Uyğun log tapılmadı</div>`;
+    else html += filtered.map(l => {
+      const d = new Date(l.ts || Date.now()), dtStr = `${String(d.getDate()).padStart(2,"0")}.${String(d.getMonth()+1).padStart(2,"0")}.${d.getFullYear()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}:${String(d.getSeconds()).padStart(2,"0")}`;
+      const sw = l.switchedFrom ? `<span class="log-switch-tag">🔀 ${escHtml(l.switchedFrom)} sessiyasından</span>` : "";
+      return `<div class="log-card cat-${escHtml(l.category||'res')}"><div class="log-top"><div><span class="log-actor">👤 ${escHtml(l.actor||"Naməlum")}</span>${sw}</div><span>🕒 ${dtStr}</span></div><div class="log-action">${escHtml(l.action)}</div>${l.detail?`<div class="log-detail">${escHtml(l.detail)}</div>`:""}<div class="log-foot"><span>📱 ${escHtml(l.device||"-")}</span>${l.date?`<button class="log-jump" onclick="jumpToDateFromReport('${escHtml(l.date)}')">📅 ${formatDisplayDate(l.date)} ↗</button>`:""}</div></div>`;
+    }).join("");
+    document.getElementById("mainContent").innerHTML = html;
   }
 
   // CHAT
@@ -700,25 +907,31 @@
   }
   function markChatSeen() { lastChatSeenTs = Date.now(); safeSetLocal("elpiano_chat_seen", String(lastChatSeenTs)); document.getElementById("chatBadge").style.display = "none"; }
   function renderChatScreen() {
-    const g = isGuest();
-    document.getElementById("mainContent").innerHTML = `<div class="chat-wrap"><div class="chat-top-bar"><span style="font-size:12px; font-weight:800; color:var(--navy);">💬 Menecer Chatı</span>${!g?`<div><button id="chatClearBtn" class="chat-clear-btn" onclick="askClearChat()">🧹 Sıfırla</button><div id="chatClearConfirm" style="display:none; gap:6px; align-items:center;"><span style="font-size:11px; font-weight:700; color:#991b1b;">Silinsin?</span><button class="btn btn-cancel btn-sm" style="padding:4px 8px;" onclick="cancelClearChat()">Xeyr</button><button class="btn btn-del-confirm btn-sm" style="padding:4px 8px;" onclick="confirmClearChat()">Bəli</button></div></div>`:''}</div><div class="chat-messages" id="chatMessagesBox"></div>${g?`<div style="padding:10px; background:#f8fafc; text-align:center; font-size:12px; font-weight:700; color:#64748b; border-top:1px solid var(--border);">👁️ Qonaq rejimində mesaj yazmaq bağlıdır</div>`:`<div class="chat-input-bar"><input type="text" id="chatInput" class="chat-input" placeholder="${escHtml(currentManager)} adıyla mesaj yaz..." onkeydown="if(event.key==='Enter') sendChatMsg()" /><button class="chat-send-btn" onclick="sendChatMsg()">Göndər ➤</button></div>`}</div>`;
+    const canWrite = hasPerm("chat_write"), canClear = hasPerm("chat_clear");
+    document.getElementById("mainContent").innerHTML = `<div class="chat-wrap"><div class="chat-top-bar"><span style="font-size:12px; font-weight:800; color:var(--navy);">💬 Menecer Chatı</span>${canClear?`<div><button id="chatClearBtn" class="chat-clear-btn" onclick="askClearChat()">🧹 Sıfırla</button><div id="chatClearConfirm" style="display:none; gap:6px; align-items:center;"><span style="font-size:11px; font-weight:700; color:#991b1b;">Silinsin?</span><button class="btn btn-cancel btn-sm" style="padding:4px 8px;" onclick="cancelClearChat()">Xeyr</button><button class="btn btn-del-confirm btn-sm" style="padding:4px 8px;" onclick="confirmClearChat()">Bəli</button></div></div>`:''}</div><div class="chat-messages" id="chatMessagesBox"></div>${!canWrite?`<div style="padding:10px; background:#f8fafc; text-align:center; font-size:12px; font-weight:700; color:#64748b; border-top:1px solid var(--border);">${isGuest()?'👁️ Qonaq rejimində mesaj yazmaq bağlıdır':'🔒 Chatda mesaj yazmaq icazəniz yoxdur'}</div>`:`<div class="chat-input-bar"><input type="text" id="chatInput" class="chat-input" placeholder="${escHtml(currentManager)} adıyla mesaj yaz..." onkeydown="if(event.key==='Enter') sendChatMsg()" /><button class="chat-send-btn" onclick="sendChatMsg()">Göndər ➤</button></div>`}</div>`;
     renderChatMessages();
   }
   function askClearChat() { document.getElementById("chatClearBtn").style.display="none"; document.getElementById("chatClearConfirm").style.display="flex"; }
   function cancelClearChat() { document.getElementById("chatClearBtn").style.display="inline-block"; document.getElementById("chatClearConfirm").style.display="none"; }
-  function confirmClearChat() { if (!isGuest()) { cloudChat=[]; if (db) db.ref(`${ROOT_PATH}/chat`).remove(); cancelClearChat(); renderChatMessages(); showToast("Chat sıfırlandı!"); } }
+  function confirmClearChat() {
+    if (!hasPerm("chat_clear")) return;
+    cloudChat=[]; if (db) db.ref(`${ROOT_PATH}/chat`).remove();
+    writeAuditLog("del", "🧹 Menecer chatı sıfırlandı", "Bütün chat mesajları silindi");
+    cancelClearChat(); renderChatMessages(); showToast("Chat sıfırlandı!");
+  }
   function renderChatMessages() {
     const box = document.getElementById("chatMessagesBox"); if (!box) return;
     if (!cloudChat.length) { box.innerHTML = `<div style="text-align:center; color:#64748b; font-size:13px; margin:auto;">Hələ mesaj yoxdur!</div>`; return; }
+    const canDelMsg = hasPerm("chat_write");
     box.innerHTML = cloudChat.map(m => {
       const isMine = (m.sender === currentManager), d = new Date(m.ts || Date.now());
       const hm = `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`, dm = `${String(d.getDate()).padStart(2,"0")}.${String(d.getMonth()+1).padStart(2,"0")}`;
-      return `<div class="msg-bubble ${isMine?'mine':'other'}">${!isMine?`<div class="msg-sender">${escHtml(m.sender)}</div>`:''}<div>${escHtml(m.text)}</div><div class="msg-meta"><span>${dm} • ${hm}</span>${isMine?`<span class="msg-del" onclick="deleteChatMsg('${m.id}')">✕</span>`:''}</div></div>`;
+      return `<div class="msg-bubble ${isMine?'mine':'other'}">${!isMine?`<div class="msg-sender">${escHtml(m.sender)}</div>`:''}<div>${escHtml(m.text)}</div><div class="msg-meta"><span>${dm} • ${hm}</span>${(isMine&&canDelMsg)?`<span class="msg-del" onclick="deleteChatMsg('${escHtml(m.id)}')">✕</span>`:''}</div></div>`;
     }).join("");
     box.scrollTop = box.scrollHeight;
   }
-  function sendChatMsg() { if (isGuest() || !currentManager) return; const i=document.getElementById("chatInput"), t=i.value.trim(); if (!t) return; i.value=""; if (db) db.ref(`${ROOT_PATH}/chat`).push({sender:currentManager,text:t,ts:Date.now()}); markChatSeen(); }
-  function deleteChatMsg(id) { if (!isGuest() && db) db.ref(`${ROOT_PATH}/chat/${id}`).remove(); }
+  function sendChatMsg() { if (!hasPerm("chat_write") || !currentManager) return; const i=document.getElementById("chatInput"), t=i.value.trim(); if (!t) return; i.value=""; if (db) db.ref(`${ROOT_PATH}/chat`).push({sender:currentManager,text:t,ts:Date.now()}); markChatSeen(); }
+  function deleteChatMsg(id) { if (hasPerm("chat_write") && db) db.ref(`${ROOT_PATH}/chat/${id}`).remove(); }
 
   // HESABAT + EXCEL + BACKUP
   function getPeriodDates() {
@@ -785,6 +998,7 @@
   }
 
   function exportReportCSV() {
+    if (!hasPerm("excel")) { showToast("⚠️ Excel yükləmə icazəniz yoxdur"); return; }
     const { from, to } = getPeriodDates(), sourceData = reportPeriod==="day" ? {[datePicker.value]:getDayReservations()} : (reportRangeData||{}), cabs = getCabinetsConfig();
     let csv = "\uFEFFTarix,Bolme,Yer,Qonaq,Say,Vaxt,Telefon,BEH,Menecer,Status,Qeyd\n";
     Object.keys(sourceData).sort().forEach(d => {
@@ -797,17 +1011,22 @@
         csv += [d,sec,place,r.name,r.guests||0,r.time||"",r.phone||"",r.beh||0,r.staff||"",r.status==="confirmed"?"Tesdiq":"Gozleme",r.note||""].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")+"\n";
       });
     });
-    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"})); a.download=`elpiano_${from}_${to}.csv`; a.click(); showToast("Excel (CSV) yükləndi!");
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"})); a.download=`elpiano_${from}_${to}.csv`; a.click();
+    writeAuditLog("cfg", "📥 Excel (CSV) hesabat yükləndi", `Dövr: ${from} — ${to}`);
+    showToast("Excel (CSV) yükləndi!");
   }
 
   function downloadFullBackupJSON() {
-    if (!db) return; showToast("Yedək hazırlanır...");
+    if (!db || !hasPerm("backup")) return; showToast("Yedək hazırlanır...");
     db.ref(ROOT_PATH).once("value", s => {
       const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(s.val()||{},null,2)],{type:"application/json"}));
-      a.download=`elpiano_tam_yedek_${todayStr}.json`; a.click(); showToast("Tam yedək yükləndi!");
+      a.download=`elpiano_tam_yedek_${todayStr}.json`; a.click();
+      writeAuditLog("cfg", "💾 Tam ehtiyat nüsxə (Backup) yükləndi", `Fayl: elpiano_tam_yedek_${todayStr}.json`);
+      showToast("Tam yedək yükləndi!");
     });
   }
   function restoreFullBackupJSON(inp) {
+    if (!hasPerm("backup")) return;
     const f = inp.files[0]; if (!f) return;
     const rd = new FileReader();
     rd.onload = e => {
@@ -820,13 +1039,22 @@
     rd.readAsText(f); inp.value = "";
   }
   function confirmRestoreBackup() {
-    if (document.getElementById("restorePinInput").value.trim() !== CLEAR_PIN) { document.getElementById("restorePinErr").style.display="block"; return; }
-    if (db && window._pendingRestoreObj) db.ref(ROOT_PATH).set(window._pendingRestoreObj).then(() => { window._pendingRestoreObj=null; document.getElementById("restorePinBox").style.display="none"; showToast("✅ Bərpa edildi!"); renderApp(); });
+    if (!hasPerm("backup")) return;
+    if (document.getElementById("restorePinInput").value.trim() !== CLEAR_PIN) {
+      document.getElementById("restorePinErr").style.display="block";
+      writeAuditLog("auth", "⚠️ Yedək bərpası üçün səhv PIN", "Yanlış admin PIN daxil edildi");
+      return;
+    }
+    if (db && window._pendingRestoreObj) db.ref(ROOT_PATH).set(window._pendingRestoreObj).then(() => {
+      window._pendingRestoreObj=null; document.getElementById("restorePinBox").style.display="none";
+      writeAuditLog("cfg", "♻️ Baza ehtiyat nüsxədən bərpa edildi", "Bütün məlumatlar JSON faylı ilə əvəzləndi");
+      showToast("✅ Bərpa edildi!"); renderApp();
+    });
   }
 
   function renderReportScreen() {
-    const { from, to } = getPeriodDates();
-    const periodControls = `<div class="period-pills"><button class="p-pill ${reportPeriod==='day'?'active':''}" onclick="setReportPeriod('day')">Bu gün</button><button class="p-pill ${reportPeriod==='1m'?'active':''}" onclick="setReportPeriod('1m')">Son 1 ay</button><button class="p-pill ${reportPeriod==='3m'?'active':''}" onclick="setReportPeriod('3m')">Son 3 ay</button><button class="p-pill ${reportPeriod==='6m'?'active':''}" onclick="setReportPeriod('6m')">Son 6 ay</button><button class="p-pill ${reportPeriod==='custom'?'active':''}" onclick="setReportPeriod('custom')">📅 Tarix seç</button></div>${reportPeriod==='custom'?`<div class="custom-range-box"><div class="field"><label>Başlanğıc</label><input type="date" id="repFromDate" value="${reportCustomFrom}" /></div><div class="field"><label>Bitiş</label><input type="date" id="repToDate" value="${reportCustomTo}" /></div><button class="btn btn-save btn-sm" style="height:36px;" onclick="applyCustomRange()">Göstər</button></div>`:''}<div class="range-banner"><span>📆 Dövr: <b>${formatDisplayDate(from)}${from!==to?' — '+formatDisplayDate(to):''}</b></span><div style="display:flex; gap:6px;"><button class="sort-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;" onclick="exportReportCSV()">📥 Excel</button>${reportPeriod!=='day'?`<button class="sort-btn" onclick="fetchReportRange()">🔄 Yenilə</button>`:''}</div></div>`;
+    const { from, to } = getPeriodDates(), canExcel = hasPerm("excel"), canBackup = hasPerm("backup"), canClearDay = hasPerm("day_clear");
+    const periodControls = `<div class="period-pills"><button class="p-pill ${reportPeriod==='day'?'active':''}" onclick="setReportPeriod('day')">Bu gün</button><button class="p-pill ${reportPeriod==='1m'?'active':''}" onclick="setReportPeriod('1m')">Son 1 ay</button><button class="p-pill ${reportPeriod==='3m'?'active':''}" onclick="setReportPeriod('3m')">Son 3 ay</button><button class="p-pill ${reportPeriod==='6m'?'active':''}" onclick="setReportPeriod('6m')">Son 6 ay</button><button class="p-pill ${reportPeriod==='custom'?'active':''}" onclick="setReportPeriod('custom')">📅 Tarix seç</button></div>${reportPeriod==='custom'?`<div class="custom-range-box"><div class="field"><label>Başlanğıc</label><input type="date" id="repFromDate" value="${reportCustomFrom}" /></div><div class="field"><label>Bitiş</label><input type="date" id="repToDate" value="${reportCustomTo}" /></div><button class="btn btn-save btn-sm" style="height:36px;" onclick="applyCustomRange()">Göstər</button></div>`:''}<div class="range-banner"><span>📆 Dövr: <b>${formatDisplayDate(from)}${from!==to?' — '+formatDisplayDate(to):''}</b></span><div style="display:flex; gap:6px;">${canExcel?`<button class="sort-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;" onclick="exportReportCSV()">📥 Excel</button>`:''}${reportPeriod!=='day'?`<button class="sort-btn" onclick="fetchReportRange()">🔄 Yenilə</button>`:''}</div></div>`;
     if (reportLoading) { document.getElementById("mainContent").innerHTML = periodControls + `<div class="report-card" style="text-align:center; padding:34px; color:var(--muted); font-weight:700;">⏳ Hesablanır...</div>`; return; }
 
     const sourceData = reportPeriod==="day" ? {[datePicker.value]:getDayReservations()} : (reportRangeData||{});
@@ -844,16 +1072,28 @@
       <div class="report-card"><div class="report-head-row"><div class="report-title">🪑 MASALAR ÜZRƏ</div><button class="sort-btn" onclick="zalSortAsc=!zalSortAsc; renderReportScreen()">${zalSortAsc?'Azdan çoxa ↑':'Çoxdan aza ↓'}</button></div><div style="display:flex; gap:6px; margin-bottom:8px;"><button class="pill ${reportZalTab==='night'?'active':''}" style="flex:1;" onclick="reportZalTab='night'; renderReportScreen()">🎤 Şou (${agg.zalNightList.length})</button><button class="pill ${reportZalTab==='day'?'active':''}" style="flex:1;" onclick="reportZalTab='day'; renderReportScreen()">☀️ Zal Səhər (${agg.zalDayList.length})</button></div>${sortedZals.map(z=>`<div class="stat-item-row"><div class="stat-item-top"><b>${escHtml(z.name)}</b><span><b>${z.count} rez</b> • ${z.guests} qonaq • <b style="color:#16a34a;">${formatMoney(z.beh)}</b></span></div><div class="bar-bg"><div class="bar-fill" style="width:${z.count?Math.max(6,Math.round(z.count/maxZalCount*100)):0}%"></div></div></div>`).join("")}</div>
       <div class="report-card"><div class="report-title" style="margin-bottom:6px;">👤 MENECERLƏR ÜZRƏ</div>${agg.staffList.length?agg.staffList.map(m=>`<div class="report-row"><span><b>${escHtml(m.name)}</b> (${m.count} rez)</span><span>${m.guests} qonaq • <b style="color:#16a34a;">${formatMoney(m.beh)}</b></span></div>`).join(""):`<div style="color:#94a3b8; font-size:13px;">Rezerv yoxdur</div>`}</div>
       ${reportPeriod!=='day'?`<div class="report-card"><div class="report-title" style="margin-bottom:6px;">📅 AKTİV GÜNLƏR (${agg.dayList.length})</div>${agg.dayList.length?agg.dayList.map(d=>`<div class="report-row" style="cursor:pointer;" onclick="jumpToDateFromReport('${d.date}')"><span><b>${formatDisplayDate(d.date)}</b> (${d.count} rez)</span><span>${d.guests} qonaq • <b style="color:#16a34a;">${formatMoney(d.beh)}</b> ↗</span></div>`).join(""):`<div style="color:#94a3b8; font-size:13px;">Məlumat yoxdur</div>`}</div>`:''}
-      ${!isGuest()?`<div class="report-card"><div class="report-title" style="margin-bottom:8px;">💾 TAM EHTİYAT NÜSXƏ (BACKUP)</div><div style="display:flex; gap:8px;"><button class="btn btn-save btn-sm" style="flex:1;" onclick="downloadFullBackupJSON()">💾 Tam Yedək Yüklə</button><label class="btn btn-cancel btn-sm" style="flex:1; cursor:pointer;">♻️ Yedəkdən Bərpa<input type="file" accept=".json" style="display:none;" onchange="restoreFullBackupJSON(this)" /></label></div><div id="restorePinBox" class="pin-box" style="margin-top:10px;"><div style="font-size:12px; font-weight:700; color:var(--navy); text-align:center;">Bərpa etmək üçün admin kodunu yazın:</div><input type="password" inputmode="numeric" maxlength="4" id="restorePinInput" class="pin-input" placeholder="••••" /><div id="restorePinErr" class="pin-err">❌ Kod səhvdir!</div><div style="display:flex; gap:8px;"><button class="btn btn-cancel btn-sm" style="flex:1;" onclick="document.getElementById('restorePinBox').style.display='none'">Ləğv</button><button class="btn btn-save btn-sm" style="flex:1;" onclick="confirmRestoreBackup()">Təsdiqlə</button></div></div></div>`:''}
-      ${(reportPeriod==='day'&&!isGuest())?`<div class="report-card" style="background:#fef2f2; border-color:#fecaca;"><div id="clearAllBox"><button class="btn" style="background:#dc2626; color:#fff; width:100%;" onclick="askClearAll()">🔒 Bu günün bütün rezervlərini boşalt</button></div><div id="clearAllPinBox" class="pin-box"><div style="font-size:13px; font-weight:700; color:#991b1b; text-align:center;">Kodu daxil edin:</div><input type="password" inputmode="numeric" maxlength="4" id="clearPinInput" class="pin-input danger" placeholder="••••" /><div id="clearPinErr" class="pin-err">❌ Kod səhvdir!</div><div style="display:flex; gap:8px;"><button class="btn btn-cancel" style="flex:0.45;" onclick="cancelClearAll()">Ləğv</button><button class="btn btn-del-confirm" style="flex:0.55;" onclick="confirmClearAll()">Boşalt</button></div></div></div>`:''}`;
+      ${canBackup?`<div class="report-card"><div class="report-title" style="margin-bottom:8px;">💾 TAM EHTİYAT NÜSXƏ (BACKUP)</div><div style="display:flex; gap:8px;"><button class="btn btn-save btn-sm" style="flex:1;" onclick="downloadFullBackupJSON()">💾 Tam Yedək Yüklə</button><label class="btn btn-cancel btn-sm" style="flex:1; cursor:pointer;">♻️ Yedəkdən Bərpa<input type="file" accept=".json" style="display:none;" onchange="restoreFullBackupJSON(this)" /></label></div><div id="restorePinBox" class="pin-box" style="margin-top:10px;"><div style="font-size:12px; font-weight:700; color:var(--navy); text-align:center;">Bərpa etmək üçün admin kodunu yazın:</div><input type="password" inputmode="numeric" maxlength="4" id="restorePinInput" class="pin-input" placeholder="••••" /><div id="restorePinErr" class="pin-err">❌ Kod səhvdir!</div><div style="display:flex; gap:8px;"><button class="btn btn-cancel btn-sm" style="flex:1;" onclick="document.getElementById('restorePinBox').style.display='none'">Ləğv</button><button class="btn btn-save btn-sm" style="flex:1;" onclick="confirmRestoreBackup()">Təsdiqlə</button></div></div></div>`:''}
+      ${(reportPeriod==='day'&&canClearDay)?`<div class="report-card" style="background:#fef2f2; border-color:#fecaca;"><div id="clearAllBox"><button class="btn" style="background:#dc2626; color:#fff; width:100%;" onclick="askClearAll()">🔒 Bu günün bütün rezervlərini boşalt</button></div><div id="clearAllPinBox" class="pin-box"><div style="font-size:13px; font-weight:700; color:#991b1b; text-align:center;">Kodu daxil edin:</div><input type="password" inputmode="numeric" maxlength="4" id="clearPinInput" class="pin-input danger" placeholder="••••" /><div id="clearPinErr" class="pin-err">❌ Kod səhvdir!</div><div style="display:flex; gap:8px;"><button class="btn btn-cancel" style="flex:0.45;" onclick="cancelClearAll()">Ləğv</button><button class="btn btn-del-confirm" style="flex:0.55;" onclick="confirmClearAll()">Boşalt</button></div></div></div>`:''}`;
   }
   function askClearAll() { document.getElementById("clearAllBox").style.display="none"; document.getElementById("clearAllPinBox").style.display="flex"; document.getElementById("clearPinErr").style.display="none"; const i=document.getElementById("clearPinInput"); i.value=""; i.focus(); }
   function cancelClearAll() { document.getElementById("clearAllBox").style.display="block"; document.getElementById("clearAllPinBox").style.display="none"; }
-  function confirmClearAll() { if (isGuest()) return; if (document.getElementById("clearPinInput").value.trim()!==CLEAR_PIN) { document.getElementById("clearPinErr").style.display="block"; return; } cloudReservations={}; if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}`).remove(); showToast("Boşaldıldı!"); renderApp(); }
+  function confirmClearAll() {
+    if (!hasPerm("day_clear")) return;
+    if (document.getElementById("clearPinInput").value.trim()!==CLEAR_PIN) {
+      document.getElementById("clearPinErr").style.display="block";
+      writeAuditLog("auth", "⚠️ Günlük sıfırlama üçün səhv PIN", `Tarix: ${formatDisplayDate(datePicker.value)}`, datePicker.value);
+      return;
+    }
+    const cnt = Object.keys(cloudReservations||{}).length;
+    cloudReservations={}; if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}`).remove();
+    writeAuditLog("del", `🚨 Günün bütün rezervləri boşaldıldı (${cnt} ədəd)`, `Tarix: ${formatDisplayDate(datePicker.value)}`, datePicker.value);
+    showToast("Boşaldıldı!"); renderApp();
+  }
 
-  // AYARLAR (TARİFLƏR, MENECER, KABİNET, ZALLAR, QEYDLƏR)
+  // NASTROYKA (YALNIZ RÜFƏT)
   function setSettingsSub(sub) { settingsSubTab=sub; editingCabIdx=editingMgrIdx=editingZalIdx=editingChipIdx=editingTariffIdx=null; showNewCabForm=showNewTariffForm=false; renderSettings(); }
   function renderSettings() {
+    if (!isRufet()) return;
     let html = `<div class="sub-tabs">
       <button class="sub-tab ${settingsSubTab==='tariffs'?'active':''}" onclick="setSettingsSub('tariffs')">📅 Tariflər</button>
       <button class="sub-tab ${settingsSubTab==='kabinets'?'active':''}" onclick="setSettingsSub('kabinets')">🚪 Kabinet</button>
@@ -871,76 +1111,124 @@
     document.getElementById("mainContent").innerHTML = html;
   }
 
-  // XÜSUSİ TARİX TARİFLƏRİ (Dekabr 1-15, 16-31 və istənilən yeni günlər)
   function renderTariffsSettings() {
     const cabs = getCabinetsConfig(), tariffs = cloudTariffs || [];
     let html = `<p style="font-size:11.5px; color:var(--muted); margin:0 0 8px;">Xüsusi günlər (bayramlar, Dekabr 1-15, 16-31 və s.) üçün kabinetlərin depozit qiymətlərini buradan təyin edib dəyişə bilərsiniz.</p>
       <div style="margin-bottom:10px;"><button class="btn btn-save" style="width:100%; padding:10px;" onclick="showNewTariffForm=!showNewTariffForm; renderSettings()">${showNewTariffForm?"✕ Bağla":"+ Yeni Tarix Tarifi əlavə et"}</button></div>`;
-    if (showNewTariffForm) {
-      html += `<div class="setting-row" style="border:2px solid var(--navy);"><b style="font-size:13px;">Yeni Tarix Tarifi</b><div class="edit-panel" style="border-top:none; padding-top:8px;">
-        <div class="field full"><label>Ad / Qeyd *</label><input type="text" id="ntTitle" placeholder="Məs: Novruz 20-25 Mart • Xidmət 10%" /></div>
-        <div class="field"><label>Başlanğıc</label><input type="date" id="ntFrom" value="${todayStr}" /></div>
-        <div class="field"><label>Bitiş</label><input type="date" id="ntTo" value="${todayStr}" /></div>
-        <div class="field full"><button class="btn btn-save btn-sm" onclick="addTariff()">Yarat və Qiymətləri Yaz</button></div>
-      </div></div>`;
-    }
+    if (showNewTariffForm) html += `<div class="setting-row" style="border:2px solid var(--navy);"><b style="font-size:13px;">Yeni Tarix Tarifi</b><div class="edit-panel" style="border-top:none; padding-top:8px;"><div class="field full"><label>Ad / Qeyd *</label><input type="text" id="ntTitle" placeholder="Məs: Novruz 20-25 Mart • Xidmət 10%" /></div><div class="field"><label>Başlanğıc</label><input type="date" id="ntFrom" value="${todayStr}" /></div><div class="field"><label>Bitiş</label><input type="date" id="ntTo" value="${todayStr}" /></div><div class="field full"><button class="btn btn-save btn-sm" onclick="addTariff()">Yarat və Qiymətləri Yaz</button></div></div></div>`;
     tariffs.forEach((tr, idx) => {
       const ed = editingTariffIdx === idx;
-      html += `<div class="setting-row"><div class="setting-top">
-        <div style="flex:1; min-width:0;"><b style="font-size:13.5px; display:block;">📅 ${escHtml(tr.title)}</b><div style="font-size:11px; color:var(--green); font-weight:700; margin-top:2px;">${formatDisplayDate(tr.from)} — ${formatDisplayDate(tr.to)}</div></div>
-        <button class="icon-btn" onclick="editingTariffIdx=${ed?'null':idx}; renderSettings()">${ed?'✕':'✏️ Düzəliş'}</button>
-      </div>
-      ${ed ? `<div class="edit-panel">
-        <div class="field full"><label>Başlıq / Qeyd</label><input type="text" id="etTitle_${idx}" value="${escHtml(tr.title)}" /></div>
-        <div class="field"><label>Başlanğıc tarix</label><input type="date" id="etFrom_${idx}" value="${tr.from}" /></div>
-        <div class="field"><label>Bitiş tarix</label><input type="date" id="etTo_${idx}" value="${tr.to}" /></div>
-        <div class="field full" style="margin-top:4px;"><label style="color:var(--navy);">Kabinet Qiymətləri (₼):</label></div>
-        ${cabs.map(c => {
-          const v = (tr.prices && tr.prices[c.id] !== undefined) ? tr.prices[c.id] : c.depositVal;
-          return `<div class="field"><label>${escHtml(c.name)}</label><input type="number" id="etP_${idx}_${c.id}" value="${v}" /></div>`;
-        }).join("")}
-        <div class="field full" style="flex-direction:row; gap:8px; margin-top:6px;" id="trAct_${idx}">
-          <button class="icon-btn del" onclick="askDelItem('trAct_${idx}','trConf_${idx}')">🗑️ Tarifi sil</button>
-          <button class="btn btn-save btn-sm" style="flex:1;" onclick="saveTariffEdit(${idx})">Yadda saxla</button>
-        </div>
-        <div class="field full" style="display:none; flex-direction:row; gap:8px; margin-top:6px;" id="trConf_${idx}">
-          <button class="btn btn-cancel btn-sm" style="flex:1;" onclick="cancelDelItem('trAct_${idx}','trConf_${idx}')">Xeyr</button>
-          <button class="btn btn-del-confirm btn-sm" style="flex:1;" onclick="deleteTariff(${idx})">Bəli, Sil</button>
-        </div>
-      </div>` : ''}</div>`;
+      html += `<div class="setting-row"><div class="setting-top"><div style="flex:1; min-width:0;"><b style="font-size:13.5px; display:block;">📅 ${escHtml(tr.title)}</b><div style="font-size:11px; color:var(--green); font-weight:700; margin-top:2px;">${formatDisplayDate(tr.from)} — ${formatDisplayDate(tr.to)}</div></div><button class="icon-btn" onclick="editingTariffIdx=${ed?'null':idx}; renderSettings()">${ed?'✕':'✏️ Düzəliş'}</button></div>
+      ${ed?`<div class="edit-panel"><div class="field full"><label>Başlıq / Qeyd</label><input type="text" id="etTitle_${idx}" value="${escHtml(tr.title)}" /></div><div class="field"><label>Başlanğıc tarix</label><input type="date" id="etFrom_${idx}" value="${tr.from}" /></div><div class="field"><label>Bitiş tarix</label><input type="date" id="etTo_${idx}" value="${tr.to}" /></div><div class="field full" style="margin-top:4px;"><label style="color:var(--navy);">Kabinet Qiymətləri (₼):</label></div>${cabs.map(c=>{const v=(tr.prices&&tr.prices[c.id]!==undefined)?tr.prices[c.id]:c.depositVal; return `<div class="field"><label>${escHtml(c.name)}</label><input type="number" id="etP_${idx}_${c.id}" value="${v}" /></div>`;}).join("")}<div class="field full" style="flex-direction:row; gap:8px; margin-top:6px;" id="trAct_${idx}"><button class="icon-btn del" onclick="askDelItem('trAct_${idx}','trConf_${idx}')">🗑️ Tarifi sil</button><button class="btn btn-save btn-sm" style="flex:1;" onclick="saveTariffEdit(${idx})">Yadda saxla</button></div><div class="field full" style="display:none; flex-direction:row; gap:8px; margin-top:6px;" id="trConf_${idx}"><button class="btn btn-cancel btn-sm" style="flex:1;" onclick="cancelDelItem('trAct_${idx}','trConf_${idx}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" style="flex:1;" onclick="deleteTariff(${idx})">Bəli, Sil</button></div></div>`:''}</div>`;
     });
     return html;
   }
-  function addTariff() {
-    const title = document.getElementById("ntTitle").value.trim(), from = document.getElementById("ntFrom").value, to = document.getElementById("ntTo").value;
-    if (!title || !from || !to) return;
-    const prices = {}; getCabinetsConfig().forEach(c => prices[c.id] = c.depositVal);
-    const list = [...(cloudTariffs||[]), { id:"tr_"+Date.now(), title, from:from<=to?from:to, to:from<=to?to:from, prices }];
-    saveTariffsConfig(list); showNewTariffForm = false; editingTariffIdx = list.length - 1; showToast("Tarif yaradıldı, qiymətləri yazın!"); renderSettings();
+  function addTariff() { const title=document.getElementById("ntTitle").value.trim(), from=document.getElementById("ntFrom").value, to=document.getElementById("ntTo").value; if(!title||!from||!to) return; const prices={}; getCabinetsConfig().forEach(c=>prices[c.id]=c.depositVal); const list=[...(cloudTariffs||[]),{id:"tr_"+Date.now(),title,from:from<=to?from:to,to:from<=to?to:from,prices}]; saveTariffsConfig(list); showNewTariffForm=false; editingTariffIdx=list.length-1; writeAuditLog("cfg",`📅 Yeni tarif əlavə edildi: ${title}`,`${formatDisplayDate(from)} — ${formatDisplayDate(to)}`); showToast("Tarif yaradıldı!"); renderSettings(); }
+  function saveTariffEdit(idx) { const list=JSON.parse(JSON.stringify(cloudTariffs||[])), tr=list[idx], cabs=getCabinetsConfig(); const t=document.getElementById(`etTitle_${idx}`).value.trim(), f=document.getElementById(`etFrom_${idx}`).value, to=document.getElementById(`etTo_${idx}`).value; if(t) tr.title=t; if(f&&to){tr.from=f<=to?f:to; tr.to=f<=to?to:f;} tr.prices=tr.prices||{}; cabs.forEach(c=>{const inp=document.getElementById(`etP_${idx}_${c.id}`); if(inp) tr.prices[c.id]=Number(inp.value)||0;}); saveTariffsConfig(list); editingTariffIdx=null; writeAuditLog("cfg",`📅 Tarif yeniləndi: ${tr.title}`,`${formatDisplayDate(tr.from)} — ${formatDisplayDate(tr.to)}`); showToast("Tarif saxlanıldı!"); renderApp(); }
+  function deleteTariff(idx) { const l=[...(cloudTariffs||[])], removed=l[idx]; l.splice(idx,1); saveTariffsConfig(l); editingTariffIdx=null; writeAuditLog("del",`📅 Tarif silindi: ${removed?.title||""}`); showToast("Tarif silindi!"); renderApp(); }
+
+  function renderPermCheckboxes(prefix, permsObj) {
+    return `<div class="perm-grid">${PERM_DEFS.map(p => `<label class="perm-item"><input type="checkbox" id="${prefix}_${p.key}" ${permsObj[p.key]?'checked':''} /><span>${p.lbl}</span></label>`).join("")}</div>`;
   }
-  function saveTariffEdit(idx) {
-    const list = JSON.parse(JSON.stringify(cloudTariffs||[])), tr = list[idx], cabs = getCabinetsConfig();
-    const t = document.getElementById(`etTitle_${idx}`).value.trim(), f = document.getElementById(`etFrom_${idx}`).value, to = document.getElementById(`etTo_${idx}`).value;
-    if (t) tr.title = t; if (f && to) { tr.from = f<=to?f:to; tr.to = f<=to?to:f; }
-    tr.prices = tr.prices || {};
-    cabs.forEach(c => { const inp = document.getElementById(`etP_${idx}_${c.id}`); if (inp) tr.prices[c.id] = Number(inp.value) || 0; });
-    saveTariffsConfig(list); editingTariffIdx = null; showToast("Tarif yadda saxlanıldı!"); renderApp();
+  function collectPermCheckboxes(prefix) {
+    const out = {};
+    PERM_DEFS.forEach(p => { const el = document.getElementById(`${prefix}_${p.key}`); out[p.key] = el ? el.checked : false; });
+    return out;
   }
-  function deleteTariff(idx) { const l=[...(cloudTariffs||[])]; l.splice(idx,1); saveTariffsConfig(l); editingTariffIdx=null; showToast("Tarif silindi!"); renderApp(); }
+  function setPresetPerms(prefix, all) {
+    PERM_DEFS.forEach(p => { const el = document.getElementById(`${prefix}_${p.key}`); if (el) el.checked = all ? true : Boolean(DEFAULT_MGR_PERMS[p.key]); });
+  }
+  function formatPermSummary(perms) {
+    return PERM_DEFS.filter(p => perms && perms[p.key]).map(p => p.lbl.split(" ")[0]).join(" ");
+  }
 
   function renderManagersSettings() {
     const mgrs = getManagers();
-    let html = `<p style="font-size:11px; color:var(--muted); margin:0 0 8px;">Hər menecerə giriş üçün ayrıca PIN kod qoya bilərsiniz.</p><div class="add-bar"><input type="text" id="newMgrInput" placeholder="Yeni menecer adı..." /><input type="password" inputmode="numeric" maxlength="6" id="newMgrPin" placeholder="PIN (ixtiyari)" style="max-width:110px;" /><button class="btn btn-save btn-sm" onclick="addManager()">+ Əlavə</button></div>`;
+    let html = `<p style="font-size:11.5px; color:var(--muted); margin:0 0 8px;">👑 <b>Rüfət</b> baş admindir (Loglar və Nastroyka yalnız ona açıqdır). Digər menecerlərə istədiyiniz icazələri verə bilərsiniz:</p>
+      <div class="setting-row" style="border:1.5px solid var(--navy);">
+        <b style="font-size:13px; color:var(--navy);">+ Yeni Menecer Əlavə Et</b>
+        <div style="display:flex; gap:6px; margin-top:8px;">
+          <input type="text" id="newMgrInput" placeholder="Adı..." style="flex:1; padding:8px; border:1px solid var(--border); border-radius:8px; font-size:13px;" />
+          <input type="password" inputmode="numeric" maxlength="6" id="newMgrPin" placeholder="PIN (ixtiyari)" style="width:110px; padding:8px; border:1px solid var(--border); border-radius:8px; font-size:13px;" />
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+          <span style="font-size:11px; font-weight:800; color:var(--muted);">İCAZƏLƏRİ SEÇİN:</span>
+          <div style="display:flex; gap:4px;">
+            <button type="button" class="sort-btn" onclick="setPresetPerms('newP',false)">Standart</button>
+            <button type="button" class="sort-btn" onclick="setPresetPerms('newP',true)">Hamısı</button>
+          </div>
+        </div>
+        ${renderPermCheckboxes("newP", DEFAULT_MGR_PERMS)}
+        <button class="btn btn-save btn-sm" style="width:100%; margin-top:10px;" onclick="addManager()">+ Meneceri Əlavə Et</button>
+      </div>`;
+
     mgrs.forEach((m, i) => {
-      html += editingMgrIdx === i
-        ? `<div class="setting-row"><div style="display:flex; gap:6px; flex-wrap:wrap;"><input type="text" id="editMgrInput" value="${escHtml(m.name)}" style="flex:1; min-width:120px; padding:8px; border:1px solid var(--navy); border-radius:8px;" /><input type="text" inputmode="numeric" maxlength="6" id="editMgrPin" value="${escHtml(m.pin)}" placeholder="PIN" style="width:90px; padding:8px; border:1px solid var(--navy); border-radius:8px;" /><button class="btn btn-save btn-sm" onclick="saveManagerEdit(${i})">Saxla</button><button class="btn btn-cancel btn-sm" onclick="editingMgrIdx=null; renderSettings()">Ləğv</button></div></div>`
-        : `<div class="setting-row"><div class="setting-top"><div><b style="font-size:14px;">${m.pin?'🔒':'👤'} ${escHtml(m.name)}</b><div style="font-size:11px; color:var(--muted);">${m.pin?'PIN kod: '+escHtml(m.pin):'PIN kod qoyulmayıb'}</div></div><div style="display:flex; gap:6px;" id="mgrActions_${i}"><button class="icon-btn" onclick="editingMgrIdx=${i}; renderSettings()">✏️ Düzəliş</button><button class="icon-btn del" onclick="askDelItem('mgrActions_${i}','mgrConfirm_${i}')">🗑️</button></div><div style="display:none; gap:6px;" id="mgrConfirm_${i}"><button class="btn btn-cancel btn-sm" onclick="cancelDelItem('mgrActions_${i}','mgrConfirm_${i}')">Xeyr</button><button class="btn btn-del-confirm btn-sm" onclick="deleteManager(${i})">Sil</button></div></div></div>`;
+      const isR = m.name === RUFET_NAME;
+      const pList = PERM_DEFS.filter(p => m.perms && m.perms[p.key]);
+      if (editingMgrIdx === i) {
+        html += `<div class="setting-row" style="border:2px solid var(--navy);">
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <input type="text" id="editMgrInput" value="${escHtml(m.name)}" ${isR?'disabled':''} style="flex:1; min-width:120px; padding:8px; border:1px solid var(--navy); border-radius:8px;" />
+            <input type="text" inputmode="numeric" maxlength="6" id="editMgrPin" value="${escHtml(m.pin)}" placeholder="PIN" style="width:95px; padding:8px; border:1px solid var(--navy); border-radius:8px;" />
+          </div>
+          ${isR ? `<div style="font-size:12px; font-weight:700; color:#92400e; background:#fef3c7; padding:8px; border-radius:8px; margin-bottom:8px;">👑 Baş Admin — Bütün icazələr, Loglar və Nastroyka daimi aktivdir.</div>`
+                : `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;"><span style="font-size:11px; font-weight:800; color:var(--muted);">İCAZƏLƏR:</span><div style="display:flex; gap:4px;"><button type="button" class="sort-btn" onclick="setPresetPerms('edP_${i}',false)">Standart</button><button type="button" class="sort-btn" onclick="setPresetPerms('edP_${i}',true)">Hamısı</button></div></div>${renderPermCheckboxes("edP_"+i, m.perms || DEFAULT_MGR_PERMS)}`}
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <button class="btn btn-cancel btn-sm" style="flex:0.4;" onclick="editingMgrIdx=null; renderSettings()">Ləğv</button>
+            <button class="btn btn-save btn-sm" style="flex:0.6;" onclick="saveManagerEdit(${i})">Yadda saxla</button>
+          </div>
+        </div>`;
+      } else {
+        html += `<div class="setting-row"><div class="setting-top">
+          <div style="flex:1; min-width:0;">
+            <b style="font-size:14px;">${isR?'👑':(m.pin?'🔒':'👤')} ${escHtml(m.name)}</b>
+            <div style="font-size:11px; color:var(--muted);">${m.pin?'PIN kod: '+escHtml(m.pin):'PIN kod qoyulmayıb'}</div>
+            <div class="perm-badges">${isR ? `<span class="perm-badge admin">👑 Tam İcazə • Loglar • Nastroyka</span>` : (pList.length ? pList.map(p=>`<span class="perm-badge">${p.lbl}</span>`).join("") : `<span class="perm-badge">Yalnız baxış</span>`)}</div>
+          </div>
+          <div style="display:flex; gap:6px;" id="mgrActions_${i}">
+            <button class="icon-btn" onclick="editingMgrIdx=${i}; renderSettings()">✏️ Düzəliş</button>
+            ${!isR ? `<button class="icon-btn del" onclick="askDelItem('mgrActions_${i}','mgrConfirm_${i}')">🗑️</button>` : ''}
+          </div>
+          <div style="display:none; gap:6px;" id="mgrConfirm_${i}">
+            <button class="btn btn-cancel btn-sm" onclick="cancelDelItem('mgrActions_${i}','mgrConfirm_${i}')">Xeyr</button>
+            <button class="btn btn-del-confirm btn-sm" onclick="deleteManager(${i})">Sil</button>
+          </div>
+        </div></div>`;
+      }
     });
     return html;
   }
-  function addManager() { const n=document.getElementById("newMgrInput").value.trim(), p=document.getElementById("newMgrPin").value.trim(); if (!n) return; saveManagers([...getManagers(),{name:n,pin:p}]); showToast("Əlavə olundu!"); renderSettings(); }
-  function saveManagerEdit(i) { const n=document.getElementById("editMgrInput").value.trim(), p=document.getElementById("editMgrPin").value.trim(); if (!n) return; const m=[...getManagers()], old=m[i].name; m[i]={name:n,pin:p}; saveManagers(m); if(currentManager===old){applyIdentityUI(n); safeSetLocal("elpiano_current_manager",n);} editingMgrIdx=null; showToast("Yeniləndi!"); renderSettings(); }
-  function deleteManager(i) { const m=[...getManagers()]; m.splice(i,1); saveManagers(m); showToast("Silindi!"); renderSettings(); }
+  function addManager() {
+    const n=document.getElementById("newMgrInput").value.trim(), p=document.getElementById("newMgrPin").value.trim();
+    if (!n) return;
+    if (getManagers().some(m => m.name.toLowerCase() === n.toLowerCase())) { showToast("⚠️ Bu ad artıq var!"); return; }
+    const perms = collectPermCheckboxes("newP");
+    saveManagers([...getManagers(), { name:n, pin:p, perms }]);
+    writeAuditLog("cfg", `👤 Yeni menecer əlavə olundu: ${n}`, `${p?"PIN təyin edildi":"PIN-siz"} • İcazələr: ${formatPermSummary(perms)||"Yox"}`);
+    showToast("Menecer əlavə olundu!"); renderSettings();
+  }
+  function saveManagerEdit(i) {
+    const m=[...getManagers()], cur=m[i], isR=(cur.name===RUFET_NAME);
+    const n = isR ? RUFET_NAME : document.getElementById("editMgrInput").value.trim();
+    const p = document.getElementById("editMgrPin").value.trim();
+    if (!n) return;
+    if (isR && !p) { showToast("⚠️ Rüfət üçün PIN boş ola bilməz!"); return; }
+    const perms = isR ? {...FULL_PERMS} : collectPermCheckboxes("edP_"+i);
+    const oldName = cur.name;
+    m[i] = { name:n, pin:p, perms };
+    saveManagers(m);
+    if (currentManager === oldName && !isR) { applyIdentityUI(n); safeSetLocal("elpiano_current_manager", n); }
+    editingMgrIdx = null;
+    writeAuditLog("cfg", `👤 Menecer redaktə edildi: ${oldName} → ${n}`, `${p?"PIN var":"PIN yoxdur"} • İcazələr: ${isR?"Tam Admin":(formatPermSummary(perms)||"Yox")}`);
+    showToast("Yeniləndi!"); renderSettings();
+  }
+  function deleteManager(i) {
+    const m=[...getManagers()], removed=m[i];
+    if (!removed || removed.name === RUFET_NAME) return;
+    m.splice(i,1); saveManagers(m);
+    writeAuditLog("del", `👤 Menecer silindi: ${removed.name}`);
+    showToast("Silindi!"); renderSettings();
+  }
 
   function renderChipsSettings() {
     let html = `<div class="add-bar"><input type="text" id="newChipInput" placeholder="Məs: Tort olacaq, DJ var..." /><button class="btn btn-save btn-sm" onclick="addNoteChip()">+ Əlavə</button></div>`;
@@ -951,9 +1239,9 @@
     });
     return html;
   }
-  function addNoteChip() { const v=document.getElementById("newChipInput").value.trim(); if(!v) return; saveNoteChips([...getNoteChips(),v]); showToast("Əlavə olundu!"); renderSettings(); }
-  function saveNoteChipEdit(i) { const v=document.getElementById("editChipInput").value.trim(); if(!v) return; const a=[...getNoteChips()]; a[i]=v; saveNoteChips(a); editingChipIdx=null; showToast("Yeniləndi!"); renderSettings(); }
-  function deleteNoteChip(i) { const a=[...getNoteChips()]; a.splice(i,1); saveNoteChips(a); showToast("Silindi!"); renderSettings(); }
+  function addNoteChip() { const v=document.getElementById("newChipInput").value.trim(); if(!v) return; saveNoteChips([...getNoteChips(),v]); writeAuditLog("cfg",`🏷️ Qeyd çipi əlavə edildi: ${v}`); showToast("Əlavə olundu!"); renderSettings(); }
+  function saveNoteChipEdit(i) { const v=document.getElementById("editChipInput").value.trim(); if(!v) return; const a=[...getNoteChips()], old=a[i]; a[i]=v; saveNoteChips(a); editingChipIdx=null; writeAuditLog("cfg",`🏷️ Qeyd çipi dəyişdi: ${old} → ${v}`); showToast("Yeniləndi!"); renderSettings(); }
+  function deleteNoteChip(i) { const a=[...getNoteChips()], removed=a[i]; a.splice(i,1); saveNoteChips(a); writeAuditLog("del",`🏷️ Qeyd çipi silindi: ${removed}`); showToast("Silindi!"); renderSettings(); }
 
   function renderCabinetsSettings() {
     const cabs = getCabinetsConfig();
@@ -966,10 +1254,10 @@
     });
     return html;
   }
-  function addCabinet() { const name=document.getElementById("ncName").value.trim(); if(!name) return; saveCabinetsConfig([...getCabinetsConfig(),{id:"cab_"+Date.now(),name,max:Number(document.getElementById("ncMax").value)||10,depositVal:Number(document.getElementById("ncDep").value)||0,shifts:Number(document.getElementById("ncShifts").value)||2,s1:"11:00 - 17:00",s2:"18:00 - 23:00"}]); showNewCabForm=false; showToast("Əlavə olundu!"); renderApp(); }
-  function setCabShifts(i,c) { const cabs=[...getCabinetsConfig()]; cabs[i].shifts=c; saveCabinetsConfig(cabs); renderApp(); }
-  function saveCabinetEdit(i) { const cabs=[...getCabinetsConfig()], c=cabs[i], nm=document.getElementById(`ecName_${i}`).value.trim(); if(nm) c.name=nm; c.max=Number(document.getElementById(`ecMax_${i}`).value)||1; c.depositVal=Number(document.getElementById(`ecDep_${i}`).value)||0; c.s1=document.getElementById(`ecS1_${i}`).value.trim()||c.s1; if(c.shifts===2&&document.getElementById(`ecS2_${i}`)) c.s2=document.getElementById(`ecS2_${i}`).value.trim()||c.s2; saveCabinetsConfig(cabs); editingCabIdx=null; showToast("Yeniləndi!"); renderApp(); }
-  function deleteCabinet(i) { const c=[...getCabinetsConfig()]; c.splice(i,1); saveCabinetsConfig(c); editingCabIdx=null; showToast("Silindi!"); renderApp(); }
+  function addCabinet() { const name=document.getElementById("ncName").value.trim(); if(!name) return; const obj={id:"cab_"+Date.now(),name,max:Number(document.getElementById("ncMax").value)||10,depositVal:Number(document.getElementById("ncDep").value)||0,shifts:Number(document.getElementById("ncShifts").value)||2,s1:"11:00 - 17:00",s2:"18:00 - 23:00"}; saveCabinetsConfig([...getCabinetsConfig(),obj]); showNewCabForm=false; writeAuditLog("cfg",`🚪 Yeni kabinet əlavə edildi: ${name}`,`Max: ${obj.max} • Depozit: ${obj.depositVal}₼ • ${obj.shifts} smen`); showToast("Əlavə olundu!"); renderApp(); }
+  function setCabShifts(i,c) { const cabs=[...getCabinetsConfig()]; cabs[i].shifts=c; saveCabinetsConfig(cabs); writeAuditLog("cfg",`🚪 Kabinet smeni dəyişdi: ${cabs[i].name}`,`${c} smen edildi`); renderApp(); }
+  function saveCabinetEdit(i) { const cabs=[...getCabinetsConfig()], c=cabs[i], nm=document.getElementById(`ecName_${i}`).value.trim(); if(nm) c.name=nm; c.max=Number(document.getElementById(`ecMax_${i}`).value)||1; c.depositVal=Number(document.getElementById(`ecDep_${i}`).value)||0; c.s1=document.getElementById(`ecS1_${i}`).value.trim()||c.s1; if(c.shifts===2&&document.getElementById(`ecS2_${i}`)) c.s2=document.getElementById(`ecS2_${i}`).value.trim()||c.s2; saveCabinetsConfig(cabs); editingCabIdx=null; writeAuditLog("cfg",`🚪 Kabinet redaktə edildi: ${c.name}`,`Max: ${c.max} • Adi depozit: ${c.depositVal}₼`); showToast("Yeniləndi!"); renderApp(); }
+  function deleteCabinet(i) { const c=[...getCabinetsConfig()], removed=c[i]; c.splice(i,1); saveCabinetsConfig(c); editingCabIdx=null; writeAuditLog("del",`🚪 Kabinet silindi: ${removed?.name||""}`); showToast("Silindi!"); renderApp(); }
 
   function renderZalSettings(type) {
     const list = getZalList(type), wkCount = type==="day"?(cloudWeekendCounts.day||20):(cloudWeekendCounts.night||30);
@@ -982,10 +1270,10 @@
     });
     return html;
   }
-  function updateWeekendZalCount(type) { const v=Number(document.getElementById("wkCountInp").value)||14; const wc={...cloudWeekendCounts}; wc[type]=v; saveWeekendCounts(wc); showToast("Həftəsonu sayı yeniləndi!"); renderApp(); }
-  function addZal(t) { const v=document.getElementById("newZalInput").value.trim(); if(!v) return; saveZalList(t,[...getZalList(t),{id:"z_"+Date.now(),name:v}]); showToast("Əlavə olundu!"); renderApp(); }
-  function saveZalEdit(t,i) { const v=document.getElementById("editZalInput").value.trim(); if(!v) return; const l=[...getZalList(t)]; l[i].name=v; saveZalList(t,l); editingZalIdx=null; showToast("Yeniləndi!"); renderApp(); }
-  function deleteZal(t,i) { const l=[...getZalList(t)]; l.splice(i,1); saveZalList(t,l); showToast("Silindi!"); renderApp(); }
+  function updateWeekendZalCount(type) { const v=Number(document.getElementById("wkCountInp").value)||14; const wc={...cloudWeekendCounts}; wc[type]=v; saveWeekendCounts(wc); writeAuditLog("cfg",`🪑 Həftəsonu zal sayı dəyişdi (${type==="day"?"Səhər":"Şou"})`,`Yeni say: ${v}`); showToast("Həftəsonu sayı yeniləndi!"); renderApp(); }
+  function addZal(t) { const v=document.getElementById("newZalInput").value.trim(); if(!v) return; saveZalList(t,[...getZalList(t),{id:"z_"+Date.now(),name:v}]); writeAuditLog("cfg",`🪑 Yeni zal əlavə edildi (${t==="day"?"Səhər":"Şou"}): ${v}`); showToast("Əlavə olundu!"); renderApp(); }
+  function saveZalEdit(t,i) { const v=document.getElementById("editZalInput").value.trim(); if(!v) return; const l=[...getZalList(t)], old=l[i].name; l[i].name=v; saveZalList(t,l); editingZalIdx=null; writeAuditLog("cfg",`🪑 Zal adı dəyişdi: ${old} → ${v}`); showToast("Yeniləndi!"); renderApp(); }
+  function deleteZal(t,i) { const l=[...getZalList(t)], removed=l[i]; l.splice(i,1); saveZalList(t,l); writeAuditLog("del",`🪑 Zal silindi: ${removed?.name||""}`); showToast("Silindi!"); renderApp(); }
   function askDelItem(a,c) { document.getElementById(a).style.display="none"; document.getElementById(c).style.display="flex"; }
   function cancelDelItem(a,c) { document.getElementById(a).style.display="flex"; document.getElementById(c).style.display="none"; }
 
@@ -996,40 +1284,45 @@
     if (selectedVal && !names.includes(selectedVal)) opts += `<option value="${escHtml(selectedVal)}">${escHtml(selectedVal)}</option>`;
     sel.innerHTML = opts; sel.value = selectedVal || "";
   }
-  function renderNoteChips() {
-    const box = document.getElementById("quickChipsBox"); if (isGuest()) { box.innerHTML=""; return; }
+  function renderNoteChips(allowEdit) {
+    const box = document.getElementById("quickChipsBox"); if (!allowEdit) { box.innerHTML=""; return; }
     const parts = document.getElementById("fNote").value.split(",").map(s=>s.trim()).filter(Boolean);
-    box.innerHTML = getNoteChips().map(opt => {
+    box.innerHTML = getNoteChips().map((opt, idx) => {
       const on = parts.some(p => p.toLowerCase()===opt.toLowerCase());
-      return `<span class="q-chip ${on?'active':''}" onclick="toggleQuickNote('${escHtml(opt).replace(/'/g,"\\'")}')">${on?'✓ ':'+ '}${escHtml(opt)}</span>`;
+      return `<span class="q-chip ${on?'active':''}" onclick="toggleQuickNoteIdx(${idx})">${on?'✓ ':'+ '}${escHtml(opt)}</span>`;
     }).join("");
   }
-  function toggleQuickNote(opt) {
-    if (isGuest()) return; const inp = document.getElementById("fNote");
-    let parts = inp.value.split(",").map(s=>s.trim()).filter(Boolean); const idx = parts.findIndex(p=>p.toLowerCase()===opt.toLowerCase());
-    if (idx>=0) parts.splice(idx,1); else parts.push(opt); inp.value = parts.join(", "); renderNoteChips();
+  function toggleQuickNoteIdx(idx) {
+    if (!editingTarget?.canWrite) return;
+    const opt = getNoteChips()[idx]; if (!opt) return;
+    const inp = document.getElementById("fNote");
+    let parts = inp.value.split(",").map(s=>s.trim()).filter(Boolean); const found = parts.findIndex(p=>p.toLowerCase()===opt.toLowerCase());
+    if (found>=0) parts.splice(found,1); else parts.push(opt); inp.value = parts.join(", "); renderNoteChips(true);
   }
-  function clearNoteField() { if (!isGuest()) { document.getElementById("fNote").value=""; renderNoteChips(); } }
+  function clearNoteField() { if (editingTarget?.canWrite) { document.getElementById("fNote").value=""; renderNoteChips(true); } }
 
   function openSheet(section, itemId, shiftNum) {
     const resData = getDayReservations(); let key, title, sub, defaultTime, maxCap=null, placeLabel=itemId;
     if (section === "kabinet") {
       const cab = getCabinetsConfig().find(c=>c.id===itemId), dep = getCabinetDepositForDate(cab, datePicker.value);
-      key = `kabinet_${itemId}_${shiftNum}`; placeLabel = `${cab.name} kabineti`;
+      key = `kabinet_${itemId}_${shiftNum}`; placeLabel = `${cab.name} (${cab.shifts===1?"Tam gün":(shiftNum===1?"Səhər":"Axşam")})`;
       title = `${cab.name} — ${cab.shifts===1?"Tam gün":(shiftNum===1?"17:00-a qədər":"18:00-dan")}`;
       sub = `Max: ${cab.max} nəfər • Depozit: ${formatMoney(dep)}`;
       defaultTime = shiftNum===1 ? cab.s1 : cab.s2; maxCap = cab.max;
     } else if (section === "zal_day") {
       const z = getEffectiveZalList("day", datePicker.value).find(x=>x.id===itemId);
-      key = `zal_day_${itemId}`; placeLabel = z?z.name:itemId; title = `${placeLabel} — Zal (Səhər)`; sub = "Səhər zalı • 10:00 - 17:00"; defaultTime = "13:00";
+      key = `zal_day_${itemId}`; placeLabel = `${z?z.name:itemId} (Səhər)`; title = `${z?z.name:itemId} — Zal (Səhər)`; sub = "Səhər zalı • 10:00 - 17:00"; defaultTime = "13:00";
     } else {
       const z = getEffectiveZalList("night", datePicker.value).find(x=>x.id===itemId);
-      key = `zal_night_${itemId}`; placeLabel = z?z.name:itemId; title = `${placeLabel} — Şou Proqram`; sub = "Axşam şou proqram zalı • 18:00 - 23:00"; defaultTime = "19:00";
+      key = `zal_night_${itemId}`; placeLabel = `${z?z.name:itemId} (Şou)`; title = `${z?z.name:itemId} — Şou Proqram`; sub = "Axşam şou proqram zalı • 18:00 - 23:00"; defaultTime = "19:00";
     }
     const res = resData[key] || {}, isExisting = Boolean(res.name);
-    if (isGuest() && !isExisting) { showToast("👁️ Qonaq rejimində rezerv etmək olmaz"); return; }
+    if (!isExisting && !hasPerm("res_create")) { showToast(isGuest()?"👁️ Qonaq rejimində rezerv etmək olmaz":"⚠️ Yeni rezerv yaratmaq icazəniz yoxdur"); return; }
 
-    editingTarget = { key, maxCap, placeLabel };
+    const canWrite = isExisting ? hasPerm("res_edit") : hasPerm("res_create");
+    const canDel = isExisting && hasPerm("res_delete");
+
+    editingTarget = { key, maxCap, placeLabel, isExisting, canWrite, canDel };
     document.getElementById("sheetTitle").textContent = title;
     document.getElementById("sheetSub").textContent = sub;
     document.getElementById("fName").value = res.name || "";
@@ -1037,19 +1330,22 @@
     document.getElementById("fPhone").value = res.phone || "";
     document.getElementById("fTime").value = res.time || defaultTime;
     document.getElementById("fBeh").value = res.beh || "";
-    populateStaffSelect(isExisting ? (res.staff||"") : (!isGuest()?currentManager:""));
+    populateStaffSelect(isExisting ? (res.staff||"") : currentManager);
     document.getElementById("fStatus").value = res.status || "confirmed";
     document.getElementById("fNote").value = res.note || "";
 
-    const g = isGuest();
-    ["fName","fGuests","fPhone","fTime","fBeh","fStaff","fStatus","fNote"].forEach(id => document.getElementById(id).disabled = g);
-    document.getElementById("guestReadOnlyBanner").style.display = g ? "block" : "none";
-    document.getElementById("clearNoteBtn").style.display = g ? "none" : "block";
-    document.getElementById("normalActions").style.display = g ? "none" : "flex";
+    ["fName","fGuests","fPhone","fTime","fBeh","fStatus","fNote"].forEach(id => document.getElementById(id).disabled = !canWrite);
+    document.getElementById("fStaff").disabled = !canWrite || (!isRufet() && !isExisting);
+    const roBanner = document.getElementById("guestReadOnlyBanner");
+    roBanner.style.display = !canWrite ? "block" : "none";
+    roBanner.textContent = isGuest() ? "👁️ Qonaq rejimi — Yalnız baxış (dəyişiklik etmək olmaz)" : "🔒 Yalnız baxış — mövcud rezervi dəyişmək icazəniz yoxdur";
+    document.getElementById("clearNoteBtn").style.display = canWrite ? "block" : "none";
+    document.getElementById("normalActions").style.display = (canWrite || canDel) ? "flex" : "none";
+    document.getElementById("btnSaveRes").style.display = canWrite ? "block" : "none";
+    document.getElementById("btnDelete").style.display = canDel ? "block" : "none";
     document.getElementById("confirmDeleteBar").style.display = "none";
-    document.getElementById("btnDelete").style.display = (isExisting && !g) ? "block" : "none";
     document.getElementById("formErr").style.display = "none";
-    renderNoteChips(); checkCap(); updateQuickContact();
+    renderNoteChips(canWrite); checkCap(); updateQuickContact();
     document.getElementById("resSheet").classList.add("open");
   }
   function closeSheet() { document.getElementById("resSheet").classList.remove("open"); }
@@ -1067,18 +1363,31 @@
     } else box.style.display = "none";
   }
   function saveRes() {
-    if (isGuest()) return;
+    if (!editingTarget?.canWrite) return;
+    const oldRes = cloudReservations[editingTarget.key], isEdit = Boolean(oldRes && oldRes.name);
+    if (isEdit && !hasPerm("res_edit")) return;
+    if (!isEdit && !hasPerm("res_create")) return;
     const name = document.getElementById("fName").value.trim(), err = document.getElementById("formErr");
     if (!name) { err.style.display="block"; err.textContent="⚠️ Qonağın adını yazın."; return; }
     err.style.display = "none";
-    const record = { name, guests:Number(document.getElementById("fGuests").value)||0, phone:document.getElementById("fPhone").value.trim(), time:document.getElementById("fTime").value.trim(), beh:Number(document.getElementById("fBeh").value)||0, staff:document.getElementById("fStaff").value, status:document.getElementById("fStatus").value, note:document.getElementById("fNote").value.trim(), updatedAt:Date.now() };
+    const staffVal = (!isRufet() && !isEdit) ? currentManager : document.getElementById("fStaff").value;
+    const record = { name, guests:Number(document.getElementById("fGuests").value)||0, phone:document.getElementById("fPhone").value.trim(), time:document.getElementById("fTime").value.trim(), beh:Number(document.getElementById("fBeh").value)||0, staff:staffVal, status:document.getElementById("fStatus").value, note:document.getElementById("fNote").value.trim(), updatedAt:Date.now() };
     cloudReservations[editingTarget.key] = record;
     if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).set(record);
+    if (isEdit) writeAuditLog("res", `✏️ Rezerv dəyişdirildi: ${editingTarget.placeLabel}`, diffReservations(oldRes, record), datePicker.value);
+    else writeAuditLog("res", `➕ Yeni rezerv: ${editingTarget.placeLabel}`, formatResSnapshot(record), datePicker.value);
     closeSheet(); showToast("Rezerv canlı bazaya yazıldı!"); renderApp();
   }
-  function askDelete() { if (!isGuest()) { document.getElementById("normalActions").style.display="none"; document.getElementById("confirmDeleteBar").style.display="flex"; } }
+  function askDelete() { if (editingTarget?.canDel) { document.getElementById("normalActions").style.display="none"; document.getElementById("confirmDeleteBar").style.display="flex"; } }
   function cancelDelete() { document.getElementById("confirmDeleteBar").style.display="none"; document.getElementById("normalActions").style.display="flex"; }
-  function confirmDeleteRes() { if (isGuest()) return; delete cloudReservations[editingTarget.key]; if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).remove(); closeSheet(); showToast("Masa boşaldıldı!"); renderApp(); }
+  function confirmDeleteRes() {
+    if (!hasPerm("res_delete")) return;
+    const oldRes = cloudReservations[editingTarget.key];
+    delete cloudReservations[editingTarget.key];
+    if (db) db.ref(`${ROOT_PATH}/reservations/${datePicker.value}/${editingTarget.key}`).remove();
+    writeAuditLog("del", `🗑️ Rezerv silindi: ${editingTarget.placeLabel}`, formatResSnapshot(oldRes), datePicker.value);
+    closeSheet(); showToast("Masa boşaldıldı!"); renderApp();
+  }
 
   datePicker.addEventListener("change", () => { cloudReservations={}; cloudDateSingers=[]; listenToSelectedDate(); renderApp(); });
   initManagerIdentity(); renderApp(); startFirebaseSync();
